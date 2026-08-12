@@ -7,6 +7,10 @@ export type EventItem = {
   summary: string;
   href: string;
   image: string;
+  cta?: {
+    href: string;
+    label: string;
+  };
 };
 
 export const upcomingEvents: EventItem[] = [
@@ -20,6 +24,10 @@ export const upcomingEvents: EventItem[] = [
       "Join us for Eagles Camp 2026 as we spend focused hours in God's presence together.",
     href: "/camp",
     image: "/images/gallery/2025/eagles2025.jpg",
+    cta: {
+      href: "https://forms.gle/mihmtQPkS38EJwaq6",
+      label: "Register now",
+    },
   },
   {
     id: "love-feast-monthly",
@@ -31,6 +39,10 @@ export const upcomingEvents: EventItem[] = [
       "A relational space to grow in wisdom, friendship, and Christ-centered community.",
     href: "/love-feast",
     image: "/images/hero.jpg",
+    cta: {
+      href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu",
+      label: "Join WhatsApp",
+    },
   },
   {
     id: "loyalty-camp",

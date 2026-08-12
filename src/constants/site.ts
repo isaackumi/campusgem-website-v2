@@ -15,3 +15,22 @@ export const coreValues = [
 
 export const aboutIntro =
   "We believe what we feed our minds shapes who we become. Campus GEM exists to ignite a Christ-centered movement among young people, replacing noise with truth, and raising leaders who live with excellence, faith, integrity, and purpose.";
+
+export const trustProof = [
+  {
+    label: "Since 2018",
+    detail: "Years of campus gatherings and camps",
+  },
+  {
+    label: "Campus hubs",
+    detail: "Fellowships, outreaches, and mentoring",
+  },
+  {
+    label: "Eagles Camp",
+    detail: "Annual intensive for young leaders",
+  },
+  {
+    label: "Love Feasts",
+    detail: "Monthly community that forms belonging",
+  },
+] as const;

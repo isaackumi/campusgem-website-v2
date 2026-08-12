@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { cn } from "@/lib/cn";
 import type { Testimonial } from "@/constants/testimonials";
@@ -6,15 +7,6 @@ type TestimonialCardProps = {
   testimonial: Testimonial;
   className?: string;
 };
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
-}
 
 export function TestimonialCard({ testimonial, className }: TestimonialCardProps) {
   return (
@@ -40,11 +32,14 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
       </Text>
 
       <footer className="relative mt-8 flex items-center gap-3 border-t border-white/10 pt-5">
-        <span
-          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-gold/12 font-display text-sm font-semibold tracking-wide text-gold"
-          aria-hidden
-        >
-          {initials(testimonial.name)}
+        <span className="relative size-12 shrink-0 overflow-hidden rounded-full border border-gold/40 bg-void">
+          <Image
+            src={testimonial.image}
+            alt=""
+            fill
+            className="object-cover object-top"
+            sizes="48px"
+          />
         </span>
         <div>
           <Heading level={4} as="cite" className="not-italic text-white">
