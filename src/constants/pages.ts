@@ -121,3 +121,22 @@ export const activityPages = {
     contentImage: "/images/hall-of-fame/stella.jpg",
   },
 } as const;
+
+export const giveContent = {
+  intro:
+    "Partner with Campus GEM as we raise Christ-centered leaders on campus. Your generosity helps students grow in faith, excellence, and community.",
+  highlight:
+    "We especially encourage you to support our camp meetings. Most of our participants are students, and your gift helps them gather, worship, and grow without the burden falling on them alone.",
+  focuses: [
+    {
+      title: "Academic support",
+      body: "We support needy students with academic help as and when resources arise, so excellence can remain a form of worship on campus.",
+    },
+    {
+      title: "Camp meeting support",
+      body: "Your giving helps fund Eagles Camp and other gatherings that keep the flame of the Spirit burning among young leaders.",
+    },
+  ],
+  needyNote:
+    "As resources become available, we also step in to support needy students in practical ways. Every gift stretches further when shared with care and prayer.",
+} as const;
