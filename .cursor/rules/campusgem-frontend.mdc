@@ -1,0 +1,17 @@
+---
+description: Campus GEM website implementation conventions
+globs:
+  - "src/**/*.{ts,tsx,css}"
+alwaysApply: true
+---
+
+# Campus GEM Frontend Rules
+
+- Prefer Server Components; add `"use client"` only for interactivity/motion.
+- Follow Atomic Design: atoms → molecules → organisms → sections → templates.
+- Keep repeated content in `src/constants/` — do not hardcode lists in JSX.
+- Use design tokens from `globals.css` / Tailwind theme; avoid one-off colors and spacing.
+- Use `next/image` and `next/font`.
+- Motion must use shared variants in `src/lib/motion.ts` and respect `prefers-reduced-motion`.
+- Maintain accessibility: semantic landmarks, focus states, keyboard nav, meaningful alt text.
+- Homepage quality bar first; do not sprawl unfinished secondary pages.

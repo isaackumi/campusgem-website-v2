@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+:root {
+  /* Campus GEM — ruby gem + lagoon, cool paper (not cream-terracotta) */
+  --ink: #14181f;
+  --ink-soft: #3d4654;
+  --ink-muted: #6b7585;
+  --paper: #f3f5f8;
+  --surface: #ffffff;
+  --mist: #e4e9ef;
+  --ruby: #c41e3a;
+  --ruby-deep: #8f1529;
+  --ruby-soft: #f8e8eb;
+  --lagoon: #0d6e6e;
+  --lagoon-deep: #085454;
+  --facet: #a8894a;
+  --overlay: rgba(12, 16, 24, 0.62);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+
+  --shadow-soft: 0 10px 30px -18px rgba(20, 24, 31, 0.35);
+  --shadow-lift: 0 18px 40px -24px rgba(20, 24, 31, 0.45);
+
+  --container: 72rem;
+  --container-wide: 84rem;
+
+  --section-y: clamp(4.5rem, 8vw, 7.5rem);
+  --section-y-sm: clamp(3.25rem, 6vw, 5rem);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-mist: var(--mist);
+  --color-ruby: var(--ruby);
+  --color-ruby-deep: var(--ruby-deep);
+  --color-ruby-soft: var(--ruby-soft);
+  --color-lagoon: var(--lagoon);
+  --color-lagoon-deep: var(--lagoon-deep);
+  --color-facet: var(--facet);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--ruby) 28%, white);
+    color: var(--ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ruby);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .section-pad {
+    padding-block: var(--section-y);
+  }
+
+  .section-pad-sm {
+    padding-block: var(--section-y-sm);
+  }
+
+  .gem-facet {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ruby) 88%, black) 0%,
+      var(--ruby) 42%,
+      color-mix(in srgb, var(--facet) 55%, var(--ruby)) 100%
+    );
+  }
+
+  .hero-veil {
+    background:
+      linear-gradient(
+        105deg,
+        rgba(12, 16, 24, 0.78) 0%,
+        rgba(12, 16, 24, 0.52) 48%,
+        rgba(12, 16, 24, 0.28) 100%
+      ),
+      linear-gradient(to top, rgba(12, 16, 24, 0.55), transparent 42%);
+  }
+}
