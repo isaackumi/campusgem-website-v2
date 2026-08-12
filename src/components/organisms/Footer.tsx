@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogo } from "@/components/atoms/BrandLogo";
 import { Container } from "@/components/atoms/Container";
 import { Divider } from "@/components/atoms/Divider";
 import { Text } from "@/components/atoms/Typography";
@@ -10,27 +10,18 @@ import { socialLinks } from "@/constants/social";
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="border-t border-white/8 bg-void text-ink">
       <Container className="section-pad">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div className="space-y-4 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-3">
-              <span className="relative h-11 w-11 overflow-hidden rounded-full">
-                <Image
-                  src="/images/logo.jpg"
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="44px"
-                />
-              </span>
-              <span className="font-display text-2xl">{siteConfig.name}</span>
+            <Link href="/" aria-label="Campus GEM Ministries home">
+              <BrandLogo />
             </Link>
-            <Text className="text-white/70">{siteConfig.description}</Text>
+            <Text className="text-ink-muted">{siteConfig.description}</Text>
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
               Explore
             </h2>
             <ul className="mt-4 space-y-2.5">
@@ -38,7 +29,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-white/80 transition hover:text-white"
+                    className="text-ink-soft transition hover:text-gold-soft"
                   >
                     {item.label}
                   </Link>
@@ -48,20 +39,20 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
               Visit
             </h2>
-            <ul className="mt-4 space-y-2.5 text-white/80">
+            <ul className="mt-4 space-y-2.5 text-ink-soft">
               <li>{siteConfig.address}</li>
               <li>
-                <a href={siteConfig.phoneHref} className="hover:text-white">
+                <a href={siteConfig.phoneHref} className="hover:text-gold-soft">
                   {siteConfig.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="hover:text-white"
+                  className="hover:text-gold-soft"
                 >
                   {siteConfig.email}
                 </a>
@@ -71,21 +62,20 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
               Connect
             </h2>
             <SocialLinks
               className="mt-4"
               links={socialLinks.filter((link) =>
-                ["facebook", "telegram"].includes(link.platform),
-              )}
+                ["facebook", "telegram"].includes(link.platform), )}
             />
           </div>
         </div>
 
         <Divider className="my-10 bg-white/10" />
 
-        <div className="flex flex-col gap-3 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {siteConfig.legalName}. All rights
             reserved.

@@ -9,7 +9,7 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   return (
-    <article className="group grid overflow-hidden rounded-[var(--radius-lg)] bg-surface shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] md:grid-cols-[0.9fr_1.1fr]">
+    <article className="group grid overflow-hidden rounded-[var(--radius-lg)] border border-white/8 bg-surface shadow-[var(--shadow-soft)] transition duration-300 hover:border-gold/30 md:grid-cols-[0.9fr_1.1fr]">
       <div className="relative min-h-48 overflow-hidden md:min-h-full">
         <Image
           src={event.image}
@@ -20,22 +20,22 @@ export function EventCard({ event }: EventCardProps) {
         />
       </div>
       <div className="flex flex-col justify-center gap-3 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ruby">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
           {event.date}
         </p>
-        <Heading level={3} as="h3">
-          <Link href={event.href} className="hover:text-ruby transition-colors">
+        <Heading level={3} as="h3" className="text-ink">
+          <Link href={event.href} className="transition-colors hover:text-gold-soft">
             {event.title}
           </Link>
         </Heading>
-        <Text muted>{event.summary}</Text>
+        <Text className="text-ink-muted">{event.summary}</Text>
         <div className="mt-2 space-y-1 text-sm text-ink-muted">
           <p>{event.time}</p>
           <p>{event.location}</p>
         </div>
         <Link
           href={event.href}
-          className="mt-3 inline-flex text-sm font-semibold text-lagoon transition-colors hover:text-lagoon-deep"
+          className="mt-3 inline-flex text-sm font-semibold text-gold transition-colors hover:text-gold-soft"
         >
           Find out more
           <span aria-hidden className="ml-1">

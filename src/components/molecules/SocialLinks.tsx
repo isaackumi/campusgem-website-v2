@@ -47,9 +47,7 @@ export function SocialLinks({ links, className, compact = false }: SocialLinksPr
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex items-center gap-2 rounded-full border border-mist bg-surface text-ink-soft transition hover:border-ruby/40 hover:text-ruby",
-              compact ? "p-2.5" : "px-3.5 py-2 text-sm",
-            )}
+              "inline-flex items-center gap-2 rounded-full border border-white/15 bg-surface text-ink-soft transition hover:border-gold/40 hover:text-gold-soft", compact ? "p-2.5" : "px-3.5 py-2 text-sm", )}
             aria-label={link.label}
           >
             <Icon platform={link.platform} />

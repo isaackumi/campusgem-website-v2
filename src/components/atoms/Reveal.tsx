@@ -3,24 +3,14 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useSyncExternalStore, type ReactNode } from "react";
 import {
-  fadeIn,
-  fadeUp,
-  imageReveal,
-  scaleIn,
-  slideIn,
-  stagger,
-  viewportOnce,
+  fadeIn, fadeUp, imageReveal, scaleIn, slideIn, stagger, viewportOnce,
 } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
 type MotionKind = "fadeUp" | "fadeIn" | "scaleIn" | "slideIn" | "imageReveal";
 
 const variants = {
-  fadeUp,
-  fadeIn,
-  scaleIn,
-  slideIn,
-  imageReveal,
+  fadeUp, fadeIn, scaleIn, slideIn, imageReveal,
 } as const;
 
 function subscribe() {
@@ -40,11 +30,7 @@ type RevealProps = {
 };
 
 export function Reveal({
-  children,
-  className,
-  kind = "fadeUp",
-  delay = 0,
-  as = "div",
+  children, className, kind = "fadeUp", delay = 0, as = "div",
 }: RevealProps) {
   const reduce = useReducedMotion();
   const ready = useIsClient();
@@ -97,8 +83,7 @@ export function Stagger({ children, className, as = "div" }: StaggerProps) {
 }
 
 export function StaggerItem({
-  children,
-  className,
+  children, className,
 }: {
   children: ReactNode;
   className?: string;

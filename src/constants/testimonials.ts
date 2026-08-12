@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "2",
     quote:
-      "Eagles Camp wasn't just an event—it was a turning point. I left clearer, grounded, and hungry for God.",
+      "Eagles Camp wasn't just an event. It was a turning point. I left clearer, grounded, and hungry for God.",
     name: "Ama B.",
     role: "Camp participant",
   },

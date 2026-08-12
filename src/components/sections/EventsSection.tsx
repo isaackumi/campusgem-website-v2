@@ -19,7 +19,7 @@ export function EventsSection() {
             />
             <Button
               href="/events"
-              variant="ghost"
+              variant="outline"
               className="shrink-0 self-start md:self-auto"
             >
               View all events

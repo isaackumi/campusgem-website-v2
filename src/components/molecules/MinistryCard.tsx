@@ -15,16 +15,29 @@ export function MinistryCard({ ministry }: MinistryCardProps) {
           src={ministry.image}
           alt=""
           fill
-          className="object-cover transition duration-700 group-hover:scale-[1.04]"
+          className="object-cover brightness-[0.72] transition duration-700 group-hover:scale-[1.04] group-hover:brightness-[0.64]"
           sizes="(max-width: 768px) 100vw, 25vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/35 to-transparent" />
+        {/* Dark veil for WCAG contrast: --ink is light cream in this theme */}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-void via-void/70 to-void/25"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-void to-transparent"
+          aria-hidden
+        />
       </div>
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
         <Heading level={3} as="h3" className="text-white">
-          <Link href={ministry.href}>{ministry.title}</Link>
+          <Link
+            href={ministry.href}
+            className="cursor-pointer transition-colors duration-200 hover:text-gold-soft"
+          >
+            {ministry.title}
+          </Link>
         </Heading>
-        <Text className="mt-2 text-white/80" size="sm">
+        <Text className="mt-2 text-white/85" size="sm">
           {ministry.summary}
         </Text>
       </div>

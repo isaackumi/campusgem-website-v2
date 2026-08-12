@@ -7,7 +7,6 @@ import { CtaSection } from "@/components/sections/CtaSection";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { MinistriesSection } from "@/components/sections/MinistriesSection";
 import { SermonsSection } from "@/components/sections/SermonsSection";
-import { WelcomeSection } from "@/components/sections/WelcomeSection";
 
 export function HomePage() {
   return (
@@ -15,9 +14,8 @@ export function HomePage() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <WelcomeSection />
-        <EventsSection />
         <AboutSection />
+        <EventsSection />
         <MinistriesSection />
         <SermonsSection />
         <CommunitySection />

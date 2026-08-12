@@ -15,11 +15,11 @@ export function SermonsSection() {
               eyebrow="Messages"
               title="Sermons & teachings"
               titleId="sermons-heading"
-              description="Truth that meets real student life—worship, discipleship, and hope in Christ."
+              description="Truth that meets real student life, worship, discipleship, and hope in Christ."
             />
             <Button
               href="/sermons"
-              variant="ghost"
+              variant="outline"
               className="shrink-0 self-start md:self-auto"
             >
               Browse sermons
