@@ -47,7 +47,7 @@ export function Hero() {
         className="relative flex min-h-svh items-end pb-14 pt-28 sm:pb-16 lg:items-center lg:pb-20 lg:pt-28"
       >
         <motion.div
-          className="relative z-10 w-full max-w-xl xl:max-w-2xl"
+          className="relative z-10 w-full max-w-2xl xl:max-w-3xl"
           initial={reduce ? false : "hidden"}
           animate="visible"
           variants={reduce ? undefined : stagger}
@@ -64,21 +64,15 @@ export function Hero() {
             id="hero-heading"
             variants={reduce ? undefined : fadeUp}
             transition={easeOutExpo}
-            className="mt-4 font-display text-[clamp(3.25rem,8.5vw,6.5rem)] font-bold leading-[0.92] tracking-[-0.035em] text-balance text-white"
+            className="mt-5 font-display text-[clamp(2.5rem,6.2vw,5rem)] font-bold leading-[1.02] tracking-[-0.03em] text-white sm:mt-6"
           >
-            {siteConfig.name}
+            Raising leaders.
+            <span className="block">Revealing Christ.</span>
+            <span className="block">Restoring purpose.</span>
           </motion.h1>
 
-          <motion.p
-            variants={reduce ? undefined : fadeUp}
-            transition={easeOutExpo}
-            className="mt-5 max-w-lg font-display text-[clamp(1.3rem,2.4vw,1.75rem)] font-semibold leading-[1.28] tracking-[-0.02em] text-gold-soft sm:mt-6"
-          >
-            Raising leaders. Revealing Christ. Restoring purpose.
-          </motion.p>
-
           <motion.div variants={reduce ? undefined : fadeUp} transition={easeOutExpo}>
-            <Text className="mt-4 max-w-md text-pretty text-white/80" size="lg">
+            <Text className="mt-5 max-w-md text-pretty text-white/80 sm:mt-6" size="lg">
               A Christ-centered movement equipping students to learn, connect,
               and grow beyond campus walls.
             </Text>
@@ -89,16 +83,16 @@ export function Hero() {
             transition={easeOutExpo}
             className="mt-7 flex flex-wrap gap-3 sm:mt-8"
           >
-            <Button href="/give" size="lg">
-              Donate
+            <Button href="/contact" size="lg">
+              Find your place
             </Button>
             <Button
-              href="/about"
+              href="/give"
               size="lg"
               variant="outline"
               className="border-white/45 text-white hover:border-gold/55 hover:bg-white/5 hover:text-gold-soft"
             >
-              Who we are
+              Donate
             </Button>
           </motion.div>
         </motion.div>

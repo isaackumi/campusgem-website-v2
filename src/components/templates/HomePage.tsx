@@ -6,6 +6,7 @@ import { CommunitySection } from "@/components/sections/CommunitySection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { MinistriesSection } from "@/components/sections/MinistriesSection";
+import { ProofStrip } from "@/components/sections/ProofStrip";
 import { SermonsSection } from "@/components/sections/SermonsSection";
 
 export function HomePage() {
@@ -14,6 +15,7 @@ export function HomePage() {
       <Navbar />
       <main id="main-content">
         <Hero />
+        <ProofStrip />
         <AboutSection />
         <EventsSection />
         <MinistriesSection />
