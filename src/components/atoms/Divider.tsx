@@ -10,10 +10,7 @@ export function Divider({ className, accent = false }: DividerProps) {
     <div
       role="separator"
       className={cn(
-        "h-px w-full",
-        accent ? "gem-facet opacity-90" : "bg-mist",
-        className,
-      )}
+        "h-px w-full", accent ? "gem-facet opacity-90" : "bg-mist", className, )}
     />
   );
 }

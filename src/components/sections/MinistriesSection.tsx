@@ -8,7 +8,7 @@ import { ministries } from "@/constants/ministries";
 export function MinistriesSection() {
   return (
     <section
-      className="section-pad bg-ink text-white"
+      className="section-pad bg-void"
       aria-labelledby="ministries-heading"
     >
       <Container>
@@ -19,11 +19,10 @@ export function MinistriesSection() {
               title="Ministries that form lives"
               titleId="ministries-heading"
               description="From camps to mentoring hubs, every pathway is designed to grow faith and leadership."
-              light
             />
             <Button
               href="/ministries"
-              variant="on-dark"
+              variant="outline"
               className="shrink-0 self-start md:self-auto"
             >
               All ministries

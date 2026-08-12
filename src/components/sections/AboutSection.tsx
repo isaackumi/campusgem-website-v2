@@ -1,58 +1,79 @@
 import Image from "next/image";
-import { Button } from "@/components/atoms/Button";
+import { Badge } from "@/components/atoms/Badge";
 import { Container } from "@/components/atoms/Container";
 import { Reveal } from "@/components/atoms/Reveal";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { aboutIntro } from "@/constants/site";
 
+const pillars = [
+  {
+    title: "Faith", body: "Christ-centered teaching that equips students for spiritual growth.", }, {
+    title: "Excellence", body: "Academic excellence pursued as worship and a witness on campus.", }, {
+    title: "Leadership", body: "Mentoring that raises strategic, transformational young leaders.", },
+];
+
+const tags = [
+  "Camp Meetings", "Love Feasts", "Mentoring Hub", "Campus Outreach",
+];
+
 export function AboutSection() {
   return (
-    <section className="section-pad bg-surface" aria-labelledby="about-heading">
-      <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal kind="imageReveal" className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] sm:aspect-[5/6]">
+    <section className="section-pad bg-void" aria-labelledby="about-heading">
+      <Container wide>
+        <Reveal>
+          <div className="panel grid overflow-hidden lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative min-h-[28rem] lg:min-h-full">
               <Image
-                src="/images/about.jpg"
-                alt="Campus GEM members smiling together outdoors"
+                src="/images/leader.jpg"
+                alt="Campus GEM leadership"
                 fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 45vw"
               />
             </div>
-            <div className="absolute -bottom-5 -right-3 hidden max-w-xs rounded-[var(--radius-md)] bg-ink p-5 text-white shadow-[var(--shadow-lift)] sm:block lg:-right-6">
-              <p className="font-display text-2xl leading-tight">
-                Excellence is worship.
-              </p>
-              <p className="mt-2 text-sm text-white/70">
-                Faith · Integrity · Leadership
-              </p>
-            </div>
-          </Reveal>
 
-          <Reveal>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-ruby">
-              About Campus GEM
-            </p>
-            <Heading level={2} id="about-heading">
-              A ministry for minds, hearts, and the next generation
-            </Heading>
-            <Text size="lg" className="mt-5" muted>
-              {aboutIntro}
-            </Text>
-            <Text className="mt-4" muted>
-              Through camp meetings, school outreaches, Bible studies, relationship
-              seminars, mentoring, and ICT training, we disciple young people to
-              live and lead with Christ at the center.
-            </Text>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/about">Our story</Button>
-              <Button href="/ministries" variant="ghost">
-                Explore ministries
-              </Button>
+            <div className="bg-surface-elevated p-6 sm:p-8 lg:p-10 xl:p-12">
+              <Badge tone="outline">About the ministry</Badge>
+              <Heading
+                level={2}
+                id="about-heading"
+                className="mt-5 text-ink"
+              >
+                A ministry centred on Christ
+              </Heading>
+              <Text size="lg" className="mt-5 text-ink-soft">
+                {aboutIntro}
+              </Text>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {pillars.map((pillar) => (
+                  <div
+                    key={pillar.title}
+                    className="rounded-[var(--radius-md)] bg-surface p-4"
+                  >
+                    <Heading level={4} as="h3" className="font-display text-xl text-ink">
+                      {pillar.title}
+                    </Heading>
+                    <Text size="sm" className="mt-2 text-ink-muted">
+                      {pillar.body}
+                    </Text>
+                  </div>
+                ))}
+              </div>
+
+              <ul className="mt-8 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-[var(--radius-pill)] bg-mist/70 px-3.5 py-2 text-sm text-ink-soft"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

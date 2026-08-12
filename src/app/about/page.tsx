@@ -1,44 +1,85 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/templates/PlaceholderPage";
-import { Text } from "@/components/atoms/Typography";
-import { aboutIntro, coreValues, mission, vision } from "@/constants/site";
+import { Heading, Text } from "@/components/atoms/Typography";
+import {
+  ContentBlock, CtaBanner, LinkCards, Prose, SplitContent,
+} from "@/components/molecules/PageBlocks";
+import { SitePage } from "@/components/templates/SitePage";
+import { aboutContent, visionContent } from "@/constants/pages";
+import { coreValues, mission, vision } from "@/constants/site";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About", description:
+    "Who we are, why we exist, and the values that shape Campus GEM.",
 };
 
 export default function AboutPage() {
   return (
-    <PlaceholderPage
+    <SitePage
       title="About Campus GEM"
-      description="Who we are, why we exist, and the values that shape our ministry."
+      eyebrow="Who we are"
+      description="A Christ-centered movement raising strategic leaders on campus and beyond."
+      image="/images/about.jpg"
     >
-      <div className="grid max-w-3xl gap-8">
-        <div>
-          <h2 className="font-display text-3xl">Who we are</h2>
-          <Text className="mt-3" muted size="lg">
-            {aboutIntro}
-          </Text>
+      <div className="space-y-16">
+        <SplitContent image="/images/leader.jpg" imageAlt="Campus GEM community">
+          <Prose>
+            <Heading level={3} as="h2" className="text-ink">
+              Who we are
+            </Heading>
+            <Text size="lg">{aboutContent.whoWeAre}</Text>
+            <Text>
+              Campus GEM was birthed to increase our acreage into the whole
+              world, discipling young people through camps, mentoring, outreach, and authentic community.
+            </Text>
+          </Prose>
+        </SplitContent>
+
+        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+          <ContentBlock title="Vision">
+            <Text size="lg">{vision}</Text>
+          </ContentBlock>
+          <ContentBlock title="Mission">
+            <Text size="lg">{mission}</Text>
+          </ContentBlock>
         </div>
-        <div>
-          <h2 className="font-display text-3xl">Vision</h2>
-          <Text className="mt-3" muted size="lg">
-            {vision}
-          </Text>
-        </div>
-        <div>
-          <h2 className="font-display text-3xl">Mission</h2>
-          <Text className="mt-3" muted size="lg">
-            {mission}
-          </Text>
-        </div>
-        <div>
-          <h2 className="font-display text-3xl">Core values</h2>
-          <Text className="mt-3" muted size="lg">
+
+        <ContentBlock title="Core values">
+          <p className="font-display text-2xl tracking-[-0.02em] text-ink sm:text-3xl">
             {coreValues.join(" · ")}
+          </p>
+          <Text className="mt-4" muted>
+            {visionContent.valuesNote}
           </Text>
+        </ContentBlock>
+
+        <div className="space-y-8">
+          <Heading level={3} as="h2" className="text-ink">
+            How we gather
+          </Heading>
+          <div className="grid gap-8 md:grid-cols-2 md:gap-x-12">
+            {aboutContent.highlights.map((item) => (
+              <ContentBlock key={item.title} title={item.title}>
+                <Text muted>{item.body}</Text>
+              </ContentBlock>
+            ))}
+          </div>
         </div>
+
+        <LinkCards
+          items={[
+            {
+              href: "/vision-mission", title: "Mission & Vision", description: "The calling that guides everything we do.", }, {
+              href: "/senior-pastor", title: "Our Senior Pastor", description: "Meet Rev. Divine Asem (Divine Perez).", }, {
+              href: "/activities", title: "Activities", description: "Camps, feasts, mentoring, and more.", }, ]}
+        />
+
+        <CtaBanner
+          title="Find your place with us"
+          description="Connect with a fellowship, join an activity, or reach out, we would love to walk with you."
+          primary={{ href: "/contact", label: "Contact us" }}
+          secondary={{ href: "/give", label: "Partner with us" }}
+        />
       </div>
-    </PlaceholderPage>
+    </SitePage>
   );
 }
