@@ -100,24 +100,38 @@ export const activityPages = {
       href: "https://forms.gle/mihmtQPkS38EJwaq6",
       label: "Register for Eagles Camp 2026",
     },
-    image: "/images/gallery/2025/eagles2025.jpg",
-    contentImage: "/images/community.jpg",
+    image: "/images/camp/camp-moment-01.jpg",
+    contentImage: "/images/camp/camp-moment-02.jpg",
   }, loveFeast: {
     title: "Love Feasts", eyebrow: "Activities", description: "A celebration of unity, compassion, and spiritual connection.", body: "Our Love Feast is more than an event, it is a transformative gathering of hearts and spirits. Join relationship seminars and monthly meetings that form healthy, Christ-centered community locally and online.", cta: {
-      href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu", label: "Join Love Feast WhatsApp", }, image: "/images/hero.jpg", contentImage: "/images/gathering.jpg", }, mentoring: {
+      href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu", label: "Join Love Feast WhatsApp", }, image: "/images/camp/camp-moment-03.jpg", contentImage: "/images/love-feast.jpg", }, mentoring: {
     title: "Mentoring Hub", eyebrow: "Activities", description:
-      "Dedicated mentoring for young and upcoming leaders preparing for the next level.", body: "In the Mentoring Hub we devote time to coach upcoming executives, sharpening character, calling, and capacity for Christ-centered leadership.", image: "/images/leader.jpg", contentImage: "/images/leader.jpg", }, ict: {
+      "Dedicated mentoring for young and upcoming leaders preparing for the next level.", body: "In the Mentoring Hub we devote time to coach upcoming executives, sharpening character, calling, and capacity for Christ-centered leadership.", image: "/images/camp/camp-moment-04.jpg",
+    contentImage: "/images/leader.jpg",
+  }, ict: {
     title: "ICT Skill Training", eyebrow: "Activities", description:
-      "Practical digital skills that equip students to serve, create, and lead.", body: "ICT Skill Training helps Campus GEM members grow in digital competence so they can serve the ministry and thrive in their academic and professional callings.", image: "/images/gathering.jpg", contentImage: "/images/mission.jpg", }, funfair: {
-    title: "Fun Fair", eyebrow: "Activities", description: "Joyful campus gatherings that build friendship and community.", body: "The Campus GEM Fun Fair is a vibrant celebration of community, games, friendship, and shared joy that strengthen belonging on campus.", image: "/images/community.jpg", contentImage: "/images/about.jpg", }, marriages: {
+      "Practical digital skills that equip students to serve, create, and lead.", body: "ICT Skill Training helps Campus GEM members grow in digital competence so they can serve the ministry and thrive in their academic and professional callings.", image: "/images/camp/camp-moment-05.jpg", contentImage: "/images/camp-19.jpg", }, funfair: {
+    title: "Fun Fair", eyebrow: "Activities", description: "Joyful campus gatherings that build friendship and community.", body: "The Campus GEM Fun Fair is a vibrant celebration of community, games, friendship, and shared joy that strengthen belonging on campus.", image: "/images/camp/camp-moment-06.jpg", contentImage: "/images/community.jpg", }, marriages: {
     title: "CGM Marriages", eyebrow: "Activities", description:
-      "Embracing love’s transformative power and celebrating each couple’s path to unity.", body: "Campus GEM Marriages celebrates covenant relationships within our family, honoring love, companionship, and God’s faithfulness.", image: "/images/hero.jpg", contentImage: "/images/hero.jpg", }, hallOfFame: {
+      "Embracing love’s transformative power and celebrating each couple’s path to unity.", body: "Campus GEM Marriages celebrates covenant relationships within our family, honoring love, companionship, and God’s faithfulness.", image: "/images/camp/camp-moment-03.jpg", contentImage: "/images/love-feast-1.jpg", }, bibleStudy: {
+    title: "Bible Study",
+    eyebrow: "Activities",
+    description:
+      "Every Sunday at 7:00 PM GMT on Telegram with Campus GEM Ministries.",
+    body: "Join us each Sunday evening for Bible Study on Telegram. We open the Word together, grow in understanding, and stay connected as one Campus GEM family—wherever you are.",
+    cta: {
+      href: "https://t.me/campusgem",
+      label: "Join on Telegram",
+    },
+    image: "/images/bible-confession-page.jpg",
+    contentImage: "/images/bible-study.png",
+  }, hallOfFame: {
     title: "Hall of Fame",
     eyebrow: "Activities",
     description:
       "Celebrating the extraordinary journeys of graduates who transform dreams into remarkable achievements.",
     body: "The Campus GEM Hall of Fame honors members whose faith, excellence, and perseverance inspire the next generation. These portraits mark seasons of study completed, calling clarified, and lives offered for God's glory.",
-    image: "/images/hall-of-fame/emmanuel-ntow.jpg",
+    image: "/images/camp/camp-moment-04.jpg",
     contentImage: "/images/hall-of-fame/stella.jpg",
   },
 } as const;

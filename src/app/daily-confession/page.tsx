@@ -26,7 +26,9 @@ export default function DailyConfessionPage() {
       title="Daily Confession"
       eyebrow="Faith"
       description="Declare God’s Word over your life, pleasant places, godly heritage, and divine favor."
-      image="/images/gathering.jpg"
+      image="/images/bible-confession-page.jpg"
+      imageClassName="object-[center_40%]"
+      slideshow={false}
       narrow
     >
       <div className="space-y-14">

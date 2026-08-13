@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Heading, Text } from "@/components/atoms/Typography";
 import {
-  ContentBlock, CtaBanner, LinkCards, Prose, SplitContent,
+  ContentBlock, CtaBanner, ImageGrid, LinkCards, Prose, SplitContent,
 } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
+import { lifeMoments } from "@/constants/media";
 import { aboutContent, visionContent } from "@/constants/pages";
 import { coreValues, mission, vision } from "@/constants/site";
 
@@ -18,10 +19,13 @@ export default function AboutPage() {
       title="About Campus GEM"
       eyebrow="Who we are"
       description="A Christ-centered movement raising strategic leaders on campus and beyond."
-      image="/images/about.jpg"
+      image="/images/camp/camp-moment-03.jpg"
     >
       <div className="space-y-16">
-        <SplitContent image="/images/leader.jpg" imageAlt="Campus GEM community">
+        <SplitContent
+          image="/images/camp/camp-moment-06.jpg"
+          imageAlt="Campus GEM members at Eagles Camp"
+        >
           <Prose>
             <Heading level={3} as="h2" className="text-ink">
               Who we are
@@ -63,6 +67,16 @@ export default function AboutPage() {
               </ContentBlock>
             ))}
           </div>
+        </div>
+
+        <div className="space-y-5">
+          <Heading level={3} as="h2" className="text-ink">
+            Life together
+          </Heading>
+          <Text muted>
+            Moments from camps, feasts, and fellowship across the Campus GEM family.
+          </Text>
+          <ImageGrid images={[...lifeMoments].slice(0, 8)} altPrefix="Campus GEM life" />
         </div>
 
         <LinkCards

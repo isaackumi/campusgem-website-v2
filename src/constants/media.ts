@@ -13,6 +13,16 @@ export const galleryAlbums: GalleryAlbum[] = [
     label: "2025",
     description: "Recent camp and community moments.",
     images: [
+      "/images/camp/camp-moment-01.jpg",
+      "/images/camp/camp-moment-02.jpg",
+      "/images/camp/camp-moment-03.jpg",
+      "/images/camp/camp-moment-04.jpg",
+      "/images/camp/camp-moment-05.jpg",
+      "/images/camp/camp-moment-06.jpg",
+      "/images/camp/camp-moment-07.jpg",
+      "/images/camp/camp-moment-08.jpg",
+      "/images/camp/camp-moment-09.jpg",
+      "/images/camp/camp-moment-10.jpg",
       "/images/gallery/2025/eagles2025.jpg",
     ],
   },
@@ -113,6 +123,34 @@ export const galleryAlbums: GalleryAlbum[] = [
 ];
 
 export const galleryImages = galleryAlbums.flatMap((album) => [...album.images]);
+
+/** Atmospheric life photos for interior page bands (not flyer art). */
+export const lifeMoments = [
+  "/images/camp/camp-moment-01.jpg",
+  "/images/camp/camp-moment-02.jpg",
+  "/images/camp/camp-moment-03.jpg",
+  "/images/camp/camp-moment-04.jpg",
+  "/images/camp/camp-moment-05.jpg",
+  "/images/camp/camp-moment-06.jpg",
+  "/images/camp/camp-moment-07.jpg",
+  "/images/camp/camp-moment-08.jpg",
+  "/images/camp/camp-moment-09.jpg",
+  "/images/camp/camp-moment-10.jpg",
+] as const;
+
+/** Eagles Camp photo set (web JPEGs converted from HEIC). */
+export const campMoments = [
+  "/images/camp/camp-moment-01.jpg",
+  "/images/camp/camp-moment-02.jpg",
+  "/images/camp/camp-moment-03.jpg",
+  "/images/camp/camp-moment-04.jpg",
+  "/images/camp/camp-moment-05.jpg",
+  "/images/camp/camp-moment-06.jpg",
+  "/images/camp/camp-moment-07.jpg",
+  "/images/camp/camp-moment-08.jpg",
+  "/images/camp/camp-moment-09.jpg",
+  "/images/camp/camp-moment-10.jpg",
+] as const;
 
 export type HallOfFameEntry = {
   id: string;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
+import { campMoments } from "@/constants/media";
 import { activityPages } from "@/constants/pages";
 import { socialLinks } from "@/constants/social";
 
@@ -18,6 +19,9 @@ export default function EaglesCampPage() {
       body={page.body}
       image={page.image}
       contentImage={page.contentImage}
+      gallery={[...campMoments]}
+      galleryAlt="Eagles Camp"
+      imageClassName="object-[center_22%]"
       cta={page.cta}
       secondaryCta={
         campWhatsApp

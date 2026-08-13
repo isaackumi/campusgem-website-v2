@@ -15,7 +15,7 @@ export default function SermonsPage() {
       title="Sermons"
       eyebrow="Word"
       description="Messages that stir faith and form Christ-centered leaders."
-      image="/images/mission.jpg"
+      image="/images/camp/camp-moment-03.jpg"
     >
       <div className="space-y-10">
         <Prose>

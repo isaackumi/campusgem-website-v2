@@ -18,7 +18,7 @@ export default function BranchesPage() {
       title="Branches"
       eyebrow="About"
       description="Find a Campus GEM fellowship near you, or start one."
-      image="/images/community.jpg"
+      image="/images/camp/camp-moment-04.jpg"
     >
       <div className="space-y-12">
         <Prose>

@@ -17,7 +17,7 @@ export default function GalleryPage() {
       title="Gallery"
       eyebrow="Moments"
       description="Browse Campus GEM memories by year, from early gatherings to recent camps."
-      image="/images/gathering.jpg"
+      image="/images/camp/camp-moment-03.jpg"
     >
       <div className="space-y-12">
         <Prose>

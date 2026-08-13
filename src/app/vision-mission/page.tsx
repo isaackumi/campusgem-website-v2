@@ -17,10 +17,10 @@ export default function VisionMissionPage() {
       title="Mission & Vision"
       eyebrow="About"
       description="Raising strategic, transformational leaders with Christ-centered principles."
-      image="/images/mission.jpg"
+      image="/images/camp/camp-moment-04.jpg"
     >
       <div className="space-y-16">
-        <SplitContent image="/images/mission.jpg" imageAlt="Campus GEM mission">
+        <SplitContent image="/images/values.jpg" imageAlt="Campus GEM values in community">
           <Prose>
             <Heading level={3} as="h2" className="text-ink">
               Vision

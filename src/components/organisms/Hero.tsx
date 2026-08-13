@@ -1,36 +1,61 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/atoms/Button";
 import { Container } from "@/components/atoms/Container";
 import { Text } from "@/components/atoms/Typography";
+import { campMoments } from "@/constants/media";
 import { siteConfig } from "@/constants/site";
-import { easeOutExpo, fadeUp, imageReveal, stagger } from "@/lib/motion";
+import { easeOutExpo, fadeUp, stagger } from "@/lib/motion";
+
+const SLIDE_MS = 5500;
+const SLIDE_TRANSITION = {
+  duration: 1.2,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
 
 export function Hero() {
   const reduce = useReducedMotion();
+  const slides = [...campMoments];
+  const [index, setIndex] = useState(0);
+  const active = slides[index % slides.length] ?? slides[0];
+
+  useEffect(() => {
+    if (reduce || slides.length < 2) return;
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % slides.length);
+    }, SLIDE_MS);
+    return () => window.clearInterval(id);
+  }, [reduce, slides.length]);
 
   return (
     <section
       className="relative isolate min-h-svh overflow-hidden text-white"
       aria-labelledby="hero-heading"
     >
-      <motion.div
-        className="absolute inset-0"
-        initial={reduce ? false : "hidden"}
-        animate="visible"
-        variants={reduce ? undefined : imageReveal}
-      >
-        <Image
-          src="/images/hero.jpg"
-          alt="Campus GEM community gathered in worship and fellowship"
-          fill
-          priority
-          className="object-cover object-[70%_26%] sm:object-[74%_22%]"
-          sizes="100vw"
-        />
-      </motion.div>
+      <div className="absolute inset-0" aria-hidden>
+        <AnimatePresence initial={false} mode="sync">
+          <motion.div
+            key={active}
+            className="absolute inset-0"
+            initial={reduce ? false : { opacity: 0, scale: 1.04, x: "4%" }}
+            animate={{ opacity: 1, scale: 1, x: "0%" }}
+            exit={reduce ? undefined : { opacity: 0, scale: 1.02, x: "-4%" }}
+            transition={SLIDE_TRANSITION}
+          >
+            <Image
+              src={active}
+              alt=""
+              fill
+              priority={index === 0}
+              className="object-cover object-[center_28%] sm:object-[center_26%]"
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Soft left text scrub; keep faces luminous on the right */}
       <div
@@ -97,6 +122,22 @@ export function Hero() {
           </motion.div>
         </motion.div>
       </Container>
+
+      {slides.length > 1 && !reduce ? (
+        <div
+          className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2 lg:bottom-8"
+          aria-hidden
+        >
+          {slides.map((src, i) => (
+            <span
+              key={src}
+              className={`h-1 rounded-full transition-all duration-500 ${
+                i === index ? "w-6 bg-gold" : "w-1.5 bg-white/35"
+              }`}
+            />
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Heading, Text } from "@/components/atoms/Typography";
 import {
-  ContentBlock, CtaBanner, Prose,
+  ContentBlock, CtaBanner, Prose, SplitContent,
 } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
 import { giveContent } from "@/constants/pages";
@@ -19,13 +19,17 @@ export default function GivePage() {
       title="Give"
       eyebrow="Partnership"
       description="Support camp meetings, academic help, and students in need."
-      image="/images/mission.jpg"
-      narrow
+      image="/images/camp/camp-moment-06.jpg"
     >
       <div className="space-y-12">
-        <Prose>
-          <Text size="lg">{giveContent.intro}</Text>
-        </Prose>
+        <SplitContent
+          image="/images/camp/camp-moment-01.jpg"
+          imageAlt="Students gathered at Campus GEM camp"
+        >
+          <Prose>
+            <Text size="lg">{giveContent.intro}</Text>
+          </Prose>
+        </SplitContent>
 
         <aside className="rounded-lg border border-gold/35 bg-gold/10 px-5 py-6 sm:px-6 sm:py-7">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold">

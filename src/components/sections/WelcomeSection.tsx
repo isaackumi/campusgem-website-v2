@@ -21,7 +21,7 @@ export function WelcomeSection() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {[
-            { title: "Our Vision", body: vision, image: "/images/about.jpg" }, { title: "Our Mission", body: mission, image: "/images/mission.jpg" }, {
+            { title: "Our Vision", body: vision, image: "/images/about.jpg" }, { title: "Our Mission", body: mission, image: "/images/vision.jpg" }, {
               title: "Core Values", body: `${coreValues.join(" · ")}. We pursue academic excellence as worship.`, image: "/images/community.jpg", }, ].map((item) => (
             <Reveal key={item.title} kind="fadeUp">
               <article className="h-full overflow-hidden rounded-[var(--radius-lg)] bg-paper">

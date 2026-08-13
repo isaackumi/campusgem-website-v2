@@ -23,7 +23,7 @@ export const upcomingEvents: EventItem[] = [
     summary:
       "Join us for Eagles Camp 2026 as we spend focused hours in God's presence together.",
     href: "/camp",
-    image: "/images/gallery/2025/eagles2025.jpg",
+    image: "/images/camp/camp-moment-01.jpg",
     cta: {
       href: "https://forms.gle/mihmtQPkS38EJwaq6",
       label: "Register now",
@@ -38,7 +38,7 @@ export const upcomingEvents: EventItem[] = [
     summary:
       "A relational space to grow in wisdom, friendship, and Christ-centered community.",
     href: "/love-feast",
-    image: "/images/hero.jpg",
+    image: "/images/love-feast.jpg",
     cta: {
       href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu",
       label: "Join WhatsApp",
@@ -52,6 +52,21 @@ export const upcomingEvents: EventItem[] = [
     location: "Campus venues across Ghana",
     summary: "Lift the name of our Maker and strengthen one another in faith.",
     href: "/activities",
-    image: "/images/community.jpg",
+    image: "/images/eagles-camp.jpg",
+  },
+  {
+    id: "bible-study-sunday",
+    title: "Bible Study",
+    date: "Every Sunday",
+    time: "7:00 PM GMT",
+    location: "Telegram · Campus GEM Ministries",
+    summary:
+      "Open the Word with us online every Sunday evening. Join the Campus GEM Telegram channel.",
+    href: "/bible-study",
+    image: "/images/bible-confession-page.jpg",
+    cta: {
+      href: "https://t.me/campusgem",
+      label: "Join Telegram",
+    },
   },
 ];

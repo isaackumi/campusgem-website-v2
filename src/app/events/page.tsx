@@ -15,7 +15,7 @@ export default function EventsPage() {
       title="Events"
       eyebrow="Gatherings"
       description="Camps, feasts, and seasonal meetings where we seek God together."
-      image="/images/about.jpg"
+      image="/images/camp/camp-moment-06.jpg"
     >
       <div className="space-y-10">
         <Prose>

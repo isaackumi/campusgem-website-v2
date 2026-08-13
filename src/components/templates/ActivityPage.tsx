@@ -11,6 +11,7 @@ type ActivityPageProps = {
   body: string;
   image: string;
   contentImage?: string;
+  imageClassName?: string;
   cta?: { href: string; label: string };
   secondaryCta?: { href: string; label: string };
   gallery?: string[];
@@ -18,7 +19,17 @@ type ActivityPageProps = {
 };
 
 export function ActivityPage({
-  title, eyebrow = "Activities", description, body, image, contentImage, cta, secondaryCta, gallery, galleryAlt,
+  title,
+  eyebrow = "Activities",
+  description,
+  body,
+  image,
+  contentImage,
+  imageClassName,
+  cta,
+  secondaryCta,
+  gallery,
+  galleryAlt,
 }: ActivityPageProps) {
   const sideImage = contentImage ?? image;
 
@@ -28,6 +39,7 @@ export function ActivityPage({
       eyebrow={eyebrow}
       description={description}
       image={image}
+      imageClassName={imageClassName}
     >
       <div className="space-y-14">
         <SplitContent image={sideImage} imageAlt={title}>

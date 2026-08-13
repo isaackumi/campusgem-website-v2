@@ -13,7 +13,7 @@ export const ministries: Ministry[] = [
     summary:
       "Intensive camp meetings that keep the flame of the Spirit burning as we journey through the year.",
     href: "/camp",
-    image: "/images/community.jpg",
+    image: "/images/camp/camp-moment-01.jpg",
   },
   {
     id: "love-feast",
@@ -21,7 +21,7 @@ export const ministries: Ministry[] = [
     summary:
       "Relationship seminars and monthly gatherings that form healthy, Christ-centered community.",
     href: "/love-feast",
-    image: "/images/gathering.jpg",
+    image: "/images/love-feast.jpg",
   },
   {
     id: "mentoring-hub",
@@ -37,6 +37,6 @@ export const ministries: Ministry[] = [
     summary:
       "Practical digital skills that equip students to serve, create, and lead with excellence.",
     href: "/ict-training",
-    image: "/images/gallery/2019/camp_19.jpg",
+    image: "/images/camp-19.jpg",
   },
 ];

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { ContactForm } from "@/components/molecules/ContactForm";
 import {
-  ContentBlock, CtaBanner,
+  ContentBlock, CtaBanner, SplitContent,
 } from "@/components/molecules/PageBlocks";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { SitePage } from "@/components/templates/SitePage";
@@ -21,7 +21,7 @@ export default function ContactPage() {
       title="Contact"
       eyebrow="Connect"
       description="We would love to hear from you and help you find your place. Whether you want to visit a gathering, partner with the ministry, or ask a question, reach out. We typically respond within a few days."
-      image="/images/community.jpg"
+      image="/images/camp/camp-moment-05.jpg"
     >
       <div className="space-y-10 md:space-y-12">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
@@ -71,6 +71,19 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        <SplitContent
+          image="/images/community.jpg"
+          imageAlt="Campus GEM community gathering"
+          reverse
+        >
+          <ContentBlock title="Come as you are">
+            <Text muted>
+              Visit a fellowship, join a WhatsApp group, or start a conversation.
+              We are here to help you take the next step with Campus GEM.
+            </Text>
+          </ContentBlock>
+        </SplitContent>
 
         <CtaBanner
           title="Ready to partner?"
