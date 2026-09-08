@@ -35,8 +35,8 @@ export const ministries: Ministry[] = [
     id: "ict-training",
     title: "ICT Skill Training",
     summary:
-      "Practical digital skills that equip students to serve, create, and lead with excellence.",
+      "Practical digital skills that equip Youth to serve, create, and lead with excellence.",
     href: "/ict-training",
-    image: "/images/camp-19.jpg",
+    image: "/images/gallery/2019/camp_19.jpg",
   },
 ];

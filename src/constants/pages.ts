@@ -54,7 +54,7 @@ export const pastorContent = {
     {
       year: "Origin",
       title: "Campus GEM begins",
-      body: "Campus GEM was launched as an offshoot of Redemption Light Chapel International to reach students and raise leaders.",
+      body: "Campus GEM was launched as an offshoot of Redemption Light Chapel International to reach Youth and raise leaders.",
     },
     {
       year: "Today",
@@ -65,7 +65,7 @@ export const pastorContent = {
   focuses: [
     {
       title: "Campus discipleship",
-      body: "Forming students who walk with Christ in their studies, friendships, and calling.",
+      body: "Forming Youth who walk with Christ in their studies, friendships, and calling.",
     },
     {
       title: "Leadership formation",
@@ -110,7 +110,7 @@ export const activityPages = {
     contentImage: "/images/leader.jpg",
   }, ict: {
     title: "ICT Skill Training", eyebrow: "Activities", description:
-      "Practical digital skills that equip students to serve, create, and lead.", body: "ICT Skill Training helps Campus GEM members grow in digital competence so they can serve the ministry and thrive in their academic and professional callings.", image: "/images/camp/camp-moment-05.jpg", contentImage: "/images/camp-19.jpg", }, funfair: {
+      "Practical digital skills that equip Youth to serve, create, and lead.", body: "ICT Skill Training helps Campus GEM members grow in digital competence so they can serve the ministry and thrive in their academic and professional callings.", image: "/images/camp/camp-moment-05.jpg", contentImage: "/images/gallery/2019/camp_19.jpg", }, funfair: {
     title: "Fun Fair", eyebrow: "Activities", description: "Joyful campus gatherings that build friendship and community.", body: "The Campus GEM Fun Fair is a vibrant celebration of community, games, friendship, and shared joy that strengthen belonging on campus.", image: "/images/camp/camp-moment-06.jpg", contentImage: "/images/community.jpg", }, marriages: {
     title: "CGM Marriages", eyebrow: "Activities", description:
       "Embracing love’s transformative power and celebrating each couple’s path to unity.", body: "Campus GEM Marriages celebrates covenant relationships within our family, honoring love, companionship, and God’s faithfulness.", image: "/images/camp/camp-moment-03.jpg", contentImage: "/images/love-feast-1.jpg", }, bibleStudy: {
@@ -138,13 +138,13 @@ export const activityPages = {
 
 export const giveContent = {
   intro:
-    "Partner with Campus GEM as we raise Christ-centered leaders on campus. Your generosity helps students grow in faith, excellence, and community.",
+    "Partner with Campus GEM as we raise Christ-centered leaders on campus. Your generosity helps Youth grow in faith, excellence, and community.",
   highlight:
-    "We especially encourage you to support our camp meetings. Most of our participants are students, and your gift helps them gather, worship, and grow without the burden falling on them alone.",
+    "We especially encourage you to support our camp meetings. Most of our participants are Youth, and your gift helps them gather, worship, and grow without the burden falling on them alone.",
   focuses: [
     {
       title: "Academic support",
-      body: "We support needy students with academic help as and when resources arise, so excellence can remain a form of worship on campus.",
+      body: "We support needy Youth with academic help as and when resources arise, so excellence can remain a form of worship on campus.",
     },
     {
       title: "Camp meeting support",
@@ -152,5 +152,5 @@ export const giveContent = {
     },
   ],
   needyNote:
-    "As resources become available, we also step in to support needy students in practical ways. Every gift stretches further when shared with care and prayer.",
+    "As resources become available, we also step in to support needy Youth in practical ways. Every gift stretches further when shared with care and prayer.",
 } as const;

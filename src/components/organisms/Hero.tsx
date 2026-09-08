@@ -98,7 +98,7 @@ export function Hero() {
 
           <motion.div variants={reduce ? undefined : fadeUp} transition={easeOutExpo}>
             <Text className="mt-5 max-w-md text-pretty text-white/80 sm:mt-6" size="lg">
-              A Christ-centered movement equipping students to learn, connect,
+              A Christ-centered movement equipping Youth to learn, connect,
               and grow beyond campus walls.
             </Text>
           </motion.div>

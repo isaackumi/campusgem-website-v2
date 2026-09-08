@@ -111,13 +111,13 @@ export const galleryAlbums: GalleryAlbum[] = [
     label: "Highlights",
     description: "Favorite moments from camps and campus life.",
     images: [
-      "/images/gallery/moments/amenuvor.jpg",
       "/images/gallery/moments/camp_19.jpg",
       "/images/gallery/moments/eagles2025.jpg",
       "/images/gallery/moments/ec_2024.jpeg",
-      "/images/gallery/moments/loyalty_camp.jpg",
-      "/images/gallery/moments/ntow.jpg",
-      "/images/gallery/moments/sammy.jpg",
+      "/images/gallery/moments/love-feast.jpeg",
+      "/images/gallery/moments/love-feast-1.jpg",
+      "/images/camp/camp-moment-03.jpg",
+      "/images/camp/camp-moment-06.jpg",
     ],
   },
 ];

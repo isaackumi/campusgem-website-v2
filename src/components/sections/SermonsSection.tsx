@@ -15,7 +15,7 @@ export function SermonsSection() {
               eyebrow="Messages"
               title="Sermons & teachings"
               titleId="sermons-heading"
-              description="Truth that meets real student life, worship, discipleship, and hope in Christ."
+              description="Truth that meets real Youth life, worship, discipleship, and hope in Christ."
             />
             <Button
               href="/sermons"

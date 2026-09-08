@@ -12,7 +12,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Campus GEM gave me a place to belong and a faith that shapes how I lead on campus and beyond.",
     name: "Emmanuel Ntow",
-    role: "Student leader",
+    role: "Youth leader",
     image: "/images/hall-of-fame/emmanuel-ntow.jpg",
   },
   {

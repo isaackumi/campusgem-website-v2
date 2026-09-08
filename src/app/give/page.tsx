@@ -10,21 +10,21 @@ import { siteConfig } from "@/constants/site";
 export const metadata: Metadata = {
   title: "Give",
   description:
-    "Support Campus GEM camp meetings, academic help for needy students, and Christ-centered campus discipleship.",
-};
+    "Support Campus GEM camp meetings, academic help for needy Youth, and Christ-centered campus discipleship.",
+  };
 
 export default function GivePage() {
   return (
     <SitePage
       title="Give"
       eyebrow="Partnership"
-      description="Support camp meetings, academic help, and students in need."
+      description="Support camp meetings, academic help, and Youth in need."
       image="/images/camp/camp-moment-06.jpg"
     >
       <div className="space-y-12">
         <SplitContent
           image="/images/camp/camp-moment-01.jpg"
-          imageAlt="Students gathered at Campus GEM camp"
+          imageAlt="Youth gathered at Campus GEM camp"
         >
           <Prose>
             <Text size="lg">{giveContent.intro}</Text>
@@ -56,7 +56,7 @@ export default function GivePage() {
           </div>
         </div>
 
-        <ContentBlock title="Supporting needy students">
+        <ContentBlock title="Supporting needy Youth">
           <Text muted>{giveContent.needyNote}</Text>
         </ContentBlock>
 

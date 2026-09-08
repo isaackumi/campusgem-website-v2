@@ -12,5 +12,5 @@ export const featuredSermons: Sermon[] = [
   {
     id: "new-way", title: "Start a New Way of Living", speaker: "Campus GEM", category: "Discipleship", date: "Recent", href: "/sermons", image: "/images/bible-confession-page.jpg", }, {
     id: "what-must-i-do", title: "What Must I Do To Be Saved", speaker: "Campus GEM", category: "Salvation", date: "Recent", href: "/sermons", image: "/images/gathering.jpg", }, {
-    id: "second-coming", title: "The Hope of His Coming", speaker: "Campus GEM", category: "Faith", date: "Recent", href: "/sermons", image: "/images/gallery/moments/amenuvor.jpg", },
+    id: "second-coming", title: "The Hope of His Coming", speaker: "Campus GEM", category: "Faith", date: "Recent", href: "/sermons", image: "/images/camp/camp-moment-09.jpg", },
 ];

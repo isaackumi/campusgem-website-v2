@@ -7,7 +7,7 @@ import { aboutIntro } from "@/constants/site";
 
 const pillars = [
   {
-    title: "Faith", body: "Christ-centered teaching that equips students for spiritual growth.", }, {
+    title: "Faith", body: "Christ-centered teaching that equips Youth for spiritual growth.", }, {
     title: "Excellence", body: "Academic excellence pursued as worship and a witness on campus.", }, {
     title: "Leadership", body: "Mentoring that raises strategic, transformational young leaders.", },
 ];

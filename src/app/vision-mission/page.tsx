@@ -68,7 +68,7 @@ export default function VisionMissionPage() {
 
         <CtaBanner
           title="Walk the vision with us"
-          description="Whether you are a student, graduate, or partner, there is room to grow and serve."
+          description="Whether you are Youth, a graduate, or a partner, there is room to grow and serve."
           primary={{ href: "/activities", label: "Explore activities" }}
           secondary={{ href: "/contact", label: "Get in touch" }}
         />
