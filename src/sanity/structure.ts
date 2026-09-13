@@ -67,6 +67,10 @@ export const structure: StructureResolver = (S) =>
             ),
         ),
       S.divider(),
+      S.documentTypeListItem("event").title("Events"),
+      S.documentTypeListItem("sermon").title("Sermons"),
+      S.documentTypeListItem("ministry").title("Ministries"),
+      S.divider(),
       S.listItem()
         .title("Gallery by year")
         .child(

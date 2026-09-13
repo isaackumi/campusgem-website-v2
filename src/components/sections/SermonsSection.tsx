@@ -3,9 +3,9 @@ import { Container } from "@/components/atoms/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/atoms/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { SermonGrid } from "@/components/organisms/SermonGrid";
-import { featuredSermons } from "@/constants/sermons";
+import type { Sermon } from "@/constants/sermons";
 
-export function SermonsSection() {
+export function SermonsSection({ sermons }: { sermons: Sermon[] }) {
   return (
     <section className="section-pad bg-paper" aria-labelledby="sermons-heading">
       <Container>
@@ -28,7 +28,7 @@ export function SermonsSection() {
         </Reveal>
         <Stagger>
           <StaggerItem>
-            <SermonGrid sermons={featuredSermons} />
+            <SermonGrid sermons={sermons} />
           </StaggerItem>
         </Stagger>
       </Container>

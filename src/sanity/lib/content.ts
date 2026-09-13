@@ -4,6 +4,10 @@ import {
   hallOfFameEntries as fallbackHallOfFame,
   marriageImages as fallbackMarriageImages,
 } from "@/constants/media";
+import type { EventItem } from "@/constants/events";
+import { upcomingEvents as fallbackEvents } from "@/constants/events";
+import type { Ministry } from "@/constants/ministries";
+import { ministries as fallbackMinistries } from "@/constants/ministries";
 import { activityPages as fallbackActivities } from "@/constants/pages";
 import {
   confessionBenediction,
@@ -11,6 +15,10 @@ import {
   giveContent,
   pastorContent,
 } from "@/constants/pages";
+import type { Sermon } from "@/constants/sermons";
+import { featuredSermons as fallbackSermons } from "@/constants/sermons";
+import type { SocialLink } from "@/constants/social";
+import { socialLinks as fallbackSocialLinks } from "@/constants/social";
 import { siteConfig, aboutIntro, coreValues, mission, vision, trustProof } from "@/constants/site";
 import type { PageKey } from "@/sanity/lib/lists";
 import { isSanityConfigured } from "@/sanity/env";
@@ -18,12 +26,16 @@ import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import {
   activityPageQuery,
+  activityPagesQuery,
   confessionQuery,
+  eventsQuery,
   galleryAlbumsQuery,
   givePageQuery,
   hallOfFameQuery,
   marriagesPageQuery,
+  ministriesQuery,
   pastorQuery,
+  sermonsQuery,
   sitePageQuery,
   siteSettingsQuery,
 } from "@/sanity/lib/queries";
@@ -206,11 +218,30 @@ export async function getSiteSettings() {
     homeSupport:
       "A Christ-centered movement equipping Youth to learn, connect, and grow beyond campus walls.",
     trustProof: [...trustProof],
+    socialLinks: [...fallbackSocialLinks] as SocialLink[],
   };
   if (!isSanityConfigured) return fallback;
   try {
     const doc = await client.fetch(siteSettingsQuery);
     if (!doc) return fallback;
+    const socialLinks: SocialLink[] = doc.socialLinks?.length
+      ? doc.socialLinks
+          .filter(
+            (link: { label?: string; href?: string; platform?: string }) =>
+              link?.label && link?.href && link?.platform,
+          )
+          .map(
+            (link: {
+              label: string;
+              href: string;
+              platform: SocialLink["platform"];
+            }) => ({
+              label: link.label,
+              href: link.href,
+              platform: link.platform,
+            }),
+          )
+      : fallback.socialLinks;
     return {
       ...fallback,
       ...Object.fromEntries(
@@ -221,6 +252,7 @@ export async function getSiteSettings() {
       homeHeadline: doc.homeHeadline?.length
         ? doc.homeHeadline
         : fallback.homeHeadline,
+      socialLinks,
     };
   } catch {
     return fallback;
@@ -445,6 +477,181 @@ export async function getMarriagesContent(): Promise<{
       slideshow: doc.slideshow ?? true,
       photos: photos.length ? photos : fallback.photos,
     };
+  } catch {
+    return fallback;
+  }
+}
+
+export async function getEvents(): Promise<EventItem[]> {
+  if (!isSanityConfigured) return [...fallbackEvents];
+  try {
+    const docs = await client.fetch(eventsQuery);
+    if (!docs?.length) return [...fallbackEvents];
+    const localById = new Map(fallbackEvents.map((item) => [item.id, item]));
+    return docs.map(
+      (
+        doc: {
+          eventId?: string;
+          title?: string;
+          date?: string;
+          time?: string;
+          location?: string;
+          summary?: string;
+          href?: string;
+          image?: unknown;
+          ctaLabel?: string;
+          ctaHref?: string;
+        },
+        index: number,
+      ) => {
+        const id = doc.eventId || `event-${index}`;
+        const local = localById.get(id);
+        const cta =
+          doc.ctaLabel && doc.ctaHref
+            ? { label: doc.ctaLabel, href: doc.ctaHref }
+            : local?.cta;
+        return {
+          id,
+          title: doc.title || local?.title || "Event",
+          date: doc.date || local?.date || "",
+          time: doc.time || local?.time || "",
+          location: doc.location || local?.location || "",
+          summary: doc.summary || local?.summary || "",
+          href: doc.href || local?.href || "/events",
+          image: imageUrl(doc.image) || local?.image || "/images/camp/camp-moment-01.jpg",
+          ...(cta ? { cta } : {}),
+        };
+      },
+    );
+  } catch {
+    return [...fallbackEvents];
+  }
+}
+
+export async function getSermons(): Promise<Sermon[]> {
+  if (!isSanityConfigured) return [...fallbackSermons];
+  try {
+    const docs = await client.fetch(sermonsQuery);
+    if (!docs?.length) return [...fallbackSermons];
+    const localById = new Map(fallbackSermons.map((item) => [item.id, item]));
+    return docs.map(
+      (
+        doc: {
+          sermonId?: string;
+          title?: string;
+          speaker?: string;
+          category?: string;
+          date?: string;
+          href?: string;
+          image?: unknown;
+        },
+        index: number,
+      ) => {
+        const id = doc.sermonId || `sermon-${index}`;
+        const local = localById.get(id);
+        return {
+          id,
+          title: doc.title || local?.title || "Sermon",
+          speaker: doc.speaker || local?.speaker || "Campus GEM",
+          category: doc.category || local?.category || "",
+          date: doc.date || local?.date || "Recent",
+          href: doc.href || local?.href || "/sermons",
+          image:
+            imageUrl(doc.image) ||
+            local?.image ||
+            "/images/bible-confession-page.jpg",
+        };
+      },
+    );
+  } catch {
+    return [...fallbackSermons];
+  }
+}
+
+export async function getMinistries(): Promise<Ministry[]> {
+  if (!isSanityConfigured) return [...fallbackMinistries];
+  try {
+    const docs = await client.fetch(ministriesQuery);
+    if (!docs?.length) return [...fallbackMinistries];
+    const localById = new Map(fallbackMinistries.map((item) => [item.id, item]));
+    return docs.map(
+      (
+        doc: {
+          ministryId?: string;
+          title?: string;
+          summary?: string;
+          href?: string;
+          image?: unknown;
+        },
+        index: number,
+      ) => {
+        const id = doc.ministryId || `ministry-${index}`;
+        const local = localById.get(id);
+        return {
+          id,
+          title: doc.title || local?.title || "Ministry",
+          summary: doc.summary || local?.summary || "",
+          href: doc.href || local?.href || "/ministries",
+          image:
+            imageUrl(doc.image) || local?.image || "/images/camp/camp-moment-01.jpg",
+        };
+      },
+    );
+  } catch {
+    return [...fallbackMinistries];
+  }
+}
+
+const activityHrefByKey: Record<string, string> = {
+  camp: "/camp",
+  "love-feast": "/love-feast",
+  "bible-study": "/bible-study",
+  mentoring: "/mentoring-hub",
+  ict: "/ict-training",
+  funfair: "/funfair",
+  marriages: "/cgem-marriages",
+  "hall-of-fame": "/hall-of-fame",
+};
+
+export async function getActivityIndexItems(): Promise<
+  Array<{ href: string; title: string; description: string }>
+> {
+  const fallback = Object.entries(activityHrefByKey).map(([key, href]) => {
+    const page =
+      activityFallbackMap[key as keyof typeof activityFallbackMap] ??
+      fallbackActivities.camp;
+    return {
+      href,
+      title: page.title,
+      description: page.description,
+    };
+  });
+  if (!isSanityConfigured) return fallback;
+  try {
+    const docs = await client.fetch(activityPagesQuery);
+    if (!docs?.length) return fallback;
+    return docs
+      .filter((doc: { activityKey?: string }) =>
+        Boolean(doc.activityKey && activityHrefByKey[doc.activityKey]),
+      )
+      .map(
+        (doc: {
+          activityKey: string;
+          title?: string;
+          description?: string;
+        }) => {
+          const href = activityHrefByKey[doc.activityKey];
+          const local =
+            activityFallbackMap[
+              doc.activityKey as keyof typeof activityFallbackMap
+            ];
+          return {
+            href,
+            title: doc.title || local?.title || doc.activityKey,
+            description: doc.description || local?.description || "",
+          };
+        },
+      );
   } catch {
     return fallback;
   }

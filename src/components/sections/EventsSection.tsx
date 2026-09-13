@@ -3,9 +3,9 @@ import { Container } from "@/components/atoms/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/atoms/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { EventGrid } from "@/components/organisms/EventGrid";
-import { upcomingEvents } from "@/constants/events";
+import type { EventItem } from "@/constants/events";
 
-export function EventsSection() {
+export function EventsSection({ events }: { events: EventItem[] }) {
   return (
     <section className="section-pad bg-paper" aria-labelledby="events-heading">
       <Container>
@@ -29,7 +29,7 @@ export function EventsSection() {
 
         <Stagger>
           <StaggerItem>
-            <EventGrid events={upcomingEvents.slice(0, 2)} />
+            <EventGrid events={events.slice(0, 2)} />
           </StaggerItem>
         </Stagger>
       </Container>

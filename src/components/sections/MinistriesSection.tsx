@@ -3,9 +3,9 @@ import { Container } from "@/components/atoms/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/atoms/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { MinistryGrid } from "@/components/organisms/MinistryGrid";
-import { ministries } from "@/constants/ministries";
+import type { Ministry } from "@/constants/ministries";
 
-export function MinistriesSection() {
+export function MinistriesSection({ ministries }: { ministries: Ministry[] }) {
   return (
     <section
       className="section-pad bg-void"

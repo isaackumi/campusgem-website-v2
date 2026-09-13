@@ -66,7 +66,8 @@ export const siteSettingsQuery = defineQuery(`
     aboutIntro,
     homeHeadline,
     homeSupport,
-    trustProof[] { label, detail }
+    trustProof[] { label, detail },
+    socialLinks[] { label, href, platform }
   }
 `);
 
@@ -148,5 +149,54 @@ export const marriagesPageQuery = defineQuery(`
       year,
       image
     }
+  }
+`);
+
+export const eventsQuery = defineQuery(`
+  *[_type == "event"] | order(sortOrder asc, title asc) {
+    eventId,
+    title,
+    date,
+    time,
+    location,
+    summary,
+    href,
+    image,
+    ctaLabel,
+    ctaHref,
+    sortOrder
+  }
+`);
+
+export const sermonsQuery = defineQuery(`
+  *[_type == "sermon"] | order(sortOrder asc, title asc) {
+    sermonId,
+    title,
+    speaker,
+    category,
+    date,
+    href,
+    image,
+    sortOrder
+  }
+`);
+
+export const ministriesQuery = defineQuery(`
+  *[_type == "ministry"] | order(sortOrder asc, title asc) {
+    ministryId,
+    title,
+    summary,
+    href,
+    image,
+    sortOrder
+  }
+`);
+
+export const activityPagesQuery = defineQuery(`
+  *[_type == "activityPage"] | order(title asc) {
+    activityKey,
+    title,
+    description,
+    eyebrow
   }
 `);

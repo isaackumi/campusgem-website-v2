@@ -102,6 +102,38 @@ export const siteSettings = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "socialLinks",
+      title: "Social & group links",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "socialLink",
+          fields: [
+            defineField({ name: "label", type: "string", title: "Label" }),
+            defineField({ name: "href", type: "url", title: "URL" }),
+            defineField({
+              name: "platform",
+              title: "Platform",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Facebook", value: "facebook" },
+                  { title: "Telegram", value: "telegram" },
+                  { title: "WhatsApp", value: "whatsapp" },
+                  { title: "Email", value: "email" },
+                ],
+                layout: "dropdown",
+              },
+            }),
+          ],
+          preview: {
+            select: { title: "label", subtitle: "platform" },
+          },
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare() {

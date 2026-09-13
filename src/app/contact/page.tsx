@@ -6,7 +6,6 @@ import {
 } from "@/components/molecules/PageBlocks";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { SitePage } from "@/components/templates/SitePage";
-import { socialLinks } from "@/constants/social";
 import { getSitePage, getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -84,7 +83,7 @@ export default async function ContactPage() {
               <Heading level={3} as="h2" className="text-ink">
                 Social & groups
               </Heading>
-              <SocialLinks links={socialLinks} />
+              <SocialLinks links={settings.socialLinks} />
             </div>
           </div>
         </div>

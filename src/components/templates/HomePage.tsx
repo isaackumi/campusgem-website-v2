@@ -8,10 +8,20 @@ import { EventsSection } from "@/components/sections/EventsSection";
 import { MinistriesSection } from "@/components/sections/MinistriesSection";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { SermonsSection } from "@/components/sections/SermonsSection";
-import { getSiteSettings } from "@/sanity/lib/content";
+import {
+  getEvents,
+  getMinistries,
+  getSermons,
+  getSiteSettings,
+} from "@/sanity/lib/content";
 
 export async function HomePage() {
-  const settings = await getSiteSettings();
+  const [settings, events, ministries, sermons] = await Promise.all([
+    getSiteSettings(),
+    getEvents(),
+    getMinistries(),
+    getSermons(),
+  ]);
 
   return (
     <>
@@ -24,9 +34,9 @@ export async function HomePage() {
         />
         <ProofStrip items={settings.trustProof} />
         <AboutSection />
-        <EventsSection />
-        <MinistriesSection />
-        <SermonsSection />
+        <EventsSection events={events} />
+        <MinistriesSection ministries={ministries} />
+        <SermonsSection sermons={sermons} />
         <CommunitySection />
         <CtaSection />
       </main>

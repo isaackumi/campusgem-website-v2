@@ -5,10 +5,11 @@ import { Divider } from "@/components/atoms/Divider";
 import { Text } from "@/components/atoms/Typography";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { footerNav } from "@/constants/navigation";
-import { siteConfig } from "@/constants/site";
-import { socialLinks } from "@/constants/social";
+import { getSiteSettings } from "@/sanity/lib/content";
 
-export function Footer() {
+export async function Footer() {
+  const settings = await getSiteSettings();
+
   return (
     <footer className="border-t border-white/8 bg-void text-ink">
       <Container className="section-pad">
@@ -17,7 +18,7 @@ export function Footer() {
             <Link href="/" aria-label="Campus GEM Ministries home">
               <BrandLogo />
             </Link>
-            <Text className="text-ink-muted">{siteConfig.description}</Text>
+            <Text className="text-ink-muted">{settings.description}</Text>
           </div>
 
           <div>
@@ -43,21 +44,21 @@ export function Footer() {
               Visit
             </h2>
             <ul className="mt-4 space-y-2.5 text-ink-soft">
-              <li>{siteConfig.address}</li>
+              <li>{settings.address}</li>
               <li>
-                <a href={siteConfig.phoneHref} className="hover:text-gold-soft">
-                  {siteConfig.phone}
+                <a href={settings.phoneHref} className="hover:text-gold-soft">
+                  {settings.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={`mailto:${siteConfig.email}`}
+                  href={`mailto:${settings.email}`}
                   className="hover:text-gold-soft"
                 >
-                  {siteConfig.email}
+                  {settings.email}
                 </a>
               </li>
-              <li>{siteConfig.hours}</li>
+              <li>{settings.hours}</li>
             </ul>
           </div>
 
@@ -67,8 +68,9 @@ export function Footer() {
             </h2>
             <SocialLinks
               className="mt-4"
-              links={socialLinks.filter((link) =>
-                ["facebook", "telegram"].includes(link.platform), )}
+              links={settings.socialLinks.filter((link) =>
+                ["facebook", "telegram"].includes(link.platform),
+              )}
             />
           </div>
         </div>
@@ -77,10 +79,10 @@ export function Footer() {
 
         <div className="flex flex-col gap-3 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {siteConfig.legalName}. All rights
+            © {new Date().getFullYear()} The Campus Gem Ministries. All rights
             reserved.
           </p>
-          <p>{siteConfig.tagline}</p>
+          <p>{settings.tagline}</p>
         </div>
       </Container>
     </footer>

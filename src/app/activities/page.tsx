@@ -5,49 +5,50 @@ import {
 } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
 import { lifeMoments } from "@/constants/media";
-import { activityPages } from "@/constants/pages";
-import { primaryNav } from "@/constants/navigation";
+import { getActivityIndexItems, getSitePage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
-  title: "Activities", description:
+  title: "Activities",
+  description:
     "Camps, love feasts, mentoring, training, and the life of Campus GEM.",
 };
 
-const activities =
-  primaryNav.find((item) => item.href === "/activities")?.children ?? [];
+export default async function ActivitiesPage() {
+  const [page, activities] = await Promise.all([
+    getSitePage("activities", {
+      title: "Activities",
+      eyebrow: "Campus life",
+      description:
+        "Camps, feasts, mentoring, training, and celebrations that form the Campus GEM family.",
+      image: "/images/camp/camp-moment-05.jpg",
+      slideshow: true,
+      narrow: false,
+      intro:
+        "From intensive camp meetings to monthly Love Feasts and mentoring hubs, every activity is designed to help you learn, connect, and grow in Christ.",
+      sections: [],
+      primaryCta: { href: "/contact", label: "Contact us" },
+      secondaryCta: { href: "/gallery", label: "View gallery" },
+    }),
+    getActivityIndexItems(),
+  ]);
 
-const descriptions: Record<string, string> = {
-  "/camp": activityPages.camp.description,
-  "/love-feast": activityPages.loveFeast.description,
-  "/bible-study": activityPages.bibleStudy.description,
-  "/mentoring-hub": activityPages.mentoring.description,
-  "/ict-training": activityPages.ict.description,
-  "/funfair": activityPages.funfair.description,
-  "/cgem-marriages": activityPages.marriages.description,
-  "/hall-of-fame": activityPages.hallOfFame.description,
-};
-
-export default function ActivitiesPage() {
   return (
     <SitePage
-      title="Activities"
-      eyebrow="Campus life"
-      description="Camps, feasts, mentoring, training, and celebrations that form the Campus GEM family."
-      image="/images/camp/camp-moment-05.jpg"
+      title={page.title}
+      eyebrow={page.eyebrow}
+      description={page.description}
+      image={page.image}
+      slideshow={page.slideshow}
     >
       <div className="space-y-12">
         <Prose>
           <Text size="lg">
-            From intensive camp meetings to monthly Love Feasts and mentoring
-            hubs, every activity is designed to help you learn, connect, and
-            grow in Christ.
+            {page.intro ||
+              "From intensive camp meetings to monthly Love Feasts and mentoring hubs, every activity is designed to help you learn, connect, and grow in Christ."}
           </Text>
         </Prose>
 
-        <LinkCards
-          items={activities.map((item) => ({
-            href: item.href, title: item.label, description: descriptions[item.href], }))}
-        />
+        <LinkCards items={activities} />
 
         <div className="space-y-5">
           <Heading level={3} as="h2" className="text-ink">
@@ -72,8 +73,10 @@ export default function ActivitiesPage() {
         <CtaBanner
           title="Ready to join in?"
           description="Reach out and we will help you find the right gathering or program."
-          primary={{ href: "/contact", label: "Contact us" }}
-          secondary={{ href: "/gallery", label: "View gallery" }}
+          primary={page.primaryCta ?? { href: "/contact", label: "Contact us" }}
+          secondary={
+            page.secondaryCta ?? { href: "/gallery", label: "View gallery" }
+          }
         />
       </div>
     </SitePage>
