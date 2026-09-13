@@ -3,31 +3,33 @@ import { Text } from "@/components/atoms/Typography";
 import { CtaBanner, Prose } from "@/components/molecules/PageBlocks";
 import { GalleryExplorer } from "@/components/organisms/GalleryExplorer";
 import { SitePage } from "@/components/templates/SitePage";
-import { galleryAlbums } from "@/constants/media";
+import { getGalleryAlbums } from "@/sanity/lib/gallery";
 
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "Campus GEM gallery by year: camps, outreaches, and campus community life.",
+    "Campus GEM gallery by year and activity: camps, outreaches, and campus community life.",
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const albums = await getGalleryAlbums();
+
   return (
     <SitePage
       title="Gallery"
       eyebrow="Moments"
-      description="Browse Campus GEM memories by year, from early gatherings to recent camps."
+      description="Browse Campus GEM memories by year and activity, from early gatherings to recent camps."
       image="/images/camp/camp-moment-03.jpg"
     >
       <div className="space-y-12">
         <Prose>
           <Text size="lg">
             A living archive of worship, friendship, and the journeys that shape
-            leaders for Christ. Filter by year or open any photo for a closer look.
+            leaders for Christ. Filter by year or activity, or open any photo for a closer look.
           </Text>
         </Prose>
 
-        <GalleryExplorer albums={galleryAlbums} />
+        <GalleryExplorer albums={albums} />
 
         <CtaBanner
           title="Be part of the next moment"

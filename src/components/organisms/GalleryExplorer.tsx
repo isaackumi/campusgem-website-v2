@@ -28,8 +28,8 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
     () => [
       {
         id: "all" as const,
-        label: "All years",
-        description: "Every season of Campus GEM life in one place.",
+        label: "All albums",
+        description: "Every season and activity of Campus GEM life in one place.",
         count: albums.reduce((sum, album) => sum + album.images.length, 0),
       },
       ...albums.map((album) => ({
