@@ -4,7 +4,9 @@ export const apiVersion =
 export const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
+/** Public project id — env override preferred, hard fallback for Vercel builds. */
+export const projectId =
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "pi6d5m52";
 
-/** True when public Sanity project settings are present. */
+/** True when we have a usable project id. */
 export const isSanityConfigured = Boolean(projectId);

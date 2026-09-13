@@ -5,8 +5,11 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./src/sanity/schemaTypes";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+/** Public IDs — safe to ship; env vars override when present. */
+const projectId =
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "pi6d5m52";
+const dataset =
+  process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
 export default defineConfig({
   name: "campusgem",

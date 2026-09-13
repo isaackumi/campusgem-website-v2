@@ -2,11 +2,10 @@ import type { Metadata, Viewport } from "next";
 import {
   metadata as studioMetadata,
   viewport as studioViewport,
-  NextStudio,
 } from "next-sanity/studio";
-import config from "../../../../sanity.config";
+import { Studio } from "./Studio";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   ...studioMetadata,
@@ -19,5 +18,5 @@ export const viewport: Viewport = {
 };
 
 export default function StudioPage() {
-  return <NextStudio config={config} />;
+  return <Studio />;
 }
