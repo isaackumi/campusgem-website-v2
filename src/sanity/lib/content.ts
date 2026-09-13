@@ -1,5 +1,9 @@
-import type { GalleryAlbum } from "@/constants/media";
-import { galleryAlbums as fallbackAlbums } from "@/constants/media";
+import type { GalleryAlbum, HallOfFameEntry } from "@/constants/media";
+import {
+  galleryAlbums as fallbackAlbums,
+  hallOfFameEntries as fallbackHallOfFame,
+  marriageImages as fallbackMarriageImages,
+} from "@/constants/media";
 import { activityPages as fallbackActivities } from "@/constants/pages";
 import {
   confessionBenediction,
@@ -17,6 +21,8 @@ import {
   confessionQuery,
   galleryAlbumsQuery,
   givePageQuery,
+  hallOfFameQuery,
+  marriagesPageQuery,
   pastorQuery,
   sitePageQuery,
   siteSettingsQuery,
@@ -87,7 +93,10 @@ export async function getSitePage(
 ): Promise<ManagedSitePage> {
   if (!isSanityConfigured) return fallback;
   try {
-    const doc = await client.fetch(sitePageQuery, { pageKey });
+    const doc = await client.fetch(sitePageQuery, {
+      pageKey,
+      docId: `page-${pageKey}`,
+    });
     if (!doc) return fallback;
     return {
       title: doc.title || fallback.title,
@@ -142,7 +151,10 @@ export async function getActivityPage(activityKey: keyof typeof activityFallback
     };
   }
   try {
-    const doc = await client.fetch(activityPageQuery, { activityKey });
+    const doc = await client.fetch(activityPageQuery, {
+      activityKey,
+      docId: `activity-${activityKey}`,
+    });
     if (!doc) {
       return {
         ...fallback,
@@ -331,6 +343,107 @@ export async function getGiveContent(): Promise<{
       focuses: doc.focuses?.length ? doc.focuses : fallback.focuses,
       needyNote: doc.needyNote || fallback.needyNote,
       howToGive: doc.howToGive || fallback.howToGive,
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+export async function getHallOfFameContent(): Promise<{
+  title: string;
+  eyebrow: string;
+  description: string;
+  body: string;
+  image: string;
+  entries: HallOfFameEntry[];
+}> {
+  const fallback = {
+    title: fallbackActivities.hallOfFame.title,
+    eyebrow: fallbackActivities.hallOfFame.eyebrow,
+    description: fallbackActivities.hallOfFame.description,
+    body: fallbackActivities.hallOfFame.body,
+    image: fallbackActivities.hallOfFame.image,
+    entries: [...fallbackHallOfFame],
+  };
+  if (!isSanityConfigured) return fallback;
+  try {
+    const doc = await client.fetch(hallOfFameQuery);
+    if (!doc) return fallback;
+    const localById = new Map(fallbackHallOfFame.map((entry) => [entry.id, entry]));
+    const entries: HallOfFameEntry[] = doc.entries?.length
+      ? doc.entries
+          .filter((entry: { name?: string }) => Boolean(entry?.name))
+          .map(
+            (
+              entry: {
+                entryId?: string;
+                name: string;
+                note?: string;
+                portrait?: unknown;
+              },
+              index: number,
+            ) => {
+              const id = entry.entryId || `entry-${index}`;
+              const local = localById.get(id);
+              return {
+                id,
+                name: entry.name,
+                note: entry.note || local?.note,
+                src: imageUrl(entry.portrait) || local?.src || fallback.image,
+              };
+            },
+          )
+      : fallback.entries;
+    return {
+      title: doc.title || fallback.title,
+      eyebrow: doc.eyebrow || fallback.eyebrow,
+      description: doc.description || fallback.description,
+      body: doc.body || fallback.body,
+      image: imageUrl(doc.heroImage) || fallback.image,
+      entries,
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+export async function getMarriagesContent(): Promise<{
+  title: string;
+  eyebrow: string;
+  description: string;
+  body: string;
+  image: string;
+  contentImage: string;
+  slideshow: boolean;
+  photos: string[];
+}> {
+  const fallback = {
+    title: fallbackActivities.marriages.title,
+    eyebrow: fallbackActivities.marriages.eyebrow,
+    description: fallbackActivities.marriages.description,
+    body: fallbackActivities.marriages.body,
+    image: fallbackActivities.marriages.image,
+    contentImage: fallbackActivities.marriages.contentImage,
+    slideshow: true,
+    photos: [...fallbackMarriageImages],
+  };
+  if (!isSanityConfigured) return fallback;
+  try {
+    const doc = await client.fetch(marriagesPageQuery);
+    if (!doc) return fallback;
+    const photos =
+      doc.photos
+        ?.map((photo: { image?: unknown }) => imageUrl(photo?.image))
+        .filter((src: string | undefined): src is string => Boolean(src)) ?? [];
+    return {
+      title: doc.title || fallback.title,
+      eyebrow: doc.eyebrow || fallback.eyebrow,
+      description: doc.description || fallback.description,
+      body: doc.body || fallback.body,
+      image: imageUrl(doc.heroImage) || fallback.image,
+      contentImage: imageUrl(doc.contentImage) || fallback.contentImage,
+      slideshow: doc.slideshow ?? true,
+      photos: photos.length ? photos : fallback.photos,
     };
   } catch {
     return fallback;

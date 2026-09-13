@@ -1,16 +1,17 @@
 /** Shared Studio dropdown options — single source for pages, years, activities. */
 
-export const yearOptions = [
-  { title: "2026", value: 2026 },
-  { title: "2025", value: 2025 },
-  { title: "2024", value: 2024 },
-  { title: "2023", value: 2023 },
-  { title: "2022", value: 2022 },
-  { title: "2021", value: 2021 },
-  { title: "2020", value: 2020 },
-  { title: "2019", value: 2019 },
-  { title: "2018", value: 2018 },
+/**
+ * Years available on the public gallery / portal.
+ * Keep in sync with `galleryAlbums` year folders in `src/constants/media.ts`.
+ */
+export const portalYears = [
+  2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018,
 ] as const;
+
+export const yearOptions = portalYears.map((year) => ({
+  title: String(year),
+  value: year,
+}));
 
 export const activityOptions = [
   { title: "Eagles Camp", value: "camp" },

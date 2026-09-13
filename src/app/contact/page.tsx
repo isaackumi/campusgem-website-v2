@@ -6,8 +6,8 @@ import {
 } from "@/components/molecules/PageBlocks";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { SitePage } from "@/components/templates/SitePage";
-import { siteConfig } from "@/constants/site";
 import { socialLinks } from "@/constants/social";
+import { getSitePage, getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -15,13 +15,30 @@ export const metadata: Metadata = {
     "Reach Campus GEM: address, phone, email, and social channels.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [page, settings] = await Promise.all([
+    getSitePage("contact", {
+      title: "Contact",
+      eyebrow: "Connect",
+      description:
+        "We would love to hear from you and help you find your place. Whether you want to visit a gathering, partner with the ministry, or ask a question, reach out. We typically respond within a few days.",
+      image: "/images/camp/camp-moment-05.jpg",
+      slideshow: true,
+      narrow: false,
+      sections: [],
+      primaryCta: { href: "/give", label: "Partner / Give" },
+      secondaryCta: { href: "/activities", label: "Explore activities" },
+    }),
+    getSiteSettings(),
+  ]);
+
   return (
     <SitePage
-      title="Contact"
-      eyebrow="Connect"
-      description="We would love to hear from you and help you find your place. Whether you want to visit a gathering, partner with the ministry, or ask a question, reach out. We typically respond within a few days."
-      image="/images/camp/camp-moment-05.jpg"
+      title={page.title}
+      eyebrow={page.eyebrow}
+      description={page.description}
+      image={page.image}
+      slideshow={page.slideshow}
     >
       <div className="space-y-10 md:space-y-12">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
@@ -40,25 +57,25 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
               <ContentBlock title="Visit">
-                <Text muted>{siteConfig.address}</Text>
+                <Text muted>{settings.address}</Text>
                 <Text className="mt-2" muted>
-                  {siteConfig.hours}
+                  {settings.hours}
                 </Text>
               </ContentBlock>
               <ContentBlock title="Call">
                 <a
                   className="text-lg text-gold-soft transition-colors duration-200 hover:text-gold"
-                  href={siteConfig.phoneHref}
+                  href={settings.phoneHref}
                 >
-                  {siteConfig.phone}
+                  {settings.phone}
                 </a>
               </ContentBlock>
               <ContentBlock title="Email">
                 <a
                   className="text-lg text-gold-soft transition-colors duration-200 hover:text-gold"
-                  href={`mailto:${siteConfig.email}`}
+                  href={`mailto:${settings.email}`}
                 >
-                  {siteConfig.email}
+                  {settings.email}
                 </a>
               </ContentBlock>
             </div>
@@ -88,8 +105,10 @@ export default function ContactPage() {
         <CtaBanner
           title="Ready to partner?"
           description="Your generosity fuels camps, mentoring, and campus discipleship."
-          primary={{ href: "/give", label: "Partner / Give" }}
-          secondary={{ href: "/activities", label: "Explore activities" }}
+          primary={page.primaryCta ?? { href: "/give", label: "Partner / Give" }}
+          secondary={
+            page.secondaryCta ?? { href: "/activities", label: "Explore activities" }
+          }
         />
       </div>
     </SitePage>

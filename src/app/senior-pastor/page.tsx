@@ -9,8 +9,7 @@ import {
   Prose,
 } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
-import { pastorContent } from "@/constants/pages";
-import { siteConfig } from "@/constants/site";
+import { getPastorContent, getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "Our Senior Pastor",
@@ -18,12 +17,17 @@ export const metadata: Metadata = {
     "Meet Rev. Divine Asem (Divine Perez), founder and Senior Pastor of Campus GEM.",
 };
 
-export default function SeniorPastorPage() {
+export default async function SeniorPastorPage() {
+  const [pastor, settings] = await Promise.all([
+    getPastorContent(),
+    getSiteSettings(),
+  ]);
+
   return (
     <SitePage
       title="Our Senior Pastor"
       eyebrow="Leadership"
-      description={`${pastorContent.name}, lovingly known as ${pastorContent.preferredName}.`}
+      description={`${pastor.name}, lovingly known as ${pastor.preferredName}.`}
       image="/images/camp/camp-moment-05.jpg"
     >
       <div className="space-y-16">
@@ -31,8 +35,8 @@ export default function SeniorPastorPage() {
           <div className="space-y-4">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-surface">
               <Image
-                src={pastorContent.portrait}
-                alt={pastorContent.name}
+                src={pastor.portrait}
+                alt={pastor.name}
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -41,13 +45,13 @@ export default function SeniorPastorPage() {
             </div>
             <div className="border-t border-white/10 pt-4">
               <p className="font-display text-2xl font-bold text-ink">
-                {pastorContent.name}
+                {pastor.name}
               </p>
               <p className="mt-1 text-sm font-semibold uppercase tracking-[0.14em] text-gold">
-                {pastorContent.title}
+                {pastor.title}
               </p>
               <Text className="mt-2" muted size="sm">
-                Preferred name: {pastorContent.preferredName}
+                Preferred name: {pastor.preferredName}
               </Text>
             </div>
           </div>
@@ -55,12 +59,12 @@ export default function SeniorPastorPage() {
           <div className="space-y-8">
             <Prose className="max-w-none">
               <Heading level={3} as="h2" className="text-ink">
-                Founder of {pastorContent.ministry}
+                Founder of {pastor.ministry}
               </Heading>
-              <Text size="lg">{pastorContent.intro}</Text>
-              <Text size="lg">{pastorContent.summary}</Text>
-              <Text>{pastorContent.encounter}</Text>
-              <Text>{pastorContent.calling}</Text>
+              <Text size="lg">{pastor.intro}</Text>
+              <Text size="lg">{pastor.summary}</Text>
+              <Text>{pastor.encounter}</Text>
+              <Text>{pastor.calling}</Text>
             </Prose>
 
             <div className="flex flex-wrap gap-3">
@@ -74,7 +78,7 @@ export default function SeniorPastorPage() {
 
         <blockquote className="border-l-2 border-gold/50 pl-5 sm:pl-6">
           <p className="font-display text-[1.35rem] leading-[1.5] text-ink sm:text-[1.6rem]">
-            “{pastorContent.quote}”
+            “{pastor.quote}”
           </p>
           <Text className="mt-4" muted size="sm">
             The word that shaped the birth of Campus GEM
@@ -86,19 +90,28 @@ export default function SeniorPastorPage() {
             The journey
           </Heading>
           <ol className="grid gap-8 md:grid-cols-3 md:gap-10">
-            {pastorContent.timeline.map((item, index) => (
-              <li key={item.title} className="border-t border-white/10 pt-5">
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold">
-                  {String(index + 1).padStart(2, "0")} · {item.year}
-                </p>
-                <Heading level={4} as="h3" className="mt-3 font-display text-xl font-bold text-ink">
-                  {item.title}
-                </Heading>
-                <Text className="mt-3" muted>
-                  {item.body}
-                </Text>
-              </li>
-            ))}
+            {pastor.timeline.map(
+              (
+                item: { year: string; title: string; body: string },
+                index: number,
+              ) => (
+                <li key={item.title} className="border-t border-white/10 pt-5">
+                  <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                    {String(index + 1).padStart(2, "0")} · {item.year}
+                  </p>
+                  <Heading
+                    level={4}
+                    as="h3"
+                    className="mt-3 font-display text-xl font-bold text-ink"
+                  >
+                    {item.title}
+                  </Heading>
+                  <Text className="mt-3" muted>
+                    {item.body}
+                  </Text>
+                </li>
+              ),
+            )}
           </ol>
         </div>
 
@@ -107,7 +120,7 @@ export default function SeniorPastorPage() {
             What he champions
           </Heading>
           <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-            {pastorContent.focuses.map((item) => (
+            {pastor.focuses.map((item: { title: string; body: string }) => (
               <ContentBlock key={item.title} title={item.title}>
                 <Text muted>{item.body}</Text>
               </ContentBlock>
@@ -117,7 +130,7 @@ export default function SeniorPastorPage() {
 
         <ContentBlock title="From Redemption Light to Campus GEM">
           <Text muted>
-            Campus GEM stands as an offshoot of {pastorContent.church}. Pastor
+            Campus GEM stands as an offshoot of {pastor.church}. Pastor
             Divine’s calling moved the ministry from concentrated church work
             into a wider field: camps, mentoring, relationship seminars, and
             campus outreach that form leaders for Christ.
@@ -150,7 +163,7 @@ export default function SeniorPastorPage() {
 
         <CtaBanner
           title="Would you like to connect?"
-          description={`Reach the Campus GEM team at ${siteConfig.email} or ${siteConfig.phone}. We would love to walk with you.`}
+          description={`Reach the Campus GEM team at ${settings.email} or ${settings.phone}. We would love to walk with you.`}
           primary={{ href: "/contact", label: "Contact us" }}
           secondary={{ href: "/give", label: "Partner with us" }}
         />

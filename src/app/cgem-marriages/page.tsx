@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
-import { getActivityPage } from "@/sanity/lib/content";
+import { getMarriagesContent } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "CGM Marriages",
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CgemMarriagesPage() {
-  const page = await getActivityPage("marriages");
+  const page = await getMarriagesContent();
   return (
     <ActivityPage
       title={page.title}
@@ -17,7 +17,9 @@ export default async function CgemMarriagesPage() {
       body={page.body}
       image={page.image}
       contentImage={page.contentImage}
-      slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
+      slideshow={page.slideshow}
+      gallery={page.photos}
+      galleryAlt="CGM marriage celebration"
     />
   );
 }

@@ -20,7 +20,7 @@ export const galleryAlbumsQuery = defineQuery(`
 `);
 
 export const sitePageQuery = defineQuery(`
-  *[_type == "sitePage" && pageKey == $pageKey][0] {
+  *[_type == "sitePage" && (pageKey == $pageKey || _id == $docId || _id == ("drafts." + $docId))][0] {
     pageKey,
     title,
     eyebrow,
@@ -36,7 +36,7 @@ export const sitePageQuery = defineQuery(`
 `);
 
 export const activityPageQuery = defineQuery(`
-  *[_type == "activityPage" && activityKey == $activityKey][0] {
+  *[_type == "activityPage" && (activityKey == $activityKey || _id == $docId || _id == ("drafts." + $docId))][0] {
     activityKey,
     title,
     eyebrow,
@@ -113,5 +113,40 @@ export const givePageQuery = defineQuery(`
     focuses[] { title, body },
     needyNote,
     howToGive
+  }
+`);
+
+export const hallOfFameQuery = defineQuery(`
+  *[_type == "hallOfFame" && _id == "hallOfFame"][0] {
+    title,
+    eyebrow,
+    description,
+    body,
+    heroImage,
+    entries[] {
+      entryId,
+      name,
+      note,
+      year,
+      portrait
+    }
+  }
+`);
+
+export const marriagesPageQuery = defineQuery(`
+  *[_type == "marriagesPage" && _id == "marriagesPage"][0] {
+    title,
+    eyebrow,
+    description,
+    body,
+    heroImage,
+    contentImage,
+    slideshow,
+    photos[] {
+      _key,
+      caption,
+      year,
+      image
+    }
   }
 `);

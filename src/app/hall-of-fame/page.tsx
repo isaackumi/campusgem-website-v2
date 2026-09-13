@@ -3,17 +3,17 @@ import { Text } from "@/components/atoms/Typography";
 import { CtaBanner, Prose } from "@/components/molecules/PageBlocks";
 import { HallOfFameExplorer } from "@/components/organisms/HallOfFameExplorer";
 import { SitePage } from "@/components/templates/SitePage";
-import { hallOfFameEntries } from "@/constants/media";
-import { activityPages } from "@/constants/pages";
-
-const page = activityPages.hallOfFame;
+import { getHallOfFameContent } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "Hall of Fame",
-  description: page.description,
+  description:
+    "Celebrating graduates whose faith, excellence, and perseverance inspire the next generation.",
 };
 
-export default function HallOfFamePage() {
+export default async function HallOfFamePage() {
+  const page = await getHallOfFameContent();
+
   return (
     <SitePage
       title={page.title}
@@ -32,10 +32,10 @@ export default function HallOfFamePage() {
               Portraits
             </p>
             <Text size="sm" muted>
-              {hallOfFameEntries.length} honored
+              {page.entries.length} honored
             </Text>
           </div>
-          <HallOfFameExplorer entries={hallOfFameEntries} />
+          <HallOfFameExplorer entries={page.entries} />
         </div>
 
         <CtaBanner

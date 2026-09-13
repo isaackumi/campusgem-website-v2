@@ -39,8 +39,11 @@ export const galleryAlbum = defineType({
       name: "year",
       title: "Year",
       type: "number",
-      description: "Pick from the year list.",
-      options: { list: yearList },
+      description: "Portal years shown on the live gallery (dropdown).",
+      options: {
+        list: yearList,
+        layout: "dropdown",
+      },
       hidden: ({ parent }) => parent?.kind !== "year",
       validation: (rule) =>
         rule.custom((value, context) => {
