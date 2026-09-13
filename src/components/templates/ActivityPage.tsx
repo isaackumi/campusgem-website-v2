@@ -12,6 +12,7 @@ type ActivityPageProps = {
   image: string;
   contentImage?: string;
   imageClassName?: string;
+  slideshow?: boolean;
   cta?: { href: string; label: string };
   secondaryCta?: { href: string; label: string };
   gallery?: string[];
@@ -26,6 +27,7 @@ export function ActivityPage({
   image,
   contentImage,
   imageClassName,
+  slideshow = true,
   cta,
   secondaryCta,
   gallery,
@@ -40,6 +42,7 @@ export function ActivityPage({
       description={description}
       image={image}
       imageClassName={imageClassName}
+      slideshow={slideshow}
     >
       <div className="space-y-14">
         <SplitContent image={sideImage} imageAlt={title}>

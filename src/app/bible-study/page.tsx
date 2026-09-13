@@ -3,16 +3,17 @@ import Image from "next/image";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { CtaBanner, Prose } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
-import { activityPages } from "@/constants/pages";
-
-const page = activityPages.bibleStudy;
+import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
   title: "Bible Study",
-  description: page.description,
+  description:
+    "Every Sunday at 7:00 PM GMT on Telegram with Campus GEM Ministries.",
 };
 
-export default function BibleStudyPage() {
+export default async function BibleStudyPage() {
+  const page = await getActivityPage("bible-study");
+
   return (
     <SitePage
       title={page.title}
@@ -64,7 +65,12 @@ export default function BibleStudyPage() {
         <CtaBanner
           title="Join Bible Study"
           description="Open Telegram and gather with us this Sunday at 7 PM GMT."
-          primary={page.cta}
+          primary={
+            page.cta ?? {
+              href: "https://t.me/campusgem",
+              label: "Join on Telegram",
+            }
+          }
           secondary={{ href: "/daily-confession", label: "Daily confession" }}
         />
       </div>

@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
-import { marriageImages } from "@/constants/media";
-import { activityPages } from "@/constants/pages";
+import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
-  title: "CGM Marriages", description: activityPages.marriages.description,
+  title: "CGM Marriages",
+  description: "Campus GEM marriages and covenant celebrations.",
 };
 
-export default function CgemMarriagesPage() {
-  const page = activityPages.marriages;
+export default async function CgemMarriagesPage() {
+  const page = await getActivityPage("marriages");
   return (
     <ActivityPage
       title={page.title}
+      eyebrow={page.eyebrow}
       description={page.description}
       body={page.body}
       image={page.image}
       contentImage={page.contentImage}
-      cta={{ href: "/contact", label: "Celebrate with us" }}
-      gallery={[...marriageImages]}
-      galleryAlt="Campus GEM marriage"
+      slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
     />
   );
 }

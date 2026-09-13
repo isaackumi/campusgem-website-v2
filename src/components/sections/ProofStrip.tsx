@@ -2,7 +2,11 @@ import { Container } from "@/components/atoms/Container";
 import { Reveal, Stagger, StaggerItem } from "@/components/atoms/Reveal";
 import { trustProof } from "@/constants/site";
 
-export function ProofStrip() {
+export function ProofStrip({
+  items = [...trustProof],
+}: {
+  items?: Array<{ label: string; detail: string }>;
+}) {
   return (
     <section
       className="border-y border-white/8 bg-void"
@@ -11,7 +15,7 @@ export function ProofStrip() {
       <Container>
         <Reveal>
           <Stagger className="grid gap-8 py-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:py-12">
-            {trustProof.map((item) => (
+            {items.map((item) => (
               <StaggerItem key={item.label}>
                 <p className="font-display text-2xl font-bold tracking-[-0.02em] text-gold sm:text-[1.65rem]">
                   {item.label}

@@ -8,14 +8,21 @@ import { EventsSection } from "@/components/sections/EventsSection";
 import { MinistriesSection } from "@/components/sections/MinistriesSection";
 import { ProofStrip } from "@/components/sections/ProofStrip";
 import { SermonsSection } from "@/components/sections/SermonsSection";
+import { getSiteSettings } from "@/sanity/lib/content";
 
-export function HomePage() {
+export async function HomePage() {
+  const settings = await getSiteSettings();
+
   return (
     <>
       <Navbar />
       <main id="main-content">
-        <Hero />
-        <ProofStrip />
+        <Hero
+          tagline={settings.tagline}
+          headline={settings.homeHeadline}
+          support={settings.homeSupport}
+        />
+        <ProofStrip items={settings.trustProof} />
         <AboutSection />
         <EventsSection />
         <MinistriesSection />

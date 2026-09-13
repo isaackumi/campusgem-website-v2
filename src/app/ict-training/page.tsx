@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
-import { activityPages } from "@/constants/pages";
+import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
-  title: "ICT Skill Training", description: activityPages.ict.description,
+  title: "ICT Skill Training",
+  description: "Campus GEM ICT skill training for Youth.",
 };
 
-export default function IctTrainingPage() {
-  const page = activityPages.ict;
+export default async function IctTrainingPage() {
+  const page = await getActivityPage("ict");
   return (
     <ActivityPage
       title={page.title}
+      eyebrow={page.eyebrow}
       description={page.description}
       body={page.body}
       image={page.image}
       contentImage={page.contentImage}
-      cta={{ href: "/contact", label: "Enquire about training" }}
+      slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
     />
   );
 }

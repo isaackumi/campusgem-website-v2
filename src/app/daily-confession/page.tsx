@@ -2,31 +2,31 @@ import type { Metadata } from "next";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { CtaBanner, Prose } from "@/components/molecules/PageBlocks";
 import { SitePage } from "@/components/templates/SitePage";
-import {
-  confessionBenediction, confessionSections,
-} from "@/constants/pages";
+import { getConfessionContent } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
-  title: "Daily Confession", description:
-    "Speak life over your day with Campus GEM’s daily confession.",
+  title: "Daily Confession",
+  description: "Speak life over your day with Campus GEM’s daily confession.",
 };
 
-const numberedSections = (() => {
+export default async function DailyConfessionPage() {
+  const content = await getConfessionContent();
+
   let n = 0;
-  return confessionSections.map((section) => ({
-    ...section, lines: section.lines.map((line) => {
+  const numberedSections = content.sections.map((section) => ({
+    ...section,
+    lines: section.lines.map((line) => {
       n += 1;
       return { line, number: n };
-    }), }));
-})();
+    }),
+  }));
 
-export default function DailyConfessionPage() {
   return (
     <SitePage
-      title="Daily Confession"
-      eyebrow="Faith"
-      description="Declare God’s Word over your life, pleasant places, godly heritage, and divine favor."
-      image="/images/bible-confession-page.jpg"
+      title={content.title}
+      eyebrow={content.eyebrow}
+      description={content.description}
+      image={content.image}
       imageClassName="object-[center_40%]"
       slideshow={false}
       narrow
@@ -34,8 +34,7 @@ export default function DailyConfessionPage() {
       <div className="space-y-14">
         <Prose>
           <Text size="lg" className="text-ink-soft">
-            Speak these aloud each day. Let faith rise as you agree with God’s
-            promises for your life, family, and calling.
+            {content.intro}
           </Text>
         </Prose>
 
@@ -56,7 +55,7 @@ export default function DailyConfessionPage() {
               <ol className="confession-list" start={section.lines[0]?.number}>
                 {section.lines.map(({ line, number }) => (
                   <li
-                    key={line}
+                    key={`${number}-${line.slice(0, 24)}`}
                     className="grid grid-cols-[2.5rem_1fr] gap-3"
                     value={number}
                   >
@@ -78,7 +77,7 @@ export default function DailyConfessionPage() {
 
         <blockquote className="border-l-2 border-gold/50 pl-5">
           <p className="font-display text-[1.2rem] leading-[1.7] text-ink sm:text-[1.35rem]">
-            {confessionBenediction}
+            {content.benediction}
           </p>
         </blockquote>
 

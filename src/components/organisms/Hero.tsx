@@ -16,7 +16,19 @@ const SLIDE_TRANSITION = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
-export function Hero() {
+export function Hero({
+  tagline = siteConfig.tagline,
+  headline = [
+    "Raising leaders.",
+    "Revealing Christ.",
+    "Restoring purpose.",
+  ],
+  support = "A Christ-centered movement equipping Youth to learn, connect, and grow beyond campus walls.",
+}: {
+  tagline?: string;
+  headline?: string[];
+  support?: string;
+}) {
   const reduce = useReducedMotion();
   const slides = [...campMoments];
   const [index, setIndex] = useState(0);
@@ -29,6 +41,8 @@ export function Hero() {
     }, SLIDE_MS);
     return () => window.clearInterval(id);
   }, [reduce, slides.length]);
+
+  const lines = headline.length ? headline : ["Raising leaders."];
 
   return (
     <section
@@ -82,7 +96,7 @@ export function Hero() {
             transition={easeOutExpo}
             className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-gold"
           >
-            {siteConfig.tagline}
+            {tagline}
           </motion.p>
 
           <motion.h1
@@ -91,15 +105,17 @@ export function Hero() {
             transition={easeOutExpo}
             className="mt-5 font-display text-[clamp(2.5rem,6.2vw,5rem)] font-bold leading-[1.02] tracking-[-0.03em] text-white sm:mt-6"
           >
-            Raising leaders.
-            <span className="block">Revealing Christ.</span>
-            <span className="block">Restoring purpose.</span>
+            {lines[0]}
+            {lines.slice(1).map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </motion.h1>
 
           <motion.div variants={reduce ? undefined : fadeUp} transition={easeOutExpo}>
             <Text className="mt-5 max-w-md text-pretty text-white/80 sm:mt-6" size="lg">
-              A Christ-centered movement equipping Youth to learn, connect,
-              and grow beyond campus walls.
+              {support}
             </Text>
           </motion.div>
 

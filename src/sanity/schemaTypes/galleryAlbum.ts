@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { activityList, yearList } from "../lib/lists";
 
 export const galleryAlbum = defineType({
   name: "galleryAlbum",
@@ -38,7 +39,8 @@ export const galleryAlbum = defineType({
       name: "year",
       title: "Year",
       type: "number",
-      description: "For year albums (e.g. 2025).",
+      description: "Pick from the year list.",
+      options: { list: yearList },
       hidden: ({ parent }) => parent?.kind !== "year",
       validation: (rule) =>
         rule.custom((value, context) => {
@@ -53,19 +55,10 @@ export const galleryAlbum = defineType({
       name: "activity",
       title: "Activity",
       type: "string",
-      description: "For activity albums (Camp, Love Feast, etc.).",
+      description: "Pick an activity album.",
       options: {
-        list: [
-          { title: "Eagles Camp", value: "camp" },
-          { title: "Love Feasts", value: "love-feast" },
-          { title: "Bible Study", value: "bible-study" },
-          { title: "Mentoring Hub", value: "mentoring" },
-          { title: "ICT Training", value: "ict" },
-          { title: "Fun Fair", value: "funfair" },
-          { title: "CGM Marriages", value: "marriages" },
-          { title: "Hall of Fame", value: "hall-of-fame" },
-          { title: "Other", value: "other" },
-        ],
+        list: activityList,
+        layout: "dropdown",
       },
       hidden: ({ parent }) => parent?.kind !== "activity",
     }),
@@ -79,7 +72,7 @@ export const galleryAlbum = defineType({
       name: "sortOrder",
       title: "Sort order",
       type: "number",
-      description: "Lower numbers appear first. Year albums often use 0–N.",
+      description: "Lower numbers appear first.",
       initialValue: 100,
     }),
     defineField({
@@ -102,7 +95,6 @@ export const galleryAlbum = defineType({
               name: "alt",
               title: "Alt text",
               type: "string",
-              description: "Short description for accessibility.",
             }),
             defineField({
               name: "caption",
