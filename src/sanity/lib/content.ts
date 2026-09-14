@@ -66,6 +66,35 @@ export type ManagedSitePage = {
   secondaryCta?: { label: string; href: string };
 };
 
+function albumIdFromDoc(doc: {
+  _id: string;
+  slug?: string | null;
+  kind?: string | null;
+  year?: number | null;
+}): string {
+  // Year albums must match local constants (`"2020"`), not document ids.
+  if (doc.kind === "year" && doc.year != null) return String(doc.year);
+  return doc.slug || doc._id;
+}
+
+function resolveGalleryPhotoUrl(photo: unknown): string | undefined {
+  if (!photo || typeof photo !== "object") return undefined;
+  const entry = photo as { image?: unknown; asset?: unknown; _type?: string };
+  // Old object shape: { image: { asset } }. New shape: image doc itself.
+  if (entry.image) return imageUrl(entry.image);
+  return imageUrl(photo);
+}
+
+/** Studio uploads first, then always keep synced/local photos underneath. */
+function mergeAlbumImages(
+  sanityImages: string[],
+  localImages: readonly string[] | undefined,
+): string[] {
+  const local = localImages ?? [];
+  const sanitySet = new Set(sanityImages);
+  return [...sanityImages, ...local.filter((src) => !sanitySet.has(src))];
+}
+
 export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
   if (!isSanityConfigured) return [...fallbackAlbums];
   try {
@@ -74,49 +103,35 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
         _id: string;
         title?: string | null;
         slug?: string | null;
+        kind?: string | null;
+        year?: number | null;
         description?: string | null;
         photos?: Array<{ image?: unknown; asset?: unknown } | unknown> | null;
       }>
     >(galleryAlbumsQuery);
 
-    const sanityById = new Map<string, GalleryAlbum>();
-    for (const doc of docs ?? []) {
-      const images =
-        doc.photos
-          ?.map((photo) => {
-            if (!photo || typeof photo !== "object") return undefined;
-            const entry = photo as { image?: unknown; asset?: unknown; _type?: string };
-            // Old object shape: { image: { asset } }. New shape: image doc itself.
-            if (entry.image) return imageUrl(entry.image);
-            return imageUrl(photo);
-          })
-          .filter((src): src is string => Boolean(src)) ?? [];
-      if (!images.length) continue;
-      const id = doc.slug || doc._id;
-      sanityById.set(id, {
-        id,
-        label: doc.title || "Album",
-        description: doc.description || "",
-        images,
-      });
-    }
-
-    // Merge: Sanity photos win per album; keep local albums that have no CMS photos yet.
+    // Start from synced/local albums so clearing Studio photos can never wipe a year.
     const merged = new Map<string, GalleryAlbum>();
     for (const album of fallbackAlbums) {
       merged.set(album.id, { ...album, images: [...album.images] });
     }
-    for (const [id, album] of sanityById) {
+
+    for (const doc of docs ?? []) {
+      const id = albumIdFromDoc(doc);
+      const sanityImages =
+        doc.photos
+          ?.map(resolveGalleryPhotoUrl)
+          .filter((src): src is string => Boolean(src)) ?? [];
       const local = merged.get(id);
-      const combined = [
-        ...album.images,
-        ...(local?.images ?? []).filter((src) => !album.images.includes(src)),
-      ];
+
+      // Empty Studio album → leave synced/local photos alone (never wipe a year).
+      if (!sanityImages.length) continue;
+
       merged.set(id, {
         id,
-        label: album.label || local?.label || "Album",
-        description: album.description || local?.description || "",
-        images: combined.length ? combined : [...(local?.images ?? [])],
+        label: doc.title || local?.label || "Album",
+        description: doc.description || local?.description || "",
+        images: mergeAlbumImages(sanityImages, local?.images),
       });
     }
 

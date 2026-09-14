@@ -83,7 +83,7 @@ export const galleryAlbum = defineType({
       title: "Photos",
       type: "array",
       description:
-        "Drag several files onto this field at once, or use Add item for one-by-one uploads.",
+        "Extra photos for this album. The website already keeps the synced year photos — removing items here only removes Studio uploads, not the built-in gallery images. Drag several files at once, or use Add item.",
       options: {
         layout: "grid",
       },
