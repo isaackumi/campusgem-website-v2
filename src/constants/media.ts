@@ -13,6 +13,14 @@ export const galleryAlbums: GalleryAlbum[] = [
     label: "2025",
     description: "Recent camp and community moments.",
     images: [
+      "/images/gallery/2025/eagles2025.jpg",
+    ],
+  },
+  {
+    id: "2024",
+    label: "2024",
+    description: "Eagles Camp and ministry highlights.",
+    images: [
       "/images/camp/camp-moment-01.jpg",
       "/images/camp/camp-moment-02.jpg",
       "/images/camp/camp-moment-03.jpg",
@@ -23,14 +31,6 @@ export const galleryAlbums: GalleryAlbum[] = [
       "/images/camp/camp-moment-08.jpg",
       "/images/camp/camp-moment-09.jpg",
       "/images/camp/camp-moment-10.jpg",
-      "/images/gallery/2025/eagles2025.jpg",
-    ],
-  },
-  {
-    id: "2024",
-    label: "2024",
-    description: "Eagles Camp and ministry highlights.",
-    images: [
       "/images/gallery/2024/ec_2024.jpeg",
     ],
   },
