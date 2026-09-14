@@ -211,6 +211,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
                         src={src}
                         alt={`Campus GEM ${album.label} photo ${index + 1}`}
                         fill
+                        unoptimized={/^https?:\/\//i.test(src)}
                         className="object-cover transition duration-300 group-hover:scale-[1.03]"
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       />
@@ -300,6 +301,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
                 src={lightbox.images[lightbox.index]}
                 alt={`${lightbox.label} photo ${lightbox.index + 1}`}
                 fill
+                unoptimized={/^https?:\/\//i.test(lightbox.images[lightbox.index])}
                 className="object-contain"
                 sizes="(max-width: 1280px) 100vw, 64rem"
                 priority

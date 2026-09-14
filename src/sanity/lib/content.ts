@@ -108,12 +108,15 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
     }
     for (const [id, album] of sanityById) {
       const local = merged.get(id);
+      const combined = [
+        ...album.images,
+        ...(local?.images ?? []).filter((src) => !album.images.includes(src)),
+      ];
       merged.set(id, {
         id,
         label: album.label || local?.label || "Album",
         description: album.description || local?.description || "",
-        // Prefer CMS photos when present; otherwise keep local fallbacks.
-        images: album.images.length ? album.images : [...(local?.images ?? [])],
+        images: combined.length ? combined : [...(local?.images ?? [])],
       });
     }
 

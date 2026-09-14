@@ -5,5 +5,6 @@ export const client = createClient({
   projectId: projectId || "missing",
   dataset,
   apiVersion,
-  useCdn: true,
+  // Gallery and CMS pages need fresh reads after Studio publishes.
+  useCdn: false,
 });
