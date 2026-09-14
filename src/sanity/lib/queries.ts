@@ -14,6 +14,7 @@ export const galleryAlbumsQuery = defineQuery(`
       _key,
       alt,
       caption,
+      ...,
       image
     }
   }

@@ -5,6 +5,9 @@ import { GalleryExplorer } from "@/components/organisms/GalleryExplorer";
 import { SitePage } from "@/components/templates/SitePage";
 import { getGalleryAlbums } from "@/sanity/lib/gallery";
 
+/** Pick up Studio gallery uploads without waiting for a full redeploy. */
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Gallery",
   description:

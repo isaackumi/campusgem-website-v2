@@ -75,24 +75,49 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
         title?: string | null;
         slug?: string | null;
         description?: string | null;
-        photos?: Array<{ image?: unknown }> | null;
+        photos?: Array<{ image?: unknown; asset?: unknown } | unknown> | null;
       }>
     >(galleryAlbumsQuery);
-    const albums = (docs ?? [])
-      .map((doc) => {
-        const images =
-          doc.photos
-            ?.map((photo) => imageUrl(photo?.image))
-            .filter((src): src is string => Boolean(src)) ?? [];
-        if (!images.length) return null;
-        return {
-          id: doc.slug || doc._id,
-          label: doc.title || "Album",
-          description: doc.description || "",
-          images,
-        };
-      })
-      .filter(Boolean) as GalleryAlbum[];
+
+    const sanityById = new Map<string, GalleryAlbum>();
+    for (const doc of docs ?? []) {
+      const images =
+        doc.photos
+          ?.map((photo) => {
+            if (!photo || typeof photo !== "object") return undefined;
+            const entry = photo as { image?: unknown; asset?: unknown; _type?: string };
+            // Old object shape: { image: { asset } }. New shape: image doc itself.
+            if (entry.image) return imageUrl(entry.image);
+            return imageUrl(photo);
+          })
+          .filter((src): src is string => Boolean(src)) ?? [];
+      if (!images.length) continue;
+      const id = doc.slug || doc._id;
+      sanityById.set(id, {
+        id,
+        label: doc.title || "Album",
+        description: doc.description || "",
+        images,
+      });
+    }
+
+    // Merge: Sanity photos win per album; keep local albums that have no CMS photos yet.
+    const merged = new Map<string, GalleryAlbum>();
+    for (const album of fallbackAlbums) {
+      merged.set(album.id, { ...album, images: [...album.images] });
+    }
+    for (const [id, album] of sanityById) {
+      const local = merged.get(id);
+      merged.set(id, {
+        id,
+        label: album.label || local?.label || "Album",
+        description: album.description || local?.description || "",
+        // Prefer CMS photos when present; otherwise keep local fallbacks.
+        images: album.images.length ? album.images : [...(local?.images ?? [])],
+      });
+    }
+
+    const albums = [...merged.values()].filter((album) => album.images.length);
     return albums.length ? albums : [...fallbackAlbums];
   } catch {
     return [...fallbackAlbums];

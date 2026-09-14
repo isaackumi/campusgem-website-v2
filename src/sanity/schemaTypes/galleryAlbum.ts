@@ -82,18 +82,16 @@ export const galleryAlbum = defineType({
       name: "photos",
       title: "Photos",
       type: "array",
+      description:
+        "Drag several files onto this field at once, or use Add item for one-by-one uploads.",
+      options: {
+        layout: "grid",
+      },
       of: [
         defineArrayMember({
-          type: "object",
-          name: "photo",
+          type: "image",
+          options: { hotspot: true },
           fields: [
-            defineField({
-              name: "image",
-              title: "Image",
-              type: "image",
-              options: { hotspot: true },
-              validation: (rule) => rule.required(),
-            }),
             defineField({
               name: "alt",
               title: "Alt text",
@@ -105,19 +103,6 @@ export const galleryAlbum = defineType({
               type: "string",
             }),
           ],
-          preview: {
-            select: {
-              title: "caption",
-              alt: "alt",
-              media: "image",
-            },
-            prepare({ title, alt, media }) {
-              return {
-                title: title || alt || "Photo",
-                media,
-              };
-            },
-          },
         }),
       ],
     }),
@@ -139,7 +124,7 @@ export const galleryAlbum = defineType({
       title: "title",
       kind: "kind",
       year: "year",
-      media: "photos.0.image",
+      media: "photos.0",
     },
     prepare({ title, kind, year, media }) {
       const subtitle =
