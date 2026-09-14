@@ -92,7 +92,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
           role="tablist"
           aria-label="Filter gallery by year"
           id={tablistId}
-          className="flex flex-wrap gap-2 border-b border-white/10 pb-4"
+          className="sticky top-[4.5rem] z-20 -mx-1 flex flex-wrap gap-2 border-b border-white/10 bg-paper/95 px-1 py-3 backdrop-blur-md"
         >
           {filters.map((item) => {
             const selected = item.id === filter;
@@ -107,7 +107,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
                   "cursor-pointer rounded-[var(--radius-sm)] px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
                   selected
                     ? "bg-gold text-void"
-                    : "border border-white/12 text-ink-soft hover:border-gold/40 hover:text-gold-soft",
+                    : "border border-white/12 bg-void/40 text-ink-soft hover:border-gold/40 hover:text-gold-soft",
                 )}
                 onClick={() => setFilter(item.id)}
                 onKeyDown={(event) => {

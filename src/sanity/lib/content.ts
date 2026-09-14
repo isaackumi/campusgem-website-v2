@@ -121,6 +121,20 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
     }
 
     const albums = [...merged.values()].filter((album) => album.images.length);
+
+    // Surface Studio uploads first so new CMS photos are not buried under older local years.
+    albums.sort((a, b) => {
+      const aCms = a.images.some((src) => src.includes("cdn.sanity.io")) ? 1 : 0;
+      const bCms = b.images.some((src) => src.includes("cdn.sanity.io")) ? 1 : 0;
+      if (aCms !== bCms) return bCms - aCms;
+      const aYear = Number.parseInt(a.id, 10);
+      const bYear = Number.parseInt(b.id, 10);
+      if (!Number.isNaN(aYear) && !Number.isNaN(bYear) && aYear !== bYear) {
+        return bYear - aYear;
+      }
+      return a.label.localeCompare(b.label);
+    });
+
     return albums.length ? albums : [...fallbackAlbums];
   } catch {
     return [...fallbackAlbums];
