@@ -704,8 +704,8 @@ export async function getActivityIndexItems(): Promise<
             ];
           return {
             href,
-            title: doc.title || local?.title || doc.activityKey,
-            description: doc.description || local?.description || "",
+            title: local?.title || doc.title || doc.activityKey,
+            description: local?.description || doc.description || "",
           };
         },
       );

@@ -21,8 +21,12 @@ export default async function EaglesCampPage() {
     <ActivityPage
       title={local.title}
       eyebrow={local.eyebrow}
-      description={cms.description || local.description}
+      description={local.description}
       body={local.body}
+      storyTitle={local.storyTitle}
+      scripture={local.scripture}
+      beats={local.beats}
+      closing={local.closing}
       image={cms.image || local.image}
       contentImage={cms.contentImage || local.contentImage}
       slideshow={"slideshow" in cms ? Boolean(cms.slideshow) : true}

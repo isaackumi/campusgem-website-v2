@@ -36,12 +36,12 @@ export const activitiesNav: NavItem[] = [
   {
     label: "Mentoring Hub",
     href: "/mentoring-hub",
-    short: "Coaching upcoming leaders for the next level.",
+    short: "Paired with mentors who prepare Youth for the future.",
   },
   {
     label: "ICT Skill Training",
     href: "/ict-training",
-    short: "Digital skills for service and calling.",
+    short: "We train Youth in digital skills to serve and create.",
   },
   {
     label: "Fun Fair",
@@ -51,7 +51,7 @@ export const activitiesNav: NavItem[] = [
   {
     label: "CGM Marriages",
     href: "/cgem-marriages",
-    short: "Celebrating covenant relationships.",
+    short: "Capturing and celebrating those who are married.",
   },
   {
     label: "Hall of Fame",

@@ -11,7 +11,7 @@ export const ministries: Ministry[] = [
     id: "eagles-camp",
     title: "Eagles Camp",
     summary:
-      "Intensive camp meetings that keep the flame of the Spirit burning as we journey through the year.",
+      "Our annual camp meeting — worship, Word, and friendship that renew strength for the year.",
     href: "/camp",
     image: "/images/camp/camp-moment-01.jpg",
   },
@@ -19,7 +19,7 @@ export const ministries: Ministry[] = [
     id: "love-feast",
     title: "Love Feast",
     summary:
-      "Relationship seminars and monthly gatherings that form healthy, Christ-centered community.",
+      "Shared tables and relationship seminars that form Christ-centered friendship.",
     href: "/love-feast",
     image: "/images/love-feast.jpg",
   },
@@ -27,7 +27,7 @@ export const ministries: Ministry[] = [
     id: "mentoring-hub",
     title: "Mentoring Hub",
     summary:
-      "Dedicated mentoring for young and upcoming leaders preparing for the next level.",
+      "We pair upcoming leaders with mentors who prepare them for the future.",
     href: "/mentoring-hub",
     image: "/images/leader.jpg",
   },
@@ -35,7 +35,7 @@ export const ministries: Ministry[] = [
     id: "ict-training",
     title: "ICT Skill Training",
     summary:
-      "Practical digital skills that equip Youth to serve, create, and lead with excellence.",
+      "We train Youth in practical digital skills to serve, create, and lead.",
     href: "/ict-training",
     image: "/images/gallery/2019/camp_19.jpg",
   },

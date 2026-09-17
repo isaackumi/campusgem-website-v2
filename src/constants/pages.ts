@@ -94,43 +94,267 @@ export const activityPages = {
     title: "Eagles Camp 2026",
     eyebrow: "Activities",
     description:
-      "Join us at Redemption Light Chapel, Kokomlemle, near Heavy DO Chop Bar.",
-    body: "Eagles Camp 2026 is Campus GEM’s intensive camp meeting, space to seek God, grow in community, and keep the flame of the Spirit burning through the year. Fellowship with us at Redemption Light Chapel, Kokomlemle, near Heavy DO Chop Bar.",
+      "Our annual camp meeting — seek God, grow in community, keep the flame burning.",
+    storyTitle: "Where the year catches fire",
+    body: "Eagles Camp is Campus GEM’s intensive camp meeting — space to seek God, grow in community, and keep the flame of the Spirit burning through the year. Fellowship with us at Redemption Light Chapel, Kokomlemle, near Heavy DO Chop Bar.",
+    scripture: {
+      verse:
+        "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles.",
+      reference: "Isaiah 40:31",
+    },
+    beats: [
+      {
+        title: "Seek God together",
+        body: "Worship, Word, and prayer that reset the heart for a new season.",
+      },
+      {
+        title: "Build lasting friendship",
+        body: "Youth from campuses and communities gather as one Campus GEM family.",
+      },
+      {
+        title: "Carry the flame home",
+        body: "Leave clearer, grounded, and ready to live faith on campus and beyond.",
+      },
+    ],
+    closing:
+      "Come ready to wait on the Lord — and rise with renewed strength for the year ahead.",
     cta: {
       href: "https://forms.gle/mihmtQPkS38EJwaq6",
       label: "Register for Eagles Camp 2026",
     },
     image: "/images/camp/camp-moment-01.jpg",
     contentImage: "/images/camp/camp-moment-02.jpg",
-  }, loveFeast: {
-    title: "Love Feasts", eyebrow: "Activities", description: "A celebration of unity, compassion, and spiritual connection.", body: "Our Love Feast is more than an event, it is a transformative gathering of hearts and spirits. Join relationship seminars and monthly meetings that form healthy, Christ-centered community locally and online.", cta: {
-      href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu", label: "Join Love Feast WhatsApp", }, image: "/images/camp/camp-moment-03.jpg", contentImage: "/images/love-feast.jpg", }, mentoring: {
-    title: "Mentoring Hub", eyebrow: "Activities", description:
-      "Dedicated mentoring for young and upcoming leaders preparing for the next level.", body: "In the Mentoring Hub we devote time to coach upcoming executives, sharpening character, calling, and capacity for Christ-centered leadership.", image: "/images/camp/camp-moment-04.jpg",
+  },
+  loveFeast: {
+    title: "Love Feasts",
+    eyebrow: "Activities",
+    description:
+      "Shared tables that form friendship, wisdom, and Christ-centered community.",
+    storyTitle: "A table that forms belonging",
+    body: "Love Feast is more than a meeting — it is a gathering of hearts. Through relationship seminars and monthly fellowships (locally and online), we learn to love well, walk in wisdom, and build Christ-centered friendships that last.",
+    scripture: {
+      verse:
+        "By this shall all men know that ye are my disciples, if ye have love one to another.",
+      reference: "John 13:35",
+    },
+    beats: [
+      {
+        title: "Relationship wisdom",
+        body: "Seminars that help Youth navigate friendship, courtship, and covenant with grace.",
+      },
+      {
+        title: "Monthly gathering",
+        body: "A rhythm of fellowship that keeps community warm across campuses and online.",
+      },
+      {
+        title: "Love that witnesses",
+        body: "We practice the kind of love that makes discipleship visible.",
+      },
+    ],
+    closing:
+      "Pull up a chair — there is room at the table for you.",
+    cta: {
+      href: "https://chat.whatsapp.com/HEZ3eFw8GaQ8pIbyH7QUQu",
+      label: "Join Love Feast WhatsApp",
+    },
+    image: "/images/camp/camp-moment-03.jpg",
+    contentImage: "/images/love-feast.jpg",
+  },
+  mentoring: {
+    title: "Mentoring Hub",
+    eyebrow: "Activities",
+    description:
+      "We pair upcoming leaders with mentors who prepare them for the future.",
+    storyTitle: "Paired for the next level",
+    body: "In the Mentoring Hub we intentionally pair young and upcoming leaders with mentors who walk with them — sharpening character, clarifying calling, and preparing them for the future. It is coaching with care: faith, excellence, and leadership grown side by side.",
+    scripture: {
+      verse:
+        "Iron sharpeneth iron; so a man sharpeneth the countenance of his friend.",
+      reference: "Proverbs 27:17",
+    },
+    beats: [
+      {
+        title: "Paired with mentors",
+        body: "We match Youth with mentors who listen, guide, and model Christ-centered leadership.",
+      },
+      {
+        title: "Prepared for the future",
+        body: "Conversations that build capacity for studies, service, and the next season of calling.",
+      },
+      {
+        title: "Character before platform",
+        body: "We form leaders who carry integrity, courage, and a heart for people.",
+      },
+    ],
+    closing:
+      "You do not have to figure the future out alone — ask about being paired with a mentor.",
+    cta: {
+      href: "/contact",
+      label: "Ask about mentoring",
+    },
+    image: "/images/camp/camp-moment-04.jpg",
     contentImage: "/images/leader.jpg",
-  }, ict: {
-    title: "ICT Skill Training", eyebrow: "Activities", description:
-      "Practical digital skills that equip Youth to serve, create, and lead.", body: "ICT Skill Training helps Campus GEM members grow in digital competence so they can serve the ministry and thrive in their academic and professional callings.", image: "/images/camp/camp-moment-05.jpg", contentImage: "/images/gallery/2019/camp_19.jpg", }, funfair: {
-    title: "Fun Fair", eyebrow: "Activities", description: "Joyful campus gatherings that build friendship and community.", body: "The Campus GEM Fun Fair is a vibrant celebration of community, games, friendship, and shared joy that strengthen belonging on campus.", image: "/images/camp/camp-moment-06.jpg", contentImage: "/images/community.jpg", }, marriages: {
-    title: "CGM Marriages", eyebrow: "Activities", description:
-      "Embracing love’s transformative power and celebrating each couple’s path to unity.", body: "Campus GEM Marriages celebrates covenant relationships within our family, honoring love, companionship, and God’s faithfulness.", image: "/images/camp/camp-moment-03.jpg", contentImage: "/images/love-feast-1.jpg", }, bibleStudy: {
+  },
+  ict: {
+    title: "ICT Skill Training",
+    eyebrow: "Activities",
+    description:
+      "We train Youth in practical digital skills to serve, create, and lead.",
+    storyTitle: "Trained to build and serve",
+    body: "ICT Skill Training is where we train Campus GEM Youth in practical digital skills — so they can serve the ministry, create with excellence, and thrive in academic and professional callings. Skill is stewardship: what we learn, we offer back to God and community.",
+    scripture: {
+      verse:
+        "And I have filled him with the spirit of God, in wisdom, and in understanding, and in knowledge, and in all manner of workmanship.",
+      reference: "Exodus 31:3",
+    },
+    beats: [
+      {
+        title: "We train them",
+        body: "Hands-on sessions that build real competence — tools, workflows, and digital confidence.",
+      },
+      {
+        title: "Serve with skill",
+        body: "Youth learn to support Campus GEM media, admin, and creative work with excellence.",
+      },
+      {
+        title: "Create for calling",
+        body: "Digital fluency that opens doors in study, work, and ministry impact.",
+      },
+    ],
+    closing:
+      "Bring your curiosity — we will help you grow the skill to match your calling.",
+    cta: {
+      href: "/contact",
+      label: "Join ICT training",
+    },
+    image: "/images/camp/camp-moment-05.jpg",
+    contentImage: "/images/gallery/2019/camp_19.jpg",
+  },
+  funfair: {
+    title: "Fun Fair",
+    eyebrow: "Activities",
+    description:
+      "Joyful campus gatherings that build friendship, laughter, and belonging.",
+    storyTitle: "Joy that strengthens community",
+    body: "Fun Fair is Campus GEM at play — games, laughter, and shared joy that strengthen belonging on campus. Celebration is not a distraction from discipleship; it is part of how family is formed.",
+    scripture: {
+      verse: "A merry heart doeth good like a medicine.",
+      reference: "Proverbs 17:22",
+    },
+    beats: [
+      {
+        title: "Play together",
+        body: "Games and activities that help Youth connect beyond the classroom.",
+      },
+      {
+        title: "Belong on campus",
+        body: "A warm welcome for newcomers and a reunion for the Campus GEM family.",
+      },
+      {
+        title: "Joy as witness",
+        body: "We show that following Christ can be full of life, friendship, and gladness.",
+      },
+    ],
+    closing: "Come ready to laugh, connect, and leave lighter.",
+    image: "/images/camp/camp-moment-06.jpg",
+    contentImage: "/images/community.jpg",
+  },
+  marriages: {
+    title: "CGM Marriages",
+    eyebrow: "Activities",
+    description:
+      "We capture and celebrate those in our family who are married — covenant stories of God’s faithfulness.",
+    storyTitle: "Covenant stories we hold dear",
+    body: "CGM Marriages captures those in the Campus GEM family who are married — honoring their covenant, companionship, and the faithfulness of God through every season. These are living testimonies: love formed in Christ, celebrated by the community that walked with them.",
+    scripture: {
+      verse:
+        "Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh.",
+      reference: "Genesis 2:24",
+    },
+    beats: [
+      {
+        title: "We capture their stories",
+        body: "Portraits and celebrations of Campus GEM members who have entered covenant marriage.",
+      },
+      {
+        title: "Honor the covenant",
+        body: "We rejoice with couples and point the next generation to Christ-centered love.",
+      },
+      {
+        title: "Faithfulness on display",
+        body: "Every marriage story reminds us that God still writes beautiful chapters among us.",
+      },
+    ],
+    closing:
+      "If you are married in the Campus GEM family — or celebrating someone who is — this gallery is for you.",
+    cta: {
+      href: "/contact",
+      label: "Share a marriage story",
+    },
+    image: "/images/camp/camp-moment-03.jpg",
+    contentImage: "/images/love-feast-1.jpg",
+  },
+  bibleStudy: {
     title: "Bible Study",
     eyebrow: "Activities",
     description:
       "Every Sunday at 7:00 PM GMT on Telegram with Campus GEM Ministries.",
-    body: "Join us each Sunday evening for Bible Study on Telegram. We open the Word together, grow in understanding, and stay connected as one Campus GEM family—wherever you are.",
+    storyTitle: "Open the Word together",
+    body: "Join us each Sunday evening for Bible Study on Telegram. We open the Word together, grow in understanding, and stay connected as one Campus GEM family — wherever you are.",
+    scripture: {
+      verse:
+        "Thy word is a lamp unto my feet, and a light unto my path.",
+      reference: "Psalm 119:105",
+    },
+    beats: [
+      {
+        title: "Weekly rhythm",
+        body: "Every Sunday · 7:00 PM GMT — a steady appointment with Scripture.",
+      },
+      {
+        title: "One channel, one family",
+        body: "Gather from campus or afar on Telegram with Campus GEM Ministries.",
+      },
+      {
+        title: "Word that walks with you",
+        body: "Leave with truth you can live Monday through Saturday.",
+      },
+    ],
+    closing: "Open Telegram this Sunday — there is a seat for you in the Word.",
     cta: {
       href: "https://t.me/campusgem",
       label: "Join on Telegram",
     },
     image: "/images/bible-confession-page.jpg",
     contentImage: "/images/bible-study.png",
-  }, hallOfFame: {
+  },
+  hallOfFame: {
     title: "Hall of Fame",
     eyebrow: "Activities",
     description:
-      "Celebrating the extraordinary journeys of graduates who transform dreams into remarkable achievements.",
+      "Honoring graduates whose faith, excellence, and perseverance light the way.",
+    storyTitle: "Lives that light the path",
     body: "The Campus GEM Hall of Fame honors members whose faith, excellence, and perseverance inspire the next generation. These portraits mark seasons of study completed, calling clarified, and lives offered for God's glory.",
+    scripture: {
+      verse:
+        "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.",
+      reference: "Matthew 5:16",
+    },
+    beats: [
+      {
+        title: "Celebrate the journey",
+        body: "We remember graduates who finished well — in faith and in excellence.",
+      },
+      {
+        title: "Inspire the next generation",
+        body: "Their stories tell Youth that academic excellence can be worship.",
+      },
+      {
+        title: "Glory to God",
+        body: "Every portrait points beyond achievement to the One who called them.",
+      },
+    ],
+    closing: "Walk among the portraits — and let courage rise for your own race.",
     image: "/images/camp/camp-moment-04.jpg",
     contentImage: "/images/hall-of-fame/stella.jpg",
   },

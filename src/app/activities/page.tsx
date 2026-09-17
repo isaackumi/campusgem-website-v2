@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { Text } from "@/components/atoms/Typography";
 import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
@@ -14,7 +15,7 @@ import { getActivityIndexItems, getSitePage } from "@/sanity/lib/content";
 export const metadata: Metadata = {
   title: "Activities",
   description:
-    "Camps, love feasts, mentoring, training, and the life of Campus GEM.",
+    "Camps, love feasts, mentoring, ICT training, marriages, and the life of Campus GEM.",
 };
 
 export default async function ActivitiesPage() {
@@ -23,12 +24,12 @@ export default async function ActivitiesPage() {
       title: "Activities",
       eyebrow: "Campus life",
       description:
-        "Camps, feasts, mentoring, training, and celebrations that form the Campus GEM family.",
+        "Doorways into the Campus GEM year — formation, friendship, skill, and celebration.",
       image: atmospheres.canyon,
       slideshow: false,
       narrow: false,
       intro:
-        "From Eagles Camp — our annual camp meeting — to monthly Love Feasts and mentoring hubs, every activity helps you learn, connect, and grow in Christ.",
+        "Every Campus GEM activity is a chapter in one story: Youth who learn, connect, and grow in Christ. From Eagles Camp to Love Feasts, mentoring pairs, ICT training, and the marriages we celebrate — each rhythm forms belonging and calling.",
       sections: [],
       primaryCta: { href: "/contact", label: "Contact us" },
       secondaryCta: { href: "/gallery", label: "View gallery" },
@@ -58,13 +59,47 @@ export default async function ActivitiesPage() {
       >
         <div className="relative mb-10">
           <StoryArrow className="mb-3" />
-          <p className="max-w-md text-sm leading-6 text-ink-soft">
-            Pick a doorway below — each one is a chapter in the Campus GEM
-            year.
+          <p className="max-w-lg text-sm leading-6 text-ink-soft">
+            We train Youth in ICT. We pair them with mentors who prepare them
+            for the future. We gather at tables, camps, and celebrations —
+            including the marriages we capture and honor in our family.
           </p>
         </div>
         <LinkCards items={activities} />
       </StoryChapter>
+
+      <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-24">
+        <Image
+          src={atmospheres.nebula}
+          alt=""
+          fill
+          className="object-cover opacity-40"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-ink/55" />
+        <OutlineWord
+          tone="light"
+          className="right-0 top-4 text-[14vw] lg:text-[7rem]"
+        >
+          WORD
+        </OutlineWord>
+        <div className="container-wide relative z-10 max-w-3xl">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-200">Scripture</p>
+          </ParagraphReveal>
+          <ParagraphReveal delay={0.1}>
+            <blockquote>
+              <p className="font-display mt-4 text-2xl leading-snug tracking-tight text-white sm:text-4xl">
+                “And let us consider one another to provoke unto love and to
+                good works.”
+              </p>
+              <Text className="mt-6 text-white/65" size="sm">
+                Hebrews 10:24
+              </Text>
+            </blockquote>
+          </ParagraphReveal>
+        </div>
+      </section>
 
       <section className="relative overflow-x-hidden py-20 sm:py-24">
         <Image
@@ -94,7 +129,8 @@ export default async function ActivitiesPage() {
           />
           <ParagraphReveal delay={0.15} className="mt-4 max-w-xl">
             <p className="text-base leading-7 text-ink-soft">
-              Camps, love feasts, and gatherings across the Campus GEM family.
+              Camps, love feasts, mentoring, training, and celebrations across
+              the Campus GEM family.
             </p>
           </ParagraphReveal>
           <div className="mt-10">

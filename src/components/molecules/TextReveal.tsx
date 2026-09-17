@@ -18,12 +18,16 @@ const ease = [0.22, 1, 0.36, 1] as const;
 /** Never leave story copy invisible if IntersectionObserver fails. */
 function useRevealVisible(immediate: boolean, reduce: boolean | null) {
   const ref = useRef<HTMLElement | null>(null);
-  const inView = useInView(ref, { once: true, amount: 0.12, margin: "0px 0px -5% 0px" });
+  const inView = useInView(ref, {
+    once: true,
+    amount: 0.12,
+    margin: "0px 0px -5% 0px",
+  });
   const [failsafe, setFailsafe] = useState(false);
 
   useEffect(() => {
     if (immediate || reduce) return;
-    const id = window.setTimeout(() => setFailsafe(true), 900);
+    const id = window.setTimeout(() => setFailsafe(true), 700);
     return () => window.clearTimeout(id);
   }, [immediate, reduce]);
 
@@ -67,7 +71,7 @@ export function TextReveal({
             initial={{ y: "110%", opacity: 0 }}
             animate={visible ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }}
             transition={{
-              duration: 0.65,
+              duration: 0.75,
               delay: delay + i * stagger,
               ease,
             }}
@@ -110,7 +114,7 @@ export function ParagraphReveal({
       className={className}
       initial={{ opacity: 0, y: 20 }}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.65, delay, ease }}
+      transition={{ duration: 0.75, delay, ease }}
     >
       {children}
     </MotionTag>
