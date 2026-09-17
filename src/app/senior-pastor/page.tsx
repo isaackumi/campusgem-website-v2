@@ -25,7 +25,7 @@ export default async function SeniorPastorPage() {
       title="Our Senior Pastor"
       eyebrow="Leadership"
       description={`${pastor.name}, lovingly known as ${pastor.preferredName}.`}
-      image={atmospheres.washB}
+      image={pastor.heroImage || pastor.portrait || atmospheres.washB}
       slideshow={false}
       outline="PASTOR"
       bleed
@@ -39,18 +39,26 @@ export default async function SeniorPastorPage() {
         imageAlt={pastor.name}
       >
         <div className="space-y-4">
-          <Text muted size="sm">
-            Preferred name: {pastor.preferredName}
-          </Text>
-          <Text>{pastor.summary}</Text>
-          <Text>{pastor.encounter}</Text>
-          <Text>{pastor.calling}</Text>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <ParagraphReveal immediate>
+            <Text muted size="sm">
+              Preferred name: {pastor.preferredName}
+            </Text>
+          </ParagraphReveal>
+          <ParagraphReveal immediate delay={0.08}>
+            <Text>{pastor.summary}</Text>
+          </ParagraphReveal>
+          <ParagraphReveal immediate delay={0.14}>
+            <Text>{pastor.encounter}</Text>
+          </ParagraphReveal>
+          <ParagraphReveal immediate delay={0.2}>
+            <Text>{pastor.calling}</Text>
+          </ParagraphReveal>
+          <ParagraphReveal immediate delay={0.28} className="flex flex-wrap gap-3 pt-2">
             <Button href="/contact">Connect with us</Button>
             <Button href="/about" variant="secondary">
               About Campus GEM
             </Button>
-          </div>
+          </ParagraphReveal>
         </div>
       </StoryChapter>
 

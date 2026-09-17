@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
+import { atmospheres } from "@/constants/atmospheres";
+import { lifeMoments } from "@/constants/media";
 import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -18,6 +20,12 @@ export default async function IctTrainingPage() {
       image={page.image}
       contentImage={page.contentImage}
       slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
+      outline="ICT"
+      atmosphere={atmospheres.washB}
+      gallery={[...lifeMoments].slice(1, 9)}
+      galleryAlt="ICT Skill Training"
+      cta={page.cta ?? { href: "/contact", label: "Join ICT training" }}
+      secondaryCta={{ href: "/activities", label: "All activities" }}
     />
   );
 }

@@ -103,11 +103,20 @@ export function CtaBanner({
 
 export function LinkCards({
   items,
+  tone = "light",
 }: {
   items: Array<{ href: string; title: string; description?: string }>;
+  tone?: "light" | "dark";
 }) {
+  const dark = tone === "dark";
   return (
-    <ul className="divide-y divide-ink/10 border-y border-ink/10">
+    <ul
+      className={
+        dark
+          ? "divide-y divide-white/15 border-y border-white/15"
+          : "divide-y divide-ink/10 border-y border-ink/10"
+      }
+    >
       {items.map((item) => (
         <li key={item.href}>
           <Link
@@ -118,19 +127,35 @@ export function LinkCards({
               <Heading
                 level={4}
                 as="h3"
-                className="font-display text-xl font-bold tracking-tight text-ink transition-colors group-hover:text-brand-700 sm:text-2xl"
+                className={
+                  dark
+                    ? "font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-brand-200 sm:text-2xl"
+                    : "font-display text-xl font-bold tracking-tight text-ink transition-colors group-hover:text-brand-700 sm:text-2xl"
+                }
               >
                 {item.title}
               </Heading>
               {item.description ? (
-                <Text size="sm" className="mt-1.5 max-w-xl" muted>
+                <Text
+                  size="sm"
+                  className={
+                    dark
+                      ? "mt-1.5 max-w-xl text-white/70"
+                      : "mt-1.5 max-w-xl"
+                  }
+                  muted={!dark}
+                >
                   {item.description}
                 </Text>
               ) : null}
             </span>
             <span
               aria-hidden
-              className="shrink-0 font-display text-lg text-brand-600 transition-transform duration-200 group-hover:translate-x-1"
+              className={
+                dark
+                  ? "shrink-0 font-display text-lg text-brand-200 transition-transform duration-200 group-hover:translate-x-1"
+                  : "shrink-0 font-display text-lg text-brand-600 transition-transform duration-200 group-hover:translate-x-1"
+              }
             >
               →
             </span>

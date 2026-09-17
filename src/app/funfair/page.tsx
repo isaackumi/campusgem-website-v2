@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
+import { atmospheres } from "@/constants/atmospheres";
+import { lifeMoments } from "@/constants/media";
 import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -18,6 +20,12 @@ export default async function FunfairPage() {
       image={page.image}
       contentImage={page.contentImage}
       slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
+      outline="FAIR"
+      atmosphere={atmospheres.washA}
+      gallery={[...lifeMoments].slice(0, 8)}
+      galleryAlt="Fun Fair"
+      cta={page.cta ?? { href: "/contact", label: "Ask about Fun Fair" }}
+      secondaryCta={{ href: "/activities", label: "All activities" }}
     />
   );
 }

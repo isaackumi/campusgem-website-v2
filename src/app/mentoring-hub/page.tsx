@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ActivityPage } from "@/components/templates/ActivityPage";
+import { atmospheres } from "@/constants/atmospheres";
+import { lifeMoments } from "@/constants/media";
 import { getActivityPage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -18,6 +20,12 @@ export default async function MentoringHubPage() {
       image={page.image}
       contentImage={page.contentImage}
       slideshow={"slideshow" in page ? Boolean(page.slideshow) : true}
+      outline="MENTOR"
+      atmosphere={atmospheres.canyon}
+      gallery={[...lifeMoments].slice(2, 10)}
+      galleryAlt="Mentoring Hub"
+      cta={page.cta ?? { href: "/contact", label: "Ask about mentoring" }}
+      secondaryCta={{ href: "/ministries", label: "All ministries" }}
     />
   );
 }
