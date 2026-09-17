@@ -129,6 +129,7 @@ export const hallOfFameQuery = defineQuery(`
       entryId,
       name,
       note,
+      caption,
       year,
       portrait
     }

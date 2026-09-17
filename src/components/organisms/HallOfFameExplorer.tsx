@@ -80,6 +80,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
                   fill
                   className="object-cover object-top transition duration-500 motion-safe:group-hover:scale-[1.04]"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  quality={65}
                 />
                 <span
                   className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/80 via-ink/10 to-transparent opacity-90 transition duration-300 group-hover:opacity-100"
@@ -173,7 +174,12 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
                 {active.note ? (
                   <p className="mt-1 text-sm text-brand-600/90">{active.note}</p>
                 ) : null}
-                <p className="mt-1 text-xs font-medium text-ink-soft">
+                {active.caption ? (
+                  <p className="mt-2 max-w-prose text-sm leading-6 text-ink-soft">
+                    {active.caption}
+                  </p>
+                ) : null}
+                <p className="mt-2 text-xs font-medium text-ink-soft">
                   {activeIndex + 1} / {entries.length}
                 </p>
               </div>

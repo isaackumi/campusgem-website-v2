@@ -66,6 +66,13 @@ export const hallOfFame = defineType({
               description: "Optional subtitle (degree, role, etc.).",
             }),
             defineField({
+              name: "caption",
+              title: "Caption",
+              type: "text",
+              rows: 2,
+              description: "Optional story line shown in the portrait lightbox.",
+            }),
+            defineField({
               name: "year",
               title: "Year",
               type: "number",

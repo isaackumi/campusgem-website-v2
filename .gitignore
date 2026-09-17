@@ -43,8 +43,5 @@ next-env.d.ts
 # local agent / editor artifacts
 .remember/
 prompt.txt
-
-# local agent / editor artifacts
-.remember/
-prompt.txt
 .recovery-editorial/
+.lighthouse/

@@ -190,6 +190,7 @@ export function ImageGrid({
             fill
             className="object-cover transition duration-500 hover:scale-[1.03]"
             sizes="(max-width: 768px) 50vw, 25vw"
+            quality={65}
           />
         </li>
       ))}

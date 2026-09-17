@@ -471,6 +471,7 @@ export async function getHallOfFameContent(): Promise<{
                 entryId?: string;
                 name: string;
                 note?: string;
+                caption?: string;
                 portrait?: unknown;
               },
               index: number,
@@ -481,6 +482,7 @@ export async function getHallOfFameContent(): Promise<{
                 id,
                 name: entry.name,
                 note: entry.note || local?.note,
+                caption: entry.caption || local?.caption,
                 src: imageUrl(entry.portrait) || local?.src || fallback.image,
               };
             },
