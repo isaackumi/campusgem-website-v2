@@ -48,7 +48,7 @@ export async function Footer() {
         <div>
           <h3 className="text-sm font-semibold text-white">Explore</h3>
           <ul className="mt-4 space-y-2.5">
-            {footerNav.slice(0, 5).map((item) => (
+            {footerNav.slice(0, 6).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -64,7 +64,12 @@ export async function Footer() {
         <div>
           <h3 className="text-sm font-semibold text-white">Join</h3>
           <ul className="mt-4 space-y-2.5">
-            {joinLinks.map((item) => (
+            {[
+              ...joinLinks,
+              ...footerNav.slice(6).filter(
+                (item) => !joinLinks.some((join) => join.href === item.href),
+              ),
+            ].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

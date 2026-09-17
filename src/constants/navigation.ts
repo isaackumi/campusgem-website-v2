@@ -12,6 +12,7 @@ export type NavItem = NavLink & {
 export const primaryNav: NavItem[] = [
   { label: "Eagles Camp", href: "/camp" },
   { label: "Who We Are", href: "/about" },
+  { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
 ];
 
@@ -77,9 +78,24 @@ export const exploreNav: Array<NavItem & { short: string }> = [
     short: "Pathways that form faith and leadership.",
   },
   {
+    label: "Events",
+    href: "/events",
+    short: "Upcoming camps, feasts, and gatherings.",
+  },
+  {
+    label: "Sermons",
+    href: "/sermons",
+    short: "Messages that form faith and calling.",
+  },
+  {
     label: "Who we are",
     href: "/about",
     short: "Our story, vision, and values.",
+  },
+  {
+    label: "Mission & Vision",
+    href: "/vision-mission",
+    short: "The calling that guides Campus GEM.",
   },
   {
     label: "Senior Pastor",
@@ -90,6 +106,16 @@ export const exploreNav: Array<NavItem & { short: string }> = [
     label: "Daily Confession",
     href: "/daily-confession",
     short: "Speak life — declare God’s Word each day.",
+  },
+  {
+    label: "Bible Study",
+    href: "/bible-study",
+    short: "Sundays at 7:00 PM GMT on Telegram.",
+  },
+  {
+    label: "Branches",
+    href: "/branches",
+    short: "Find a fellowship near you.",
   },
   {
     label: "Gallery",
@@ -139,6 +165,9 @@ export const footerNav: NavLink[] = [
   { label: "Daily Confession", href: "/daily-confession" },
   { label: "Bible Study", href: "/bible-study" },
   { label: "Activities", href: "/activities" },
+  { label: "Events", href: "/events" },
+  { label: "Sermons", href: "/sermons" },
+  { label: "Branches", href: "/branches" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
   { label: "Donate", href: "/give" },

@@ -71,7 +71,7 @@ function MenuPanel({
   onNavigate?: () => void;
 }) {
   return (
-    <div className="grid w-[min(36rem,calc(100vw-1.5rem))] grid-cols-1 gap-1 rounded-2xl bg-white p-4 shadow-float ring-1 ring-ink/5 sm:grid-cols-2 sm:p-5">
+    <div className="grid max-h-[min(70vh,36rem)] w-[min(36rem,calc(100vw-1.5rem))] grid-cols-1 gap-1 overflow-y-auto rounded-2xl bg-white p-4 shadow-float ring-1 ring-ink/5 sm:grid-cols-2 sm:p-5">
       {items.map((item) => (
         <Link
           key={item.href}
@@ -378,7 +378,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center justify-end gap-1">
-          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
             {primaryNav.map((link) => {
               const active =
                 pathname === link.href ||
@@ -400,18 +400,6 @@ export function Navbar() {
             })}
             <ActivitiesPopover />
             <Button href="/give" size="sm" className="ml-2 !py-2">
-              Donate
-            </Button>
-          </nav>
-
-          <nav className="hidden items-center gap-1 lg:flex xl:hidden">
-            <Link
-              href="/camp"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-ink hover:text-brand-700"
-            >
-              Camp
-            </Link>
-            <Button href="/give" size="sm" className="!py-2">
               Donate
             </Button>
           </nav>
@@ -485,6 +473,20 @@ export function Navbar() {
               {exploreNav.map((item) => (
                 <Link
                   key={item.href}
+                  href={item.href}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              <p className="mt-3 px-3 pt-1 text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                Activities
+              </p>
+              {activitiesNav.map((item) => (
+                <Link
+                  key={`activity-${item.href}`}
                   href={item.href}
                   className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink"
                   onClick={() => setMobileOpen(false)}
