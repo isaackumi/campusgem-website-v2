@@ -40,9 +40,12 @@ function r2RemotePatterns() {
 
 const nextConfig: NextConfig = {
   images: {
-    loader: "custom",
-    loaderFile: "./src/lib/r2-image-loader.ts",
+    // Default Next/Vercel optimizer — resizes + serves AVIF/WebP.
+    // Custom R2 loader was bypassing this and serving full originals.
     remotePatterns: r2RemotePatterns(),
+    formats: ["image/avif", "image/webp"],
+    qualities: [65, 70, 75, 80],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 };
 

@@ -2,6 +2,10 @@
  * Resolve a site image path against Cloudflare R2 when configured.
  * Local fallback: `/images/...` from `public/images`.
  * R2 keys mirror that tree under `images/...`.
+ *
+ * Prefer relative `/images/...` with next/image (default optimizer).
+ * Use `mediaUrl` only when you need an absolute R2 URL (e.g. OG tags,
+ * non-Image tags, or remote-src through the optimizer).
  */
 export function mediaUrl(src: string): string {
   if (!src) return src;
