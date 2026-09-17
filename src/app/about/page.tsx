@@ -5,6 +5,8 @@ import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { Text } from "@/components/atoms/Typography";
 import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -21,10 +23,26 @@ export const metadata: Metadata = {
 };
 
 const gatheringLinks: Record<string, string> = {
+  "Eagles Camp Meeting": "/camp",
   "Eagles Camp": "/camp",
   "Love Feasts": "/love-feast",
   "Mentoring Hub": "/mentoring-hub",
 };
+
+const aboutBeats = [
+  {
+    title: "Christ at the centre",
+    body: "We exist to ignite a Christ-centered movement among Youth — truth over noise.",
+  },
+  {
+    title: "Excellence as worship",
+    body: "We firmly believe academic excellence is part of worship, and we pursue it vigorously.",
+  },
+  {
+    title: "Leaders for the wider acreage",
+    body: "From campus to community to nation — raising strategic leaders who carry the flame.",
+  },
+] as const;
 
 export default async function AboutPage() {
   const [page, settings] = await Promise.all([
@@ -73,6 +91,20 @@ export default async function AboutPage() {
             Mission & Vision
           </Button>
         </div>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="Enlarge the place of thy tent, and let them stretch forth the curtains of thine habitations: spare not, lengthen thy cords, and strengthen thy stakes."
+        reference="Isaiah 54:2"
+        outline="WIDEN"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="What shapes Campus GEM"
+        outline="HEART"
+      >
+        <StoryBeats beats={aboutBeats} />
       </StoryChapter>
 
       <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-28">

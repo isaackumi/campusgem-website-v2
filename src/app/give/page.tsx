@@ -4,6 +4,8 @@ import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { Heading, Text } from "@/components/atoms/Typography";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -17,19 +19,16 @@ export const metadata: Metadata = {
     "Support Campus GEM camp meetings, academic help for needy Youth, and Christ-centered campus discipleship.",
 };
 
-const journey = [
+const giveBeats = [
   {
-    step: "01",
     title: "You give",
     body: "A seed toward camps, mentoring, and Youth who need a hand.",
   },
   {
-    step: "02",
     title: "We gather",
     body: "Eagles Camp and other meetings stay open for young leaders.",
   },
   {
-    step: "03",
     title: "They grow",
     body: "Faith, excellence, and calling take root on campus and beyond.",
   },
@@ -65,6 +64,21 @@ export default async function GivePage() {
             Generosity in motion
           </p>
         </div>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver."
+        reference="2 Corinthians 9:7"
+        outline="SEED"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="How partnership travels"
+        outline="PATH"
+        mist
+      >
+        <StoryBeats beats={giveBeats} />
       </StoryChapter>
 
       <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-28">
@@ -115,35 +129,6 @@ export default async function GivePage() {
       </section>
 
       <StoryChapter
-        eyebrow="The path"
-        title="How partnership travels"
-        outline="PATH"
-        intro="From one gift to a season of formation — a simple arc we walk together."
-        mist
-      >
-        <ol className="relative mt-2 grid gap-10 md:grid-cols-3 md:gap-8">
-          {journey.map((item, i) => (
-            <ParagraphReveal key={item.step} delay={0.08 * i}>
-              <li className="relative">
-                {i < journey.length - 1 ? (
-                  <StoryArrow className="absolute -right-6 top-6 hidden md:block lg:-right-10" />
-                ) : null}
-                <p className="font-mono text-[11px] tracking-[0.28em] text-brand-600">
-                  {item.step}
-                </p>
-                <Heading level={3} as="h3" className="mt-3 text-ink">
-                  {item.title}
-                </Heading>
-                <Text className="mt-3" muted>
-                  {item.body}
-                </Text>
-              </li>
-            </ParagraphReveal>
-          ))}
-        </ol>
-      </StoryChapter>
-
-      <StoryChapter
         eyebrow="Stewardship"
         title="Where your gift goes"
         outline="CARE"
@@ -160,7 +145,10 @@ export default async function GivePage() {
             </ParagraphReveal>
           ))}
         </div>
-        <ParagraphReveal delay={0.2} className="mt-12 space-y-8 border-t border-ink/10 pt-10">
+        <ParagraphReveal
+          delay={0.2}
+          className="mt-12 space-y-8 border-t border-ink/10 pt-10"
+        >
           <div>
             <Heading level={3} as="h3" className="text-ink">
               Supporting needy Youth
@@ -178,7 +166,9 @@ export default async function GivePage() {
             </Text>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button href={`mailto:${settings.email}?subject=I%20want%20to%20give`}>
+            <Button
+              href={`mailto:${settings.email}?subject=I%20want%20to%20give`}
+            >
               Email {settings.email}
             </Button>
             <Button href={settings.phoneHref} variant="secondary">
