@@ -119,7 +119,7 @@ export const activityPages = {
     closing:
       "Come ready to wait on the Lord — and rise with renewed strength for the year ahead.",
     cta: {
-      href: "https://forms.gle/mihmtQPkS38EJwaq6",
+      href: "https://portal.campusgem.org/f/camp2026",
       label: "Register for Eagles Camp 2026",
     },
     image: "/images/camp/camp-moment-01.jpg",

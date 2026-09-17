@@ -25,7 +25,7 @@ export const upcomingEvents: EventItem[] = [
     href: "/camp",
     image: "/images/camp/camp-moment-01.jpg",
     cta: {
-      href: "https://forms.gle/mihmtQPkS38EJwaq6",
+      href: "https://portal.campusgem.org/f/camp2026",
       label: "Register now",
     },
   },
