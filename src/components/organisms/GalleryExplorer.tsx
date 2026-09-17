@@ -92,7 +92,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
           role="tablist"
           aria-label="Filter gallery by year"
           id={tablistId}
-          className="sticky top-[4.5rem] z-20 -mx-1 flex flex-wrap gap-2 border-b border-white/10 bg-paper/95 px-1 py-3 backdrop-blur-md"
+          className="sticky top-16 z-20 -mx-1 flex flex-wrap gap-2 border-b border-ink/10 bg-white/95 px-1 py-3 backdrop-blur-md"
         >
           {filters.map((item) => {
             const selected = item.id === filter;
@@ -104,10 +104,10 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
                 aria-selected={selected}
                 tabIndex={selected ? 0 : -1}
                 className={cn(
-                  "cursor-pointer rounded-[var(--radius-sm)] px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
+                  "cursor-pointer rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors duration-200",
                   selected
-                    ? "bg-gold text-void"
-                    : "border border-white/12 bg-void/40 text-ink-soft hover:border-gold/40 hover:text-gold-soft",
+                    ? "bg-brand-600 text-white"
+                    : "border border-ink/10 bg-mist/40 text-ink-soft hover:border-brand-400 hover:text-brand-500",
                 )}
                 onClick={() => setFilter(item.id)}
                 onKeyDown={(event) => {
@@ -161,9 +161,9 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
               className="space-y-5"
             >
               {filter === "all" ? (
-                <div className="flex items-end justify-between gap-4 border-b border-white/10 pb-3">
+                <div className="flex items-end justify-between gap-4 border-b border-ink/10 pb-3">
                   <div>
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold">
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand-600">
                       Year
                     </p>
                     <Heading
@@ -192,12 +192,12 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
               >
                 {album.images.map((src, index) => (
                   <motion.li
-                    key={src}
+                    key={`${album.id}-${index}-${src}`}
                     variants={reduce ? undefined : fadeUpSoft}
                   >
                     <button
                       type="button"
-                      className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-[var(--radius-sm)] bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                      className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-lg bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
                       onClick={() =>
                         setLightbox({
                           images: album.images,
@@ -216,7 +216,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       />
                       <span
-                        className="pointer-events-none absolute inset-0 bg-void/0 transition duration-200 group-hover:bg-void/25"
+                        className="pointer-events-none absolute inset-0 bg-mist/0 transition duration-200 group-hover:bg-mist/25"
                         aria-hidden
                       />
                     </button>
@@ -231,7 +231,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
       <AnimatePresence>
         {lightbox ? (
           <motion.div
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-void/92 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-mist/92 p-4 backdrop-blur-sm"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
@@ -243,7 +243,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
           >
             <button
               type="button"
-              className="absolute right-4 top-4 cursor-pointer rounded-[var(--radius-sm)] border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold"
+              className="absolute right-4 top-4 cursor-pointer rounded-lg border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600"
               onClick={() => setLightbox(null)}
             >
               Close
@@ -251,7 +251,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
 
             <button
               type="button"
-              className="absolute left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-[var(--radius-sm)] border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold sm:inline-flex"
+              className="absolute left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-lg border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600 sm:inline-flex"
               aria-label="Previous photo"
               onClick={(event) => {
                 event.stopPropagation();
@@ -272,7 +272,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
 
             <button
               type="button"
-              className="absolute right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-[var(--radius-sm)] border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold sm:inline-flex"
+              className="absolute right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-lg border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600 sm:inline-flex"
               aria-label="Next photo"
               onClick={(event) => {
                 event.stopPropagation();
@@ -290,7 +290,7 @@ export function GalleryExplorer({ albums }: GalleryExplorerProps) {
             </button>
 
             <motion.div
-              className="relative aspect-[4/3] w-full max-w-5xl overflow-hidden rounded-[var(--radius-md)] bg-surface"
+              className="relative aspect-[4/3] w-full max-w-5xl overflow-hidden rounded-xl bg-mist"
               initial={reduce ? false : { opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}

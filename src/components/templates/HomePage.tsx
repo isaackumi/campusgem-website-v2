@@ -5,40 +5,33 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { CommunitySection } from "@/components/sections/CommunitySection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { EventsSection } from "@/components/sections/EventsSection";
+import { FaceBleedSection } from "@/components/sections/FaceBleedSection";
 import { MinistriesSection } from "@/components/sections/MinistriesSection";
-import { ProofStrip } from "@/components/sections/ProofStrip";
-import { SermonsSection } from "@/components/sections/SermonsSection";
-import {
-  getEvents,
-  getMinistries,
-  getSermons,
-  getSiteSettings,
-} from "@/sanity/lib/content";
+import { StoryMomentSection } from "@/components/sections/StoryMomentSection";
+import { getEvents, getMinistries } from "@/sanity/lib/content";
 
+/**
+ * Story-first landing:
+ * hero → origin → faces → pull quote → pathways → gather → family → CTA
+ */
 export async function HomePage() {
-  const [settings, events, ministries, sermons] = await Promise.all([
-    getSiteSettings(),
+  const [events, ministries] = await Promise.all([
     getEvents(),
     getMinistries(),
-    getSermons(),
   ]);
 
   return (
     <>
       <Navbar />
       <main id="main-content">
-        <Hero
-          tagline={settings.tagline}
-          headline={settings.homeHeadline}
-          support={settings.homeSupport}
-        />
-        <ProofStrip items={settings.trustProof} />
+        <Hero support="A Christ-centered family where Youth belong, grow, and carry the flame beyond campus walls." />
         <AboutSection />
-        <EventsSection events={events} />
+        <FaceBleedSection />
+        <StoryMomentSection />
         <MinistriesSection ministries={ministries} />
-        <SermonsSection sermons={sermons} />
+        <EventsSection events={events} />
         <CommunitySection />
-        <CtaSection />
+        <CtaSection bleed />
       </main>
       <Footer />
     </>

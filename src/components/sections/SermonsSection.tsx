@@ -7,7 +7,7 @@ import type { Sermon } from "@/constants/sermons";
 
 export function SermonsSection({ sermons }: { sermons: Sermon[] }) {
   return (
-    <section className="section-pad bg-paper" aria-labelledby="sermons-heading">
+    <section className="relative overflow-hidden section-pad bg-white" aria-labelledby="sermons-heading">
       <Container>
         <Reveal>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -15,6 +15,7 @@ export function SermonsSection({ sermons }: { sermons: Sermon[] }) {
               eyebrow="Messages"
               title="Sermons & teachings"
               titleId="sermons-heading"
+              outline="HEAR"
               description="Truth that meets real Youth life, worship, discipleship, and hope in Christ."
             />
             <Button

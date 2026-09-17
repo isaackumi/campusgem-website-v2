@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Heading, Text } from "@/components/atoms/Typography";
-import {
-  ContentBlock, CtaBanner, Prose, SplitContent,
-} from "@/components/molecules/PageBlocks";
+import Image from "next/image";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
+import { ParagraphReveal } from "@/components/molecules/TextReveal";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { visionContent } from "@/constants/pages";
 import { getSitePage, getSiteSettings } from "@/sanity/lib/content";
 
@@ -20,8 +22,8 @@ export default async function VisionMissionPage() {
       eyebrow: "About",
       description:
         "Raising strategic, transformational leaders with Christ-centered principles.",
-      image: "/images/camp/camp-moment-04.jpg",
-      slideshow: true,
+      image: atmospheres.canyon,
+      slideshow: false,
       narrow: false,
       sections: visionContent.pathways.map((item) => ({
         title: item,
@@ -42,63 +44,83 @@ export default async function VisionMissionPage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.canyon}
       slideshow={page.slideshow}
+      outline="VISION"
+      bleed
     >
-      <div className="space-y-16">
-        <SplitContent image="/images/values.jpg" imageAlt="Campus GEM values in community">
-          <Prose>
-            <Heading level={3} as="h2" className="text-ink">
-              Vision
-            </Heading>
-            <Text size="lg">{settings.vision}</Text>
-            <Heading level={3} as="h2" className="mt-8 text-ink">
-              Mission
-            </Heading>
-            <Text size="lg">{settings.mission}</Text>
-          </Prose>
-        </SplitContent>
+      <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-28">
+        <Image
+          src={atmospheres.nebula}
+          alt=""
+          fill
+          className="object-cover opacity-45"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-ink/55" />
+        <OutlineWord
+          tone="light"
+          className="left-1/2 top-6 -translate-x-1/2 text-[14vw] lg:text-[8rem]"
+        >
+          CALLING
+        </OutlineWord>
+        <div className="container-wide relative z-10">
+          <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+            <ParagraphReveal>
+              <p className="eyebrow text-brand-200">Vision</p>
+              <p className="mt-4 text-lg leading-8 text-white/90">
+                {settings.vision}
+              </p>
+            </ParagraphReveal>
+            <ParagraphReveal delay={0.12}>
+              <p className="eyebrow text-brand-200">Mission</p>
+              <p className="mt-4 text-lg leading-8 text-white/90">
+                {settings.mission}
+              </p>
+            </ParagraphReveal>
+          </div>
+        </div>
+      </section>
 
-        <ContentBlock title="Core values">
-          <ul className="space-y-3">
-            {settings.coreValues.map((value: string) => (
-              <li
-                key={value}
-                className="font-display text-2xl tracking-[-0.02em] text-ink"
-              >
+      <StoryChapter
+        eyebrow="Foundation"
+        title="Core values"
+        outline="VALUES"
+        intro={visionContent.valuesNote}
+        mist
+      >
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {settings.coreValues.map((value: string, i: number) => (
+            <ParagraphReveal key={value} delay={0.06 * i}>
+              <li className="font-display border-t border-ink/10 pt-4 text-2xl tracking-tight text-ink">
                 {value}
               </li>
-            ))}
-          </ul>
-          <Text className="mt-5" muted>
-            {visionContent.valuesNote}
-          </Text>
-        </ContentBlock>
+            </ParagraphReveal>
+          ))}
+        </ul>
+      </StoryChapter>
 
-        <ContentBlock title="Pathways">
-          <Text muted>
-            We pursue the vision through practical pathways that form leaders
-            and reach communities.
-          </Text>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {pathways.map((item) => (
-              <li
-                key={item}
-                className="border-t border-white/10 pt-3 text-ink-soft"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </ContentBlock>
+      <StoryChapter
+        eyebrow="How we walk it"
+        title="Pathways"
+        outline="PATH"
+        intro="We pursue the vision through practical pathways that form leaders and reach communities."
+        image="/images/values.jpg"
+        imageAlt="Campus GEM values in community"
+      >
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {pathways.map((item) => (
+            <li
+              key={item}
+              className="border-t border-ink/10 pt-3 text-ink-soft"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </StoryChapter>
 
-        <CtaBanner
-          title="Walk the vision with us"
-          description="Whether you are Youth, a graduate, or a partner, there is room to grow and serve."
-          primary={page.primaryCta ?? { href: "/activities", label: "Explore activities" }}
-          secondary={page.secondaryCta ?? { href: "/contact", label: "Get in touch" }}
-        />
-      </div>
+      <CtaSection />
     </SitePage>
   );
 }

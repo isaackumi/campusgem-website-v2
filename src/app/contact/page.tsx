@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { ContactForm } from "@/components/molecules/ContactForm";
-import {
-  ContentBlock, CtaBanner, SplitContent,
-} from "@/components/molecules/PageBlocks";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
+import { ParagraphReveal } from "@/components/molecules/TextReveal";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { getSitePage, getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -20,9 +21,9 @@ export default async function ContactPage() {
       title: "Contact",
       eyebrow: "Connect",
       description:
-        "We would love to hear from you and help you find your place. Whether you want to visit a gathering, partner with the ministry, or ask a question, reach out. We typically respond within a few days.",
-      image: "/images/camp/camp-moment-05.jpg",
-      slideshow: true,
+        "We would love to hear from you and help you find your place — whether you want to visit, partner, or ask about Eagles Camp.",
+      image: atmospheres.washA,
+      slideshow: false,
       narrow: false,
       sections: [],
       primaryCta: { href: "/give", label: "Partner / Give" },
@@ -36,80 +37,70 @@ export default async function ContactPage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.washA}
       slideshow={page.slideshow}
+      outline="HELLO"
+      bleed
     >
-      <div className="space-y-10 md:space-y-12">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
-          <div className="space-y-8">
-            <div>
-              <Heading level={3} as="h2" className="text-ink">
-                Send a message
-              </Heading>
-              <Text className="mt-3" muted>
-                Tell us what you need. We typically respond within a few days.
-              </Text>
-            </div>
+      <StoryChapter
+        eyebrow="Reach out"
+        title="Send a message"
+        outline="TALK"
+        intro="Tell us what you need. We typically respond within a few days."
+        mist
+      >
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          <ParagraphReveal>
             <ContactForm />
-          </div>
+          </ParagraphReveal>
 
           <div className="space-y-8">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-              <ContentBlock title="Visit">
-                <Text muted>{settings.address}</Text>
-                <Text className="mt-2" muted>
-                  {settings.hours}
-                </Text>
-              </ContentBlock>
-              <ContentBlock title="Call">
-                <a
-                  className="text-lg text-gold-soft transition-colors duration-200 hover:text-gold"
-                  href={settings.phoneHref}
-                >
-                  {settings.phone}
-                </a>
-              </ContentBlock>
-              <ContentBlock title="Email">
-                <a
-                  className="text-lg text-gold-soft transition-colors duration-200 hover:text-gold"
-                  href={`mailto:${settings.email}`}
-                >
-                  {settings.email}
-                </a>
-              </ContentBlock>
-            </div>
-
-            <div className="space-y-5">
-              <Heading level={3} as="h2" className="text-ink">
+            <ParagraphReveal delay={0.1}>
+              <Heading level={3} as="h3" className="text-ink">
+                Visit
+              </Heading>
+              <Text className="mt-2" muted>
+                {settings.address}
+              </Text>
+              <Text className="mt-2" muted>
+                {settings.hours}
+              </Text>
+            </ParagraphReveal>
+            <ParagraphReveal delay={0.15}>
+              <Heading level={3} as="h3" className="text-ink">
+                Call
+              </Heading>
+              <a
+                className="mt-2 inline-block text-lg text-brand-500 transition-colors duration-200 hover:text-brand-600"
+                href={settings.phoneHref}
+              >
+                {settings.phone}
+              </a>
+            </ParagraphReveal>
+            <ParagraphReveal delay={0.2}>
+              <Heading level={3} as="h3" className="text-ink">
+                Email
+              </Heading>
+              <a
+                className="mt-2 inline-block text-lg text-brand-500 transition-colors duration-200 hover:text-brand-600"
+                href={`mailto:${settings.email}`}
+              >
+                {settings.email}
+              </a>
+            </ParagraphReveal>
+            <ParagraphReveal delay={0.25}>
+              <Heading level={3} as="h3" className="text-ink">
                 Social & groups
               </Heading>
-              <SocialLinks links={settings.socialLinks} />
-            </div>
+              <div className="mt-4">
+                <SocialLinks links={settings.socialLinks} />
+              </div>
+            </ParagraphReveal>
           </div>
         </div>
+      </StoryChapter>
 
-        <SplitContent
-          image="/images/community.jpg"
-          imageAlt="Campus GEM community gathering"
-          reverse
-        >
-          <ContentBlock title="Come as you are">
-            <Text muted>
-              Visit a fellowship, join a WhatsApp group, or start a conversation.
-              We are here to help you take the next step with Campus GEM.
-            </Text>
-          </ContentBlock>
-        </SplitContent>
-
-        <CtaBanner
-          title="Ready to partner?"
-          description="Your generosity fuels camps, mentoring, and campus discipleship."
-          primary={page.primaryCta ?? { href: "/give", label: "Partner / Give" }}
-          secondary={
-            page.secondaryCta ?? { href: "/activities", label: "Explore activities" }
-          }
-        />
-      </div>
+      <CtaSection />
     </SitePage>
   );
 }

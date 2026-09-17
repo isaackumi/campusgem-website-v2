@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Heading, Text } from "@/components/atoms/Typography";
-import {
-  CtaBanner, ImageGrid, LinkCards, Prose,
-} from "@/components/molecules/PageBlocks";
+import Image from "next/image";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
+import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { lifeMoments } from "@/constants/media";
 import { getActivityIndexItems, getSitePage } from "@/sanity/lib/content";
 
@@ -20,11 +24,11 @@ export default async function ActivitiesPage() {
       eyebrow: "Campus life",
       description:
         "Camps, feasts, mentoring, training, and celebrations that form the Campus GEM family.",
-      image: "/images/camp/camp-moment-05.jpg",
-      slideshow: true,
+      image: atmospheres.canyon,
+      slideshow: false,
       narrow: false,
       intro:
-        "From intensive camp meetings to monthly Love Feasts and mentoring hubs, every activity is designed to help you learn, connect, and grow in Christ.",
+        "From Eagles Camp — our annual camp meeting — to monthly Love Feasts and mentoring hubs, every activity helps you learn, connect, and grow in Christ.",
       sections: [],
       primaryCta: { href: "/contact", label: "Contact us" },
       secondaryCta: { href: "/gallery", label: "View gallery" },
@@ -37,48 +41,79 @@ export default async function ActivitiesPage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.canyon}
       slideshow={page.slideshow}
+      outline="LIFE"
+      bleed
     >
-      <div className="space-y-12">
-        <Prose>
-          <Text size="lg">
-            {page.intro ||
-              "From intensive camp meetings to monthly Love Feasts and mentoring hubs, every activity is designed to help you learn, connect, and grow in Christ."}
-          </Text>
-        </Prose>
-
-        <LinkCards items={activities} />
-
-        <div className="space-y-5">
-          <Heading level={3} as="h2" className="text-ink">
-            From the field
-          </Heading>
-          <Text muted>
-            Camps, love feasts, and gatherings that mark our year together.
-          </Text>
-          <ImageGrid
-            images={[
-              lifeMoments[0],
-              lifeMoments[1],
-              lifeMoments[2],
-              lifeMoments[3],
-              lifeMoments[5],
-              lifeMoments[6],
-            ]}
-            altPrefix="Campus GEM activity"
-          />
+      <StoryChapter
+        eyebrow="Rhythms"
+        title="Ways we grow together"
+        outline="RHYTHM"
+        intro={
+          page.intro ||
+          "From Eagles Camp to Love Feasts and mentoring hubs, every activity helps you learn, connect, and grow in Christ."
+        }
+        mist
+      >
+        <div className="relative mb-10">
+          <StoryArrow className="mb-3" />
+          <p className="max-w-md text-sm leading-6 text-ink-soft">
+            Pick a doorway below — each one is a chapter in the Campus GEM
+            year.
+          </p>
         </div>
+        <LinkCards items={activities} />
+      </StoryChapter>
 
-        <CtaBanner
-          title="Ready to join in?"
-          description="Reach out and we will help you find the right gathering or program."
-          primary={page.primaryCta ?? { href: "/contact", label: "Contact us" }}
-          secondary={
-            page.secondaryCta ?? { href: "/gallery", label: "View gallery" }
-          }
+      <section className="relative overflow-x-hidden py-20 sm:py-24">
+        <Image
+          src={atmospheres.washA}
+          alt=""
+          fill
+          className="object-cover opacity-35"
+          sizes="100vw"
         />
-      </div>
+        <div className="absolute inset-0 bg-brand-50/80" />
+        <OutlineWord className="right-0 top-8 text-[14vw] lg:text-[7rem]">
+          FIELD
+        </OutlineWord>
+        <StoryArrow
+          flip
+          className="absolute bottom-16 left-6 hidden lg:block"
+        />
+        <div className="container-wide relative z-10">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-700">From the field</p>
+          </ParagraphReveal>
+          <TextReveal
+            as="h2"
+            text="Scenes that mark our year"
+            className="font-display mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink sm:text-5xl"
+            delay={0.08}
+          />
+          <ParagraphReveal delay={0.15} className="mt-4 max-w-xl">
+            <p className="text-base leading-7 text-ink-soft">
+              Camps, love feasts, and gatherings across the Campus GEM family.
+            </p>
+          </ParagraphReveal>
+          <div className="mt-10">
+            <ImageGrid
+              images={[
+                lifeMoments[0],
+                lifeMoments[1],
+                lifeMoments[2],
+                lifeMoments[3],
+                lifeMoments[5],
+                lifeMoments[6],
+              ]}
+              altPrefix="Campus GEM activity"
+            />
+          </div>
+        </div>
+      </section>
+
+      <CtaSection />
     </SitePage>
   );
 }

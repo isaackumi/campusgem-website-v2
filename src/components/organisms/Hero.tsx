@@ -4,49 +4,59 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/atoms/Button";
-import { Container } from "@/components/atoms/Container";
-import { Text } from "@/components/atoms/Typography";
-import { campMoments } from "@/constants/media";
-import { siteConfig } from "@/constants/site";
-import { easeOutExpo, fadeUp, stagger } from "@/lib/motion";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 
-const SLIDE_MS = 5500;
+const HERO_FACES = [
+  "/images/camp/camp-moment-06.jpg",
+  "/images/camp/camp-moment-03.jpg",
+  "/images/camp/camp-moment-01.jpg",
+  "/images/camp/camp-moment-05.jpg",
+  "/images/community.jpg",
+] as const;
+
+const SLIDE_MS = 7500;
 const SLIDE_TRANSITION = {
-  duration: 1.2,
+  duration: 1.5,
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
+/**
+ * Story-first hero: brand signal, one emotional hook, faces, one CTA group.
+ */
 export function Hero({
-  tagline = siteConfig.tagline,
-  headline = [
-    "Raising leaders.",
-    "Revealing Christ.",
-    "Restoring purpose.",
-  ],
-  support = "A Christ-centered movement equipping Youth to learn, connect, and grow beyond campus walls.",
+  support = "A Christ-centered family where Youth belong, grow, and carry the flame beyond campus walls.",
 }: {
   tagline?: string;
   headline?: string[];
   support?: string;
 }) {
   const reduce = useReducedMotion();
-  const slides = [...campMoments];
   const [index, setIndex] = useState(0);
-  const active = slides[index % slides.length] ?? slides[0];
+  const [progress, setProgress] = useState(0);
+  const active = HERO_FACES[index % HERO_FACES.length] ?? HERO_FACES[0];
 
   useEffect(() => {
-    if (reduce || slides.length < 2) return;
-    const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slides.length);
-    }, SLIDE_MS);
-    return () => window.clearInterval(id);
-  }, [reduce, slides.length]);
-
-  const lines = headline.length ? headline : ["Raising leaders."];
+    if (reduce || HERO_FACES.length < 2) return;
+    const started = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const elapsed = now - started;
+      setProgress(Math.min(1, elapsed / SLIDE_MS));
+      if (elapsed >= SLIDE_MS) {
+        setIndex((current) => (current + 1) % HERO_FACES.length);
+        return;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [index, reduce]);
 
   return (
     <section
-      className="relative isolate min-h-svh overflow-hidden text-white"
+      className="grain relative flex min-h-[100svh] items-end overflow-hidden sm:items-center"
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0" aria-hidden>
@@ -54,104 +64,108 @@ export function Hero({
           <motion.div
             key={active}
             className="absolute inset-0"
-            initial={reduce ? false : { opacity: 0, scale: 1.04, x: "4%" }}
-            animate={{ opacity: 1, scale: 1, x: "0%" }}
-            exit={reduce ? undefined : { opacity: 0, scale: 1.02, x: "-4%" }}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
             transition={SLIDE_TRANSITION}
           >
-            <Image
-              src={active}
-              alt=""
-              fill
-              priority={index === 0}
-              className="object-cover object-[center_28%] sm:object-[center_26%]"
-              sizes="100vw"
-            />
+            <div className={`absolute inset-0 ${reduce ? "" : "ken-burns"}`}>
+              <Image
+                src={active}
+                alt=""
+                fill
+                priority={index === 0}
+                className="object-cover object-[center_24%] sm:object-[center_28%]"
+                sizes="100vw"
+              />
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Soft left text scrub; keep faces luminous on the right */}
-      <div
-        className="absolute inset-0 bg-[linear-gradient(100deg,rgba(7,7,8,0.9)_0%,rgba(7,7,8,0.72)_32%,rgba(7,7,8,0.28)_56%,rgba(7,7,8,0.12)_76%,rgba(7,7,8,0.35)_100%)]"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(7,7,8,0.88)_0%,rgba(7,7,8,0.28)_26%,transparent_52%)]"
-        aria-hidden
-      />
+      <div className="hero-veil absolute inset-0" aria-hidden />
 
-      <Container
-        wide
-        className="relative flex min-h-svh items-end pb-14 pt-28 sm:pb-16 lg:items-center lg:pb-20 lg:pt-28"
+      <OutlineWord
+        tone="light"
+        className="bottom-0 right-0 text-[22vw] sm:text-[14vw]"
       >
-        <motion.div
-          className="relative z-10 w-full max-w-2xl xl:max-w-3xl"
-          initial={reduce ? false : "hidden"}
-          animate="visible"
-          variants={reduce ? undefined : stagger}
-        >
-          <motion.p
-            variants={reduce ? undefined : fadeUp}
-            transition={easeOutExpo}
-            className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-gold"
-          >
-            {tagline}
-          </motion.p>
+        GEM
+      </OutlineWord>
 
-          <motion.h1
-            id="hero-heading"
-            variants={reduce ? undefined : fadeUp}
-            transition={easeOutExpo}
-            className="mt-5 font-display text-[clamp(2.5rem,6.2vw,5rem)] font-bold leading-[1.02] tracking-[-0.03em] text-white sm:mt-6"
-          >
-            {lines[0]}
-            {lines.slice(1).map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </motion.h1>
+      <div className="container-wide relative z-10 w-full pb-28 pt-32 sm:pb-32 sm:pt-36">
+        <div className="max-w-3xl">
+          <ParagraphReveal immediate>
+            <p className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
+              Campus <span className="text-brand-300">GEM</span>
+            </p>
+          </ParagraphReveal>
 
-          <motion.div variants={reduce ? undefined : fadeUp} transition={easeOutExpo}>
-            <Text className="mt-5 max-w-md text-pretty text-white/80 sm:mt-6" size="lg">
+          <StoryArrow tone="light" className="mt-5" />
+
+          <TextReveal
+            as="h1"
+            text="You were made for more than the noise."
+            className="font-display mt-5 text-[2.35rem] font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
+            delay={0.12}
+            stagger={0.045}
+            immediate
+          />
+          <span id="hero-heading" className="sr-only">
+            You were made for more than the noise.
+          </span>
+
+          <ParagraphReveal delay={0.45} immediate>
+            <p className="mt-6 max-w-md text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
               {support}
-            </Text>
-          </motion.div>
+            </p>
+          </ParagraphReveal>
 
-          <motion.div
-            variants={reduce ? undefined : fadeUp}
-            transition={easeOutExpo}
-            className="mt-7 flex flex-wrap gap-3 sm:mt-8"
+          <ParagraphReveal
+            delay={0.58}
+            immediate
+            className="mt-9 flex flex-wrap items-center gap-3"
           >
             <Button href="/contact" size="lg">
               Find your place
             </Button>
-            <Button
-              href="/give"
-              size="lg"
-              variant="outline"
-              className="border-white/45 text-white hover:border-gold/55 hover:bg-white/5 hover:text-gold-soft"
-            >
-              Donate
+            <Button href="/about" size="lg" variant="ghost">
+              Our story
             </Button>
-          </motion.div>
-        </motion.div>
-      </Container>
+          </ParagraphReveal>
+        </div>
+      </div>
 
-      {slides.length > 1 && !reduce ? (
+      {!reduce && HERO_FACES.length > 1 ? (
         <div
-          className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2 lg:bottom-8"
+          className="absolute bottom-8 left-1/2 z-10 flex w-[min(16rem,70vw)] -translate-x-1/2 flex-col items-center gap-3"
           aria-hidden
         >
-          {slides.map((src, i) => (
-            <span
-              key={src}
-              className={`h-1 rounded-full transition-all duration-500 ${
-                i === index ? "w-6 bg-gold" : "w-1.5 bg-white/35"
-              }`}
-            />
-          ))}
+          <div className="flex w-full gap-1.5">
+            {HERO_FACES.map((src, i) => (
+              <span
+                key={src}
+                className="relative h-0.5 flex-1 overflow-hidden rounded-full bg-white/25"
+              >
+                <span
+                  className="absolute inset-y-0 left-0 bg-brand-300 transition-[width] duration-100 ease-linear"
+                  style={{
+                    width:
+                      i < index
+                        ? "100%"
+                        : i === index
+                          ? `${progress * 100}%`
+                          : "0%",
+                  }}
+                />
+              </span>
+            ))}
+          </div>
+          <a
+            href="#story"
+            className="eyebrow text-[10px] tracking-[0.32em] text-white/55 transition-colors hover:text-white"
+          >
+            Scroll into the story
+          </a>
         </div>
       ) : null}
     </section>

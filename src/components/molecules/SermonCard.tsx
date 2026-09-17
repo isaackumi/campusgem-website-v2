@@ -9,7 +9,7 @@ type SermonCardProps = {
 
 export function SermonCard({ sermon }: SermonCardProps) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-white/8 bg-surface shadow-[var(--shadow-soft)]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-ink/5">
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={sermon.image}
@@ -20,15 +20,16 @@ export function SermonCard({ sermon }: SermonCardProps) {
         />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5 sm:p-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
-          {sermon.category}
-        </p>
+        <p className="eyebrow text-brand-600">{sermon.category}</p>
         <Heading level={3} as="h3" className="text-[1.35rem] text-ink">
-          <Link href={sermon.href} className="transition-colors hover:text-gold-soft">
+          <Link
+            href={sermon.href}
+            className="transition-colors hover:text-brand-700"
+          >
             {sermon.title}
           </Link>
         </Heading>
-        <Text size="sm" className="text-ink-muted">
+        <Text size="sm">
           {sermon.speaker} · {sermon.date}
         </Text>
       </div>

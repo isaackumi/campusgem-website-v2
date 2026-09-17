@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Heading, Text } from "@/components/atoms/Typography";
-import {
-  CtaBanner, ImageGrid, LinkCards, Prose,
-} from "@/components/molecules/PageBlocks";
+import Image from "next/image";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
+import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { MinistryGrid } from "@/components/organisms/MinistryGrid";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { lifeMoments } from "@/constants/media";
 import { getMinistries, getSitePage } from "@/sanity/lib/content";
 
@@ -21,8 +25,8 @@ export default async function MinistriesPage() {
       eyebrow: "Serve & grow",
       description:
         "Pathways to learn, connect, and grow as Christ-centered leaders.",
-      image: "/images/camp/camp-moment-04.jpg",
-      slideshow: true,
+      image: atmospheres.canyon,
+      slideshow: false,
       narrow: false,
       intro:
         "Each ministry expression is a door into the Campus GEM family. Explore the pathways below and take a step toward deeper formation.",
@@ -38,34 +42,72 @@ export default async function MinistriesPage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.canyon}
       slideshow={page.slideshow}
+      outline="SERVE"
+      bleed
     >
-      <div className="space-y-12">
-        <Prose>
-          <Text size="lg">
-            {page.intro ||
-              "Each ministry expression is a door into the Campus GEM family. Explore the pathways below and take a step toward deeper formation."}
-          </Text>
-        </Prose>
-
-        <MinistryGrid ministries={ministries} />
-
-        <div className="space-y-5">
-          <Heading level={3} as="h2" className="text-ink">
-            Ministry in motion
-          </Heading>
-          <ImageGrid
-            images={[
-              lifeMoments[2],
-              lifeMoments[4],
-              lifeMoments[7],
-              lifeMoments[8],
-            ]}
-            altPrefix="Campus GEM ministry"
-          />
+      <StoryChapter
+        eyebrow="Pathways"
+        title="Doors into the family"
+        outline="PATH"
+        intro={
+          page.intro ||
+          "Each ministry expression is a door into the Campus GEM family. Explore the pathways below and take a step toward deeper formation."
+        }
+        mist
+        fullWidthChildren
+      >
+        <div className="mb-8">
+          <StoryArrow className="mb-3" />
+          <p className="max-w-md text-sm leading-6 text-ink-soft">
+            Choose a pathway — camps, feasts, mentoring, and more.
+          </p>
         </div>
+        <MinistryGrid ministries={ministries} />
+      </StoryChapter>
 
+      <section className="relative overflow-x-hidden py-20 sm:py-24">
+        <Image
+          src={atmospheres.washB}
+          alt=""
+          fill
+          className="object-cover opacity-35"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-brand-50/85" />
+        <OutlineWord className="right-0 top-6 text-[14vw] lg:text-[7rem]">
+          MOVE
+        </OutlineWord>
+        <div className="container-wide relative z-10">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-700">In motion</p>
+          </ParagraphReveal>
+          <TextReveal
+            as="h2"
+            text="Ministry that looks like people"
+            className="font-display mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink sm:text-5xl"
+            delay={0.08}
+          />
+          <div className="mt-10">
+            <ImageGrid
+              images={[
+                lifeMoments[2],
+                lifeMoments[4],
+                lifeMoments[7],
+                lifeMoments[8],
+              ]}
+              altPrefix="Campus GEM ministry"
+            />
+          </div>
+        </div>
+      </section>
+
+      <StoryChapter
+        eyebrow="Also explore"
+        title="Keep walking"
+        outline="MORE"
+      >
         <LinkCards
           items={[
             {
@@ -90,16 +132,9 @@ export default async function MinistriesPage() {
             },
           ]}
         />
+      </StoryChapter>
 
-        <CtaBanner
-          title="Find your fit"
-          description="Not sure where to start? Contact us and we will help you plug in."
-          primary={page.primaryCta ?? { href: "/contact", label: "Talk to us" }}
-          secondary={
-            page.secondaryCta ?? { href: "/activities", label: "All activities" }
-          }
-        />
-      </div>
+      <CtaSection />
     </SitePage>
   );
 }

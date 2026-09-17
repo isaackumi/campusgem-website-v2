@@ -7,14 +7,19 @@ type BadgeProps = {
 };
 
 const tones = {
-  gold: "bg-gold text-void", soft: "bg-gold-tint text-gold-soft border border-gold/25", outline: "bg-transparent text-gold border border-gold/30",
+  gold: "bg-brand-600 text-white",
+  soft: "bg-brand-50 text-brand-700 ring-1 ring-brand-100",
+  outline: "bg-transparent text-brand-700 ring-1 ring-brand-200",
 };
 
 export function Badge({ children, className, tone = "soft" }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-[var(--radius-pill)] px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em]", tones[tone], className, )}
+        "eyebrow inline-flex items-center rounded-lg px-3 py-1.5",
+        tones[tone],
+        className,
+      )}
     >
       {children}
     </span>

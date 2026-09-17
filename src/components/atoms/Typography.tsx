@@ -4,7 +4,10 @@ import { cn } from "@/lib/cn";
 type HeadingLevel = 1 | 2 | 3 | 4;
 
 const headingStyles: Record<HeadingLevel, string> = {
-  1: "font-display text-[clamp(2.6rem,5.5vw,4.75rem)] font-bold leading-[1.05] tracking-[-0.03em] text-balance", 2: "font-display text-[clamp(1.85rem,3.5vw,2.85rem)] font-bold leading-[1.12] tracking-[-0.025em] text-balance", 3: "font-display text-[clamp(1.35rem,2.2vw,1.75rem)] font-semibold leading-snug tracking-[-0.02em]", 4: "font-sans text-base font-bold tracking-[0.01em]",
+  1: "font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-6xl",
+  2: "font-display text-3xl font-bold tracking-tight text-balance sm:text-4xl",
+  3: "font-display text-xl font-semibold leading-snug tracking-tight sm:text-2xl",
+  4: "font-sans text-base font-semibold tracking-tight",
 };
 
 type HeadingProps = {
@@ -16,7 +19,11 @@ type HeadingProps = {
 };
 
 export function Heading({
-  children, level = 2, as, className, id,
+  children,
+  level = 2,
+  as,
+  className,
+  id,
 }: HeadingProps) {
   const Tag = (as ?? `h${level}`) as ElementType;
   return (
@@ -35,16 +42,26 @@ type TextProps = {
 };
 
 const textSizes = {
-  sm: "text-[0.9375rem] font-medium leading-[1.65] tracking-[0.01em]", md: "text-base font-medium leading-[1.7] tracking-[0.01em]", lg: "text-[1.0625rem] font-medium leading-[1.75] tracking-[0.005em] sm:text-lg sm:leading-[1.75]",
+  sm: "text-sm leading-6",
+  md: "text-base leading-7",
+  lg: "text-base leading-7 sm:text-lg sm:leading-8",
 };
 
 export function Text({
-  children, className, muted = false, size = "md", as: Tag = "p",
+  children,
+  className,
+  muted = false,
+  size = "md",
+  as: Tag = "p",
 }: TextProps) {
   return (
     <Tag
       className={cn(
-        "font-sans text-pretty", textSizes[size], muted ? "text-ink-muted" : "text-ink-soft", className, )}
+        "font-sans text-pretty",
+        textSizes[size],
+        muted ? "text-ink-soft" : "text-ink-soft",
+        className,
+      )}
     >
       {children}
     </Tag>

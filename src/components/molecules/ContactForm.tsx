@@ -6,7 +6,7 @@ import { siteConfig } from "@/constants/site";
 import { cn } from "@/lib/cn";
 
 const fieldClass =
-  "w-full rounded-md border border-white/12 bg-void px-3.5 py-3 text-sm font-medium text-ink placeholder:text-ink-muted/70 transition-colors duration-200 focus-visible:border-gold/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+  "w-full rounded-md border border-ink/10 bg-mist px-3.5 py-3 text-sm font-medium text-ink placeholder:text-ink-soft/70 transition-colors duration-200 focus-visible:border-brand-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "ready">("idle");
@@ -33,7 +33,7 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="space-y-5" noValidate={false}>
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
             Name
           </span>
           <input
@@ -46,7 +46,7 @@ export function ContactForm() {
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
             Email
           </span>
           <input
@@ -62,7 +62,7 @@ export function ContactForm() {
       </div>
 
       <label className="block space-y-2">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
           I want to
         </span>
         <select
@@ -80,7 +80,7 @@ export function ContactForm() {
       </label>
 
       <label className="block space-y-2">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
           Message
         </span>
         <textarea
@@ -96,13 +96,13 @@ export function ContactForm() {
         <Button type="submit" size="lg">
           Send message
         </Button>
-        <p className="text-sm text-ink-muted">
+        <p className="text-sm text-ink-soft">
           Opens your email app to send to {siteConfig.email}.
         </p>
       </div>
 
       {status === "ready" ? (
-        <p className="text-sm text-gold-soft" role="status">
+        <p className="text-sm text-brand-500" role="status">
           If nothing opened, email us directly at {siteConfig.email}.
         </p>
       ) : null}

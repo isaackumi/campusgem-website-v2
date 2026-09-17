@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { Button } from "@/components/atoms/Button";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { Heading, Text } from "@/components/atoms/Typography";
-import {
-  ContentBlock, CtaBanner, Prose, SplitContent,
-} from "@/components/molecules/PageBlocks";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
+import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { getGiveContent, getSiteSettings } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -11,6 +16,24 @@ export const metadata: Metadata = {
   description:
     "Support Campus GEM camp meetings, academic help for needy Youth, and Christ-centered campus discipleship.",
 };
+
+const journey = [
+  {
+    step: "01",
+    title: "You give",
+    body: "A seed toward camps, mentoring, and Youth who need a hand.",
+  },
+  {
+    step: "02",
+    title: "We gather",
+    body: "Eagles Camp and other meetings stay open for young leaders.",
+  },
+  {
+    step: "03",
+    title: "They grow",
+    body: "Faith, excellence, and calling take root on campus and beyond.",
+  },
+] as const;
 
 export default async function GivePage() {
   const [page, settings] = await Promise.all([
@@ -23,61 +46,149 @@ export default async function GivePage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.nebula}
+      outline="GIVE"
+      slideshow={false}
+      bleed
     >
-      <div className="space-y-12">
-        <SplitContent
-          image={page.contentImage}
-          imageAlt="Youth gathered at Campus GEM camp"
-        >
-          <Prose>
-            <Text size="lg">{page.intro}</Text>
-          </Prose>
-        </SplitContent>
-
-        <aside className="rounded-lg border border-gold/35 bg-gold/10 px-5 py-6 sm:px-6 sm:py-7">
-          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold">
-            Priority need
+      <StoryChapter
+        eyebrow="Partnership"
+        title="Why your gift matters"
+        outline="GIFT"
+        intro={page.intro}
+        image={page.contentImage}
+        imageAlt="Youth gathered at Campus GEM camp"
+      >
+        <div className="relative pt-2">
+          <StoryArrow className="absolute -top-2 left-0 sm:left-8" />
+          <p className="eyebrow ml-2 mt-14 text-brand-600 sm:ml-12">
+            Generosity in motion
           </p>
-          <Heading level={3} as="h2" className="mt-3 text-ink">
-            {page.highlightTitle}
-          </Heading>
-          <Text className="mt-3 text-ink-soft" size="lg">
-            {page.highlight}
-          </Text>
-        </aside>
-
-        <div className="space-y-8">
-          <Heading level={3} as="h2" className="text-ink">
-            Where your gift goes
-          </Heading>
-          <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
-            {page.focuses.map((item) => (
-              <ContentBlock key={item.title} title={item.title}>
-                <Text muted>{item.body}</Text>
-              </ContentBlock>
-            ))}
-          </div>
         </div>
+      </StoryChapter>
 
-        <ContentBlock title="Supporting needy Youth">
-          <Text muted>{page.needyNote}</Text>
-        </ContentBlock>
-
-        <ContentBlock title="How to give">
-          <Text muted>{page.howToGive}</Text>
-        </ContentBlock>
-
-        <CtaBanner
-          title="Ready to partner with us?"
-          description={`Email ${settings.email} or call ${settings.phone}.`}
-          primary={{
-            href: `mailto:${settings.email}?subject=I%20want%20to%20give`,
-            label: "Contact us to give",
-          }}
-          secondary={{ href: "/camp", label: "About Eagles Camp" }}
+      <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-28">
+        <Image
+          src={atmospheres.nebula}
+          alt=""
+          fill
+          className="object-cover opacity-45"
+          sizes="100vw"
         />
-      </div>
+        <div className="absolute inset-0 bg-ink/60" />
+        <OutlineWord
+          tone="light"
+          className="left-1/2 top-6 -translate-x-1/2 text-[16vw] lg:text-[8rem]"
+        >
+          CAMP
+        </OutlineWord>
+        <StoryArrow
+          tone="light"
+          flip
+          className="absolute right-8 top-24 hidden sm:block lg:right-16"
+        />
+        <div className="container-wide relative z-10 max-w-3xl">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-200">Priority need</p>
+          </ParagraphReveal>
+          <TextReveal
+            as="h2"
+            text={page.highlightTitle}
+            className="font-display mt-4 text-3xl font-bold tracking-tight text-white sm:text-5xl"
+            delay={0.08}
+          />
+          <ParagraphReveal delay={0.2} className="mt-6">
+            <p className="text-base leading-7 text-white/85">{page.highlight}</p>
+          </ParagraphReveal>
+          <ParagraphReveal delay={0.28} className="mt-8 flex flex-wrap gap-3">
+            <Button
+              href={`mailto:${settings.email}?subject=I%20want%20to%20give`}
+              variant="inverse"
+            >
+              Contact us to give
+            </Button>
+            <Button href="/camp" variant="ghost">
+              About Eagles Camp
+            </Button>
+          </ParagraphReveal>
+        </div>
+      </section>
+
+      <StoryChapter
+        eyebrow="The path"
+        title="How partnership travels"
+        outline="PATH"
+        intro="From one gift to a season of formation — a simple arc we walk together."
+        mist
+      >
+        <ol className="relative mt-2 grid gap-10 md:grid-cols-3 md:gap-8">
+          {journey.map((item, i) => (
+            <ParagraphReveal key={item.step} delay={0.08 * i}>
+              <li className="relative">
+                {i < journey.length - 1 ? (
+                  <StoryArrow className="absolute -right-6 top-6 hidden md:block lg:-right-10" />
+                ) : null}
+                <p className="font-mono text-[11px] tracking-[0.28em] text-brand-600">
+                  {item.step}
+                </p>
+                <Heading level={3} as="h3" className="mt-3 text-ink">
+                  {item.title}
+                </Heading>
+                <Text className="mt-3" muted>
+                  {item.body}
+                </Text>
+              </li>
+            </ParagraphReveal>
+          ))}
+        </ol>
+      </StoryChapter>
+
+      <StoryChapter
+        eyebrow="Stewardship"
+        title="Where your gift goes"
+        outline="CARE"
+      >
+        <div className="grid gap-10 sm:grid-cols-2">
+          {page.focuses.map((item, i) => (
+            <ParagraphReveal key={item.title} delay={0.08 * i}>
+              <Heading level={3} as="h3" className="text-ink">
+                {item.title}
+              </Heading>
+              <Text className="mt-3" muted>
+                {item.body}
+              </Text>
+            </ParagraphReveal>
+          ))}
+        </div>
+        <ParagraphReveal delay={0.2} className="mt-12 space-y-8 border-t border-ink/10 pt-10">
+          <div>
+            <Heading level={3} as="h3" className="text-ink">
+              Supporting needy Youth
+            </Heading>
+            <Text className="mt-3" muted>
+              {page.needyNote}
+            </Text>
+          </div>
+          <div>
+            <Heading level={3} as="h3" className="text-ink">
+              How to give
+            </Heading>
+            <Text className="mt-3" muted>
+              {page.howToGive}
+            </Text>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button href={`mailto:${settings.email}?subject=I%20want%20to%20give`}>
+              Email {settings.email}
+            </Button>
+            <Button href={settings.phoneHref} variant="secondary">
+              Call {settings.phone}
+            </Button>
+          </div>
+        </ParagraphReveal>
+      </StoryChapter>
+
+      <CtaSection />
     </SitePage>
   );
 }

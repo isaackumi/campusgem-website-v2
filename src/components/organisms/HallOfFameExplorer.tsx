@@ -67,13 +67,13 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
               type="button"
               onClick={() => setActiveIndex(index)}
               className={cn(
-                "group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-white/10 bg-surface text-left transition-[border-color,transform] duration-300",
-                "motion-safe:hover:-translate-y-0.5 hover:border-gold/40",
-                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold",
+                "group relative flex w-full cursor-pointer flex-col overflow-hidden rounded-lg border border-ink/10 bg-mist text-left transition-[border-color,transform] duration-300",
+                "motion-safe:hover:-translate-y-0.5 hover:border-brand-400",
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600",
               )}
               aria-label={`Open portrait of ${entry.name}`}
             >
-              <span className="relative aspect-[3/4] w-full overflow-hidden bg-void">
+              <span className="relative aspect-[3/4] w-full overflow-hidden bg-mist">
                 <Image
                   src={entry.src}
                   alt={entry.name}
@@ -82,7 +82,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 <span
-                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-void/80 via-void/10 to-transparent opacity-90 transition duration-300 group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/80 via-ink/10 to-transparent opacity-90 transition duration-300 group-hover:opacity-100"
                   aria-hidden
                 />
               </span>
@@ -91,7 +91,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
                   {entry.name}
                 </span>
                 {entry.note ? (
-                  <span className="block text-[0.7rem] font-medium leading-snug text-gold/90 sm:text-xs">
+                  <span className="block text-[0.7rem] font-medium leading-snug text-brand-600/90 sm:text-xs">
                     {entry.note}
                   </span>
                 ) : null}
@@ -104,7 +104,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
       <AnimatePresence>
         {active && activeIndex !== null ? (
           <motion.div
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-void/94 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-mist/94 p-4 backdrop-blur-sm"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
@@ -116,7 +116,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
           >
             <button
               type="button"
-              className="absolute right-4 top-4 cursor-pointer rounded-sm border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold"
+              className="absolute right-4 top-4 cursor-pointer rounded-sm border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600"
               onClick={() => setActiveIndex(null)}
             >
               Close
@@ -124,7 +124,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
 
             <button
               type="button"
-              className="absolute left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-sm border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold sm:inline-flex"
+              className="absolute left-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-sm border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600 sm:inline-flex"
               aria-label="Previous portrait"
               onClick={(event) => {
                 event.stopPropagation();
@@ -138,7 +138,7 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
 
             <button
               type="button"
-              className="absolute right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-sm border border-white/15 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-gold/40 hover:text-gold sm:inline-flex"
+              className="absolute right-3 top-1/2 hidden -translate-y-1/2 cursor-pointer rounded-sm border border-ink/10 px-3 py-2 text-sm font-semibold text-ink transition-colors duration-200 hover:border-brand-400 hover:text-brand-600 sm:inline-flex"
               aria-label="Next portrait"
               onClick={(event) => {
                 event.stopPropagation();
@@ -149,14 +149,14 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
             </button>
 
             <motion.div
-              className="relative flex max-h-[min(88svh,52rem)] w-full max-w-3xl flex-col overflow-hidden rounded-md bg-surface"
+              className="relative flex max-h-[min(88svh,52rem)] w-full max-w-3xl flex-col overflow-hidden rounded-md bg-mist"
               initial={reduce ? false : { opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={reduce ? undefined : { opacity: 0, scale: 0.98 }}
               transition={easeOutSoft}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="relative aspect-[3/4] w-full max-h-[min(72svh,44rem)] bg-void sm:aspect-auto sm:h-[min(72svh,44rem)]">
+              <div className="relative aspect-[3/4] w-full max-h-[min(72svh,44rem)] bg-mist sm:aspect-auto sm:h-[min(72svh,44rem)]">
                 <Image
                   src={active.src}
                   alt={active.name}
@@ -166,14 +166,14 @@ export function HallOfFameExplorer({ entries }: HallOfFameExplorerProps) {
                   priority
                 />
               </div>
-              <div className="border-t border-white/10 px-4 py-3 sm:px-5">
+              <div className="border-t border-ink/10 px-4 py-3 sm:px-5">
                 <p className="font-sans text-base font-bold text-ink">
                   {active.name}
                 </p>
                 {active.note ? (
-                  <p className="mt-1 text-sm text-gold/90">{active.note}</p>
+                  <p className="mt-1 text-sm text-brand-600/90">{active.note}</p>
                 ) : null}
-                <p className="mt-1 text-xs font-medium text-ink-muted">
+                <p className="mt-1 text-xs font-medium text-ink-soft">
                   {activeIndex + 1} / {entries.length}
                 </p>
               </div>

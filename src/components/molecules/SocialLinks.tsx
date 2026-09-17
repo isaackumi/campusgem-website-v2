@@ -5,6 +5,7 @@ type SocialLinksProps = {
   links: SocialLink[];
   className?: string;
   compact?: boolean;
+  light?: boolean;
 };
 
 function Icon({ platform }: { platform: SocialLink["platform"] }) {
@@ -37,7 +38,12 @@ function Icon({ platform }: { platform: SocialLink["platform"] }) {
   }
 }
 
-export function SocialLinks({ links, className, compact = false }: SocialLinksProps) {
+export function SocialLinks({
+  links,
+  className,
+  compact = false,
+  light = false,
+}: SocialLinksProps) {
   return (
     <ul className={cn("flex flex-wrap gap-2", className)}>
       {links.map((link) => (
@@ -47,7 +53,12 @@ export function SocialLinks({ links, className, compact = false }: SocialLinksPr
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex items-center gap-2 rounded-full border border-white/15 bg-surface text-ink-soft transition hover:border-gold/40 hover:text-gold-soft", compact ? "p-2.5" : "px-3.5 py-2 text-sm", )}
+              "inline-flex items-center gap-2 rounded-lg text-sm font-medium transition-colors",
+              light
+                ? "bg-white/10 text-white/80 ring-1 ring-white/20 hover:bg-white/15 hover:text-white"
+                : "bg-mist text-ink-soft ring-1 ring-ink/5 hover:bg-brand-50 hover:text-brand-700",
+              compact ? "p-2.5" : "px-3.5 py-2",
+            )}
             aria-label={link.label}
           >
             <Icon platform={link.platform} />

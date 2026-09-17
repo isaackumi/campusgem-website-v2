@@ -10,7 +10,7 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   return (
-    <article className="group grid overflow-hidden rounded-lg border border-white/8 bg-surface shadow-[var(--shadow-soft)] transition duration-300 hover:border-gold/30 md:grid-cols-[0.9fr_1.1fr]">
+    <article className="group grid overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-ink/5 transition duration-300 hover:shadow-float md:grid-cols-[0.9fr_1.1fr]">
       <div className="relative min-h-48 overflow-hidden md:min-h-full">
         <Image
           src={event.image}
@@ -21,19 +21,17 @@ export function EventCard({ event }: EventCardProps) {
         />
       </div>
       <div className="flex flex-col justify-center gap-3 p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-          {event.date}
-        </p>
+        <p className="eyebrow text-brand-600">{event.date}</p>
         <Heading level={3} as="h3" className="text-ink">
           <Link
             href={event.href}
-            className="transition-colors duration-200 hover:text-gold-soft"
+            className="transition-colors duration-200 hover:text-brand-700"
           >
             {event.title}
           </Link>
         </Heading>
-        <Text className="text-ink-muted">{event.summary}</Text>
-        <div className="mt-2 space-y-1 text-sm text-ink-muted">
+        <Text>{event.summary}</Text>
+        <div className="mt-2 space-y-1 text-sm text-ink-soft">
           <p>{event.time}</p>
           <p>{event.location}</p>
         </div>
@@ -44,7 +42,7 @@ export function EventCard({ event }: EventCardProps) {
                 href={event.cta.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-pill)] bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-void shadow-[var(--shadow-soft)] transition-colors duration-200 hover:bg-gold-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                className="btn-primary"
               >
                 {event.cta.label}
               </a>
@@ -56,7 +54,7 @@ export function EventCard({ event }: EventCardProps) {
           ) : null}
           <Link
             href={event.href}
-            className="inline-flex text-sm font-semibold text-gold transition-colors duration-200 hover:text-gold-soft"
+            className="inline-flex text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
           >
             Find out more
             <span aria-hidden className="ml-1">

@@ -67,9 +67,9 @@ export function HeroBackdrop({
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-void/40" />
-      <div className="absolute inset-0 bg-linear-to-b from-void/65 via-void/30 to-paper" />
-      <div className="absolute inset-0 bg-linear-to-r from-void/45 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-ink/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-ink/25 to-ink/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
     </div>
   );
 }

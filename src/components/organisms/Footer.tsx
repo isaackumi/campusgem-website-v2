@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/atoms/BrandLogo";
 import { Container } from "@/components/atoms/Container";
-import { Divider } from "@/components/atoms/Divider";
-import { Text } from "@/components/atoms/Typography";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { footerNav } from "@/constants/navigation";
 import { getSiteSettings } from "@/sanity/lib/content";
@@ -10,81 +8,115 @@ import { getSiteSettings } from "@/sanity/lib/content";
 export async function Footer() {
   const settings = await getSiteSettings();
 
+  const joinLinks = [
+    { label: "Eagles Camp", href: "/camp" },
+    { label: "Give", href: "/give" },
+    { label: "Contact", href: "/contact" },
+    { label: "Gallery", href: "/gallery" },
+  ];
+
   return (
-    <footer className="border-t border-white/8 bg-void text-ink">
-      <Container className="section-pad">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          <div className="space-y-4 lg:col-span-1">
-            <Link href="/" aria-label="Campus GEM Ministries home">
-              <BrandLogo />
-            </Link>
-            <Text className="text-ink-muted">{settings.description}</Text>
-          </div>
-
-          <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-              Explore
-            </h2>
-            <ul className="mt-4 space-y-2.5">
-              {footerNav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-ink-soft transition hover:text-gold-soft"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-              Visit
-            </h2>
-            <ul className="mt-4 space-y-2.5 text-ink-soft">
-              <li>{settings.address}</li>
-              <li>
-                <a href={settings.phoneHref} className="hover:text-gold-soft">
-                  {settings.phone}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${settings.email}`}
-                  className="hover:text-gold-soft"
-                >
-                  {settings.email}
-                </a>
-              </li>
-              <li>{settings.hours}</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-              Connect
-            </h2>
-            <SocialLinks
-              className="mt-4"
-              links={settings.socialLinks.filter((link) =>
-                ["facebook", "telegram"].includes(link.platform),
-              )}
-            />
-          </div>
-        </div>
-
-        <Divider className="my-10 bg-white/10" />
-
-        <div className="flex flex-col gap-3 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} The Campus Gem Ministries. All rights
-            reserved.
+    <footer className="overflow-hidden bg-ink text-white">
+      <Container
+        wide
+        className="flex flex-col gap-8 border-b border-white/10 py-14 sm:flex-row sm:items-start sm:justify-between sm:py-16 lg:py-20"
+      >
+        <div>
+          <BrandLogo light />
+          <p className="mt-3 text-sm text-white/60 sm:text-base">
+            {settings.tagline}
           </p>
-          <p>{settings.tagline}</p>
+          <p className="mt-5 text-sm text-white/45">
+            © {new Date().getFullYear()} {settings.name}
+            <span className="mt-1 block text-xs">All rights reserved.</span>
+          </p>
+        </div>
+        <div className="flex gap-8 text-sm font-semibold text-white/75 sm:pt-1">
+          <Link
+            href="/contact"
+            className="transition-colors hover:text-brand-200"
+          >
+            Contact
+          </Link>
+          <Link href="/give" className="transition-colors hover:text-brand-200">
+            Donate
+          </Link>
         </div>
       </Container>
+
+      <Container wide className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <h3 className="text-sm font-semibold text-white">Explore</h3>
+          <ul className="mt-4 space-y-2.5">
+            {footerNav.slice(0, 5).map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-white/65 transition-colors hover:text-brand-200"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-sm font-semibold text-white">Join</h3>
+          <ul className="mt-4 space-y-2.5">
+            {joinLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-white/65 transition-colors hover:text-brand-200"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="sm:col-span-2 lg:col-span-2">
+          <h3 className="text-sm font-semibold text-white">Visit</h3>
+          <ul className="mt-4 space-y-2.5 text-sm text-white/65">
+            <li>{settings.address}</li>
+            <li>
+              <a
+                href={settings.phoneHref}
+                className="transition-colors hover:text-brand-200"
+              >
+                {settings.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${settings.email}`}
+                className="transition-colors hover:text-brand-200"
+              >
+                {settings.email}
+              </a>
+            </li>
+            <li>{settings.hours}</li>
+          </ul>
+          <SocialLinks
+            className="mt-6"
+            light
+            links={settings.socialLinks.filter((link) =>
+              ["facebook", "telegram"].includes(link.platform),
+            )}
+          />
+        </div>
+      </Container>
+
+      <div className="relative mt-6 min-h-[28vw] overflow-hidden sm:min-h-[22vw] lg:min-h-[18rem]">
+        <p
+          aria-hidden
+          className="font-display footer-wordmark absolute inset-x-0 bottom-0 select-none text-center text-[22vw] font-bold leading-[0.75] tracking-tight sm:text-[18vw] lg:text-[15rem]"
+        >
+          CAMPUSGEM
+        </p>
+      </div>
     </footer>
   );
 }

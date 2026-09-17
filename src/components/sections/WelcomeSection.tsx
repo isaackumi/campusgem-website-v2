@@ -8,7 +8,7 @@ import { aboutIntro, coreValues, mission, vision } from "@/constants/site";
 
 export function WelcomeSection() {
   return (
-    <section className="section-pad bg-surface" aria-labelledby="welcome-heading">
+    <section className="section-pad bg-mist" aria-labelledby="welcome-heading">
       <Container>
         <Reveal>
           <SectionHeader
@@ -21,10 +21,16 @@ export function WelcomeSection() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {[
-            { title: "Our Vision", body: vision, image: "/images/about.jpg" }, { title: "Our Mission", body: mission, image: "/images/vision.jpg" }, {
-              title: "Core Values", body: `${coreValues.join(" · ")}. We pursue academic excellence as worship.`, image: "/images/community.jpg", }, ].map((item) => (
+            { title: "Our Vision", body: vision, image: "/images/about.jpg" },
+            { title: "Our Mission", body: mission, image: "/images/vision.jpg" },
+            {
+              title: "Core Values",
+              body: `${coreValues.join(" · ")}. We pursue academic excellence as worship.`,
+              image: "/images/community.jpg",
+            },
+          ].map((item) => (
             <Reveal key={item.title} kind="fadeUp">
-              <article className="h-full overflow-hidden rounded-[var(--radius-lg)] bg-paper">
+              <article className="h-full overflow-hidden rounded-2xl bg-white shadow-card ring-1 ring-ink/5">
                 <div className="relative aspect-[16/10]">
                   <Image
                     src={item.image}
@@ -46,7 +52,7 @@ export function WelcomeSection() {
         </div>
 
         <Reveal className="mt-10">
-          <Button href="/about" variant="ghost">
+          <Button href="/about" variant="secondary">
             Learn more about Campus GEM
           </Button>
         </Reveal>

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Text } from "@/components/atoms/Typography";
-import { CtaBanner, Prose } from "@/components/molecules/PageBlocks";
+import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { EventGrid } from "@/components/organisms/EventGrid";
+import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
+import { atmospheres } from "@/constants/atmospheres";
 import { getEvents, getSitePage } from "@/sanity/lib/content";
 
 export const metadata: Metadata = {
@@ -18,11 +19,11 @@ export default async function EventsPage() {
       eyebrow: "Gatherings",
       description:
         "Camps, feasts, and seasonal meetings where we seek God together.",
-      image: "/images/camp/camp-moment-06.jpg",
-      slideshow: true,
+      image: atmospheres.washB,
+      slideshow: false,
       narrow: false,
       intro:
-        "Mark your calendar and join us. Details for registration and venues are updated as each season approaches.",
+        "Mark your calendar and join us. Details for registration and venues are updated as each season approaches — including Eagles Camp, our annual camp meeting.",
       sections: [],
       primaryCta: { href: "/contact", label: "Get connected" },
       secondaryCta: { href: "/activities", label: "All activities" },
@@ -35,28 +36,26 @@ export default async function EventsPage() {
       title={page.title}
       eyebrow={page.eyebrow}
       description={page.description}
-      image={page.image}
+      image={page.image || atmospheres.washB}
       slideshow={page.slideshow}
+      outline="EVENTS"
+      bleed
     >
-      <div className="space-y-10">
-        <Prose>
-          <Text size="lg">
-            {page.intro ||
-              "Mark your calendar and join us. Details for registration and venues are updated as each season approaches."}
-          </Text>
-        </Prose>
-
+      <StoryChapter
+        eyebrow="This season"
+        title="Gatherings on the calendar"
+        outline="SEASON"
+        intro={
+          page.intro ||
+          "Mark your calendar and join us. Details for registration and venues are updated as each season approaches."
+        }
+        mist
+        fullWidthChildren
+      >
         <EventGrid events={events} />
+      </StoryChapter>
 
-        <CtaBanner
-          title="Want earlier updates?"
-          description="Join our WhatsApp or Telegram channels for announcements."
-          primary={page.primaryCta ?? { href: "/contact", label: "Get connected" }}
-          secondary={
-            page.secondaryCta ?? { href: "/activities", label: "All activities" }
-          }
-        />
-      </div>
+      <CtaSection />
     </SitePage>
   );
 }

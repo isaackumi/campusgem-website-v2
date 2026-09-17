@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Container } from "@/components/atoms/Container";
+import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { HeroBackdrop } from "@/components/molecules/HeroBackdrop";
 import { Footer } from "@/components/organisms/Footer";
@@ -10,34 +11,50 @@ type SitePageProps = {
   title: string;
   description: string;
   eyebrow?: string;
-  /** Static fallback / first frame when slideshow is off. */
+  /** Oversized outline watermark (story cue). Defaults from title. */
+  outline?: string;
   image?: string;
-  /** Custom slide set; defaults to camp moments when slideshow is on. */
   images?: readonly string[];
-  /** Smooth camp photo carousel (default). Turn off for Bible pages. */
   slideshow?: boolean;
-  /** Extra object-position / crop classes for the hero photo. */
   imageClassName?: string;
   children: ReactNode;
   narrow?: boolean;
+  /**
+   * When true, children own their layout (StoryChapter bands).
+   * Default wraps content in a site container.
+   */
+  bleed?: boolean;
 };
 
+function defaultOutline(title: string) {
+  const word = title.trim().split(/\s+/)[0] ?? "Story";
+  return word.replace(/[^A-Za-z0-9]/g, "").slice(0, 12).toUpperCase() || "STORY";
+}
+
+/**
+ * Interior page shell — every route opens as a story chapter:
+ * full-bleed atmospheric hero, outline watermark, then narrative body.
+ */
 export function SitePage({
   title,
   description,
   eyebrow,
+  outline,
   image,
   images,
   slideshow = true,
   imageClassName,
   children,
   narrow = false,
+  bleed = false,
 }: SitePageProps) {
+  const watermark = outline ?? defaultOutline(title);
+
   return (
     <>
       <Navbar />
       <main id="main-content">
-        <section className="relative isolate min-h-[17rem] overflow-hidden pt-[5.5rem] text-white sm:min-h-[19rem] lg:min-h-[21rem] lg:pt-24">
+        <section className="grain relative isolate flex min-h-[42vh] overflow-hidden text-white sm:min-h-[48vh] lg:min-h-[52vh]">
           <HeroBackdrop
             image={image}
             images={images}
@@ -45,24 +62,33 @@ export function SitePage({
             imageClassName={imageClassName}
           />
 
-          <Container className="relative pb-5 pt-10 sm:pb-6 sm:pt-12 lg:pt-14">
+          <Container className="relative z-10 flex w-full flex-col justify-end pb-14 pt-28 sm:pb-16 sm:pt-32 lg:pb-20">
             {eyebrow ? (
-              <p className="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-gold">
-                {eyebrow}
-              </p>
+              <p className="eyebrow mb-4 text-brand-200">{eyebrow}</p>
             ) : null}
-            <Heading level={1} className="max-w-3xl text-white">
+            <Heading level={1} className="max-w-3xl text-white sm:text-6xl">
               {title}
             </Heading>
-            <Text size="lg" className="mt-4 max-w-2xl text-pretty text-white/72">
+            <Text size="lg" className="mt-5 max-w-xl text-pretty text-white/80">
               {description}
             </Text>
           </Container>
+
+          <OutlineWord
+            tone="light"
+            className="bottom-0 right-0 text-[18vw] sm:text-[12vw]"
+          >
+            {watermark}
+          </OutlineWord>
         </section>
 
-        <section className="bg-paper pb-[var(--section-y)] pt-4 sm:pt-5 md:pt-6">
-          <Container className={cn(narrow && "max-w-2xl")}>{children}</Container>
-        </section>
+        {bleed ? (
+          <div className="bg-white">{children}</div>
+        ) : (
+          <section className="bg-white pb-[var(--section-y)] pt-10 sm:pt-14">
+            <Container className={cn(narrow && "max-w-2xl")}>{children}</Container>
+          </section>
+        )}
       </main>
       <Footer />
     </>
