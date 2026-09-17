@@ -1,6 +1,22 @@
 export const siteConfig = {
-  name: "Campus GEM", legalName: "The Campus Gem Ministries", tagline: "Learn. Connect. Grow.", description:
-    "Campus GEM raises strategic, transformational leaders with Christ-centered principles through camps, discipleship, mentoring, and campus outreach.", email: "perezd295@gmail.com", phone: "+233 20 562 7670", phoneHref: "tel:+233205627670", address: "TF Hostel, University of Ghana, Legon", hours: "Mon - Fri · 8:00am - 6:00pm", url: "https://campusgem.org",
+  name: "Campus GEM",
+  legalName: "The Campus Gem Ministries",
+  tagline: "Learn. Connect. Grow.",
+  description:
+    "Campus GEM raises strategic, transformational leaders with Christ-centered principles through camps, discipleship, mentoring, and campus outreach.",
+  email: "perezd295@gmail.com",
+  phone: "+233 20 562 7670",
+  phoneHref: "tel:+233205627670",
+  address: "TF Hostel, University of Ghana, Legon",
+  hours: "Mon - Fri · 8:00am - 6:00pm",
+  url: "https://campusgem.org",
+} as const;
+
+/** Canonical Eagles Camp 2026 registration — prefer this over Studio/Google Form links. */
+export const campRegister = {
+  href: "https://portal.campusgem.org/f/camp2026",
+  label: "Register for Eagles Camp 2026",
+  shortLabel: "Register now",
 } as const;
 
 export const vision =

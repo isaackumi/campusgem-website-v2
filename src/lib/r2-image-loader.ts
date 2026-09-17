@@ -1,6 +1,9 @@
 /**
  * Next.js custom image loader — serves `/images/*` from R2 when configured.
  * Falls back to local `public/` paths when `NEXT_PUBLIC_R2_PUBLIC_URL` is unset.
+ *
+ * Always appends `w` / `q` so Next.js custom-loader validation is satisfied
+ * (R2 serves originals; query params are ignored by the CDN).
  */
 export default function r2ImageLoader({
   src,
@@ -11,19 +14,16 @@ export default function r2ImageLoader({
   width: number;
   quality?: number;
 }): string {
-  void width;
-  void quality;
+  const q = quality ?? 75;
 
   if (/^https?:\/\//i.test(src) || src.startsWith("data:")) {
-    return src;
+    const sep = src.includes("?") ? "&" : "?";
+    return `${src}${sep}w=${width}&q=${q}`;
   }
 
   const base = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/\/$/, "");
   const path = src.startsWith("/") ? src : `/${src}`;
-
-  if (base) {
-    return `${base}${path}`;
-  }
-
-  return path;
+  const url = base ? `${base}${path}` : path;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}w=${width}&q=${q}`;
 }

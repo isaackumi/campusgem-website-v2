@@ -18,6 +18,7 @@ import {
 import type { Sermon } from "@/constants/sermons";
 import { featuredSermons as fallbackSermons } from "@/constants/sermons";
 import type { SocialLink } from "@/constants/social";
+import { campRegister } from "@/constants/site";
 import { socialLinks as fallbackSocialLinks } from "@/constants/social";
 import { siteConfig, aboutIntro, coreValues, mission, vision, trustProof } from "@/constants/site";
 import type { PageKey } from "@/sanity/lib/lists";
@@ -239,9 +240,11 @@ export async function getActivityPage(activityKey: keyof typeof activityFallback
       image: imageUrl(doc.heroImage) || fallback.image,
       contentImage: imageUrl(doc.contentImage) || fallback.contentImage,
       cta:
-        doc.ctaLabel && doc.ctaHref
-          ? { label: doc.ctaLabel, href: doc.ctaHref }
-          : fallbackCta,
+        activityKey === "camp"
+          ? { href: campRegister.href, label: campRegister.label }
+          : doc.ctaLabel && doc.ctaHref
+            ? { label: doc.ctaLabel, href: doc.ctaHref }
+            : fallbackCta,
       slideshow: doc.slideshow ?? activityKey !== "bible-study",
     };
   } catch {
@@ -563,10 +566,15 @@ export async function getEvents(): Promise<EventItem[]> {
       ) => {
         const id = doc.eventId || `event-${index}`;
         const local = localById.get(id);
-        const cta =
+        const fromDoc =
           doc.ctaLabel && doc.ctaHref
             ? { label: doc.ctaLabel, href: doc.ctaHref }
-            : local?.cta;
+            : undefined;
+        // Keep portal registration canonical for Eagles Camp 2026.
+        const cta =
+          id === "eagles-camp-2026"
+            ? { href: campRegister.href, label: campRegister.shortLabel }
+            : fromDoc ?? local?.cta;
         return {
           id,
           title: doc.title || local?.title || "Event",

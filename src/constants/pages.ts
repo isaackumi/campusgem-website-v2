@@ -1,4 +1,4 @@
-import { aboutIntro, coreValues, mission, vision } from "@/constants/site";
+import { aboutIntro, campRegister, coreValues, mission, vision } from "@/constants/site";
 
 export const aboutContent = {
   whoWeAre: aboutIntro, highlights: [
@@ -119,8 +119,8 @@ export const activityPages = {
     closing:
       "Come ready to wait on the Lord — and rise with renewed strength for the year ahead.",
     cta: {
-      href: "https://portal.campusgem.org/f/camp2026",
-      label: "Register for Eagles Camp 2026",
+      href: campRegister.href,
+      label: campRegister.label,
     },
     image: "/images/camp/camp-moment-01.jpg",
     contentImage: "/images/camp/camp-moment-02.jpg",

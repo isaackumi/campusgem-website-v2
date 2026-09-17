@@ -7,13 +7,12 @@ import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
+import { campRegister } from "@/constants/site";
 
 const HERO_FACES = [
   "/images/camp/camp-moment-06.jpg",
-  "/images/camp/camp-moment-03.jpg",
   "/images/camp/camp-moment-01.jpg",
-  "/images/camp/camp-moment-05.jpg",
-  "/images/community.jpg",
+  "/images/camp/camp-moment-03.jpg",
 ] as const;
 
 const SLIDE_MS = 7500;
@@ -75,6 +74,8 @@ export function Hero({
                 alt=""
                 fill
                 priority={index === 0}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                quality={index === 0 ? 80 : 70}
                 className="object-cover object-[center_24%] sm:object-[center_28%]"
                 sizes="100vw"
               />
@@ -125,11 +126,19 @@ export function Hero({
             immediate
             className="mt-9 flex flex-wrap items-center gap-3"
           >
-            <Button href="/contact" size="lg">
-              Find your place
+            <Button
+              href={campRegister.href}
+              size="lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {campRegister.shortLabel}
             </Button>
             <Button href="/about" size="lg" variant="ghost">
               Our story
+            </Button>
+            <Button href="/contact" size="lg" variant="ghost">
+              Find your place
             </Button>
           </ParagraphReveal>
         </div>
