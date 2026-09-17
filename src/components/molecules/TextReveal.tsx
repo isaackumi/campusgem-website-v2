@@ -1,9 +1,35 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+} from "motion/react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+
+/** Never leave story copy invisible if IntersectionObserver fails. */
+function useRevealVisible(immediate: boolean, reduce: boolean | null) {
+  const ref = useRef<HTMLElement | null>(null);
+  const inView = useInView(ref, { once: true, amount: 0.12, margin: "0px 0px -5% 0px" });
+  const [failsafe, setFailsafe] = useState(false);
+
+  useEffect(() => {
+    if (immediate || reduce) return;
+    const id = window.setTimeout(() => setFailsafe(true), 900);
+    return () => window.clearTimeout(id);
+  }, [immediate, reduce]);
+
+  const visible = Boolean(reduce) || immediate || inView || failsafe;
+  return { ref, visible };
+}
 
 /** Word-by-word mask reveal for headlines. */
 export function TextReveal({
@@ -12,7 +38,6 @@ export function TextReveal({
   as: Tag = "p",
   delay = 0,
   stagger = 0.028,
-  /** Play on mount (hero) — skip scroll observer. */
   immediate = false,
 }: {
   text: string;
@@ -24,13 +49,14 @@ export function TextReveal({
 }) {
   const reduce = useReducedMotion();
   const words = text.split(" ");
+  const { ref, visible } = useRevealVisible(immediate, reduce);
 
   if (reduce) {
     return <Tag className={className}>{text}</Tag>;
   }
 
   return (
-    <Tag className={className}>
+    <Tag ref={ref as never} className={className}>
       {words.map((word, i) => (
         <span
           key={`${word}-${i}`}
@@ -38,10 +64,8 @@ export function TextReveal({
         >
           <motion.span
             className="inline-block will-change-transform"
-            initial={immediate ? { y: "110%", opacity: 0 } : { y: "110%", opacity: 0 }}
-            animate={immediate ? { y: 0, opacity: 1 } : undefined}
-            whileInView={immediate ? undefined : { y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.2, margin: "0px 0px -8% 0px" }}
+            initial={{ y: "110%", opacity: 0 }}
+            animate={visible ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }}
             transition={{
               duration: 0.65,
               delay: delay + i * stagger,
@@ -57,34 +81,38 @@ export function TextReveal({
   );
 }
 
-/** Soft fade/slide for body copy. */
+/** Soft fade/slide for body copy. Supports `as="li"` for valid confession lists. */
 export function ParagraphReveal({
   children,
   className,
   delay = 0,
   immediate = false,
+  as = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   immediate?: boolean;
+  as?: "div" | "li";
 }) {
   const reduce = useReducedMotion();
+  const { ref, visible } = useRevealVisible(immediate, reduce);
+  const MotionTag = motion[as] as ElementType;
 
   if (reduce) {
-    return <div className={className}>{children}</div>;
+    const Static = as;
+    return <Static className={className}>{children}</Static>;
   }
 
   return (
-    <motion.div
+    <MotionTag
+      ref={ref}
       className={className}
       initial={{ opacity: 0, y: 20 }}
-      animate={immediate ? { opacity: 1, y: 0 } : undefined}
-      whileInView={immediate ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15, margin: "0px 0px -8% 0px" }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.65, delay, ease }}
     >
       {children}
-    </motion.div>
+    </MotionTag>
   );
 }

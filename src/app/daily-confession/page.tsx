@@ -91,21 +91,21 @@ export default async function DailyConfessionPage() {
               start={section.lines[0]?.number}
             >
               {section.lines.map(({ line, number }, i) => (
-                <ParagraphReveal key={`${number}-${line.slice(0, 24)}`} delay={0.04 * i}>
-                  <li
-                    className="grid grid-cols-[2.5rem_1fr] gap-3"
-                    value={number}
+                <ParagraphReveal
+                  key={`${number}-${line.slice(0, 24)}`}
+                  as="li"
+                  delay={0.04 * Math.min(i, 6)}
+                  className="grid grid-cols-[2.5rem_1fr] gap-3"
+                >
+                  <span
+                    className="pt-0.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-brand-600"
+                    aria-hidden
                   >
-                    <span
-                      className="pt-0.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-brand-600"
-                      aria-hidden
-                    >
-                      {String(number).padStart(2, "0")}
-                    </span>
-                    <p className="font-display text-[1.15rem] leading-[1.65] tracking-[0.01em] text-ink sm:text-[1.3rem]">
-                      {line}
-                    </p>
-                  </li>
+                    {String(number).padStart(2, "0")}
+                  </span>
+                  <p className="font-display text-[1.15rem] leading-[1.65] tracking-[0.01em] text-ink sm:text-[1.3rem]">
+                    {line}
+                  </p>
                 </ParagraphReveal>
               ))}
             </ol>
