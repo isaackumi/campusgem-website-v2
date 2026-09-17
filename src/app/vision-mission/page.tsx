@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
-import { ParagraphReveal } from "@/components/molecules/TextReveal";
+import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { SitePage } from "@/components/templates/SitePage";
 import { atmospheres } from "@/constants/atmospheres";
@@ -14,6 +18,21 @@ export const metadata: Metadata = {
   description:
     "Campus GEM’s vision, mission, and Christ-centered pathways for leadership.",
 };
+
+const visionBeats = [
+  {
+    title: "See the calling",
+    body: "A clear vision: strategic, transformational leaders formed with Christ-centered principles.",
+  },
+  {
+    title: "Walk the mission",
+    body: "We pursue that vision through camps, outreaches, mentoring, and daily obedience.",
+  },
+  {
+    title: "Hold the values",
+    body: "Faith, excellence, and leadership — academic excellence as worship, lived out loud.",
+  },
+] as const;
 
 export default async function VisionMissionPage() {
   const [page, settings] = await Promise.all([
@@ -49,6 +68,16 @@ export default async function VisionMissionPage() {
       outline="VISION"
       bleed
     >
+      <StoryChapter
+        eyebrow="The chapter"
+        title="Why we exist"
+        outline="WHY"
+        intro="Campus GEM was birthed from a call to increase acreage — beyond a single congregation into campuses, communities, and nations. Vision and mission keep that calling clear."
+        mist
+      >
+        <StoryArrow className="mb-2" />
+      </StoryChapter>
+
       <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-28">
         <Image
           src={atmospheres.nebula}
@@ -82,6 +111,20 @@ export default async function VisionMissionPage() {
         </div>
       </section>
 
+      <ScriptureBand
+        verse="Where there is no vision, the people perish: but he that keepeth the law, happy is he."
+        reference="Proverbs 29:18"
+        outline="SEE"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="How calling becomes culture"
+        outline="HEART"
+      >
+        <StoryBeats beats={visionBeats} />
+      </StoryChapter>
+
       <StoryChapter
         eyebrow="Foundation"
         title="Core values"
@@ -109,16 +152,55 @@ export default async function VisionMissionPage() {
         imageAlt="Campus GEM values in community"
       >
         <ul className="grid gap-3 sm:grid-cols-2">
-          {pathways.map((item) => (
-            <li
-              key={item}
-              className="border-t border-ink/10 pt-3 text-ink-soft"
-            >
-              {item}
-            </li>
+          {pathways.map((item, i) => (
+            <ParagraphReveal key={item} delay={0.05 * i}>
+              <li className="border-t border-ink/10 pt-3 text-ink-soft">
+                <span className="mr-2 font-mono text-[11px] tracking-[0.2em] text-brand-600">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {item}
+              </li>
+            </ParagraphReveal>
           ))}
         </ul>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button href="/activities">Explore activities</Button>
+          <Button href="/contact" variant="secondary">
+            Get in touch
+          </Button>
+        </div>
       </StoryChapter>
+
+      <section className="relative overflow-x-hidden py-16 sm:py-20">
+        <Image
+          src={atmospheres.washA}
+          alt=""
+          fill
+          className="object-cover opacity-35"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-brand-50/85" />
+        <OutlineWord className="right-0 top-4 text-[12vw] lg:text-[6rem]">
+          LIVE
+        </OutlineWord>
+        <div className="container-wide relative z-10 max-w-2xl">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-700">Live it</p>
+          </ParagraphReveal>
+          <TextReveal
+            as="h2"
+            text="Vision becomes real in community"
+            className="font-display mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+            delay={0.08}
+          />
+          <ParagraphReveal delay={0.18} className="mt-8 flex flex-wrap gap-3">
+            <Button href="/senior-pastor">Meet our pastor</Button>
+            <Button href="/about" variant="secondary">
+              About Campus GEM
+            </Button>
+          </ParagraphReveal>
+        </div>
+      </section>
 
       <CtaSection />
     </SitePage>

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { EventGrid } from "@/components/organisms/EventGrid";
@@ -17,6 +19,21 @@ export const metadata: Metadata = {
     "Upcoming Campus GEM camps, gatherings, and moments to grow together.",
 };
 
+const eventBeats = [
+  {
+    title: "Mark the calendar",
+    body: "Camps, feasts, and seasonal meetings — start with what is next on the list.",
+  },
+  {
+    title: "Come ready to gather",
+    body: "Every event is a doorway into worship, friendship, and formation.",
+  },
+  {
+    title: "Invite someone with you",
+    body: "Bring a friend from campus — belonging grows when we arrive together.",
+  },
+] as const;
+
 export default async function EventsPage() {
   const [page, events] = await Promise.all([
     getSitePage("events", {
@@ -28,7 +45,7 @@ export default async function EventsPage() {
       slideshow: false,
       narrow: false,
       intro:
-        "Mark your calendar and join us. Details for registration and venues are updated as each season approaches — including Eagles Camp, our annual camp meeting.",
+        "Mark your calendar and join us. Details for registration and venues update as each season approaches — including Eagles Camp, our annual camp meeting.",
       sections: [],
       primaryCta: { href: "/contact", label: "Get connected" },
       secondaryCta: { href: "/activities", label: "All activities" },
@@ -55,14 +72,35 @@ export default async function EventsPage() {
           "Mark your calendar and join us. Details for registration and venues are updated as each season approaches."
         }
         mist
+      >
+        <StoryArrow className="mb-2" />
+        <p className="mt-6 max-w-md text-sm leading-6 text-ink-soft">
+          From Eagles Camp to Love Feasts — each date is a chapter waiting for
+          you.
+        </p>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="Not forsaking the assembling of ourselves together, as the manner of some is; but exhorting one another."
+        reference="Hebrews 10:25"
+        outline="GATHER"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="How to walk into an event"
+        outline="STEP"
+      >
+        <StoryBeats beats={eventBeats} />
+      </StoryChapter>
+
+      <StoryChapter
+        mist
+        eyebrow="Upcoming"
+        title="What is next"
+        outline="DATE"
         fullWidthChildren
       >
-        <div className="mb-8">
-          <StoryArrow className="mb-3" />
-          <p className="max-w-md text-sm leading-6 text-ink-soft">
-            Camps, feasts, and seasonal meetings — start with what is next.
-          </p>
-        </div>
         <EventGrid events={events} />
       </StoryChapter>
 
@@ -104,7 +142,8 @@ export default async function EventsPage() {
                 {
                   href: "/contact",
                   title: "Get connected",
-                  description: "Ask about venues, registration, or starting a branch.",
+                  description:
+                    "Ask about venues, registration, or starting a branch.",
                 },
               ]}
             />

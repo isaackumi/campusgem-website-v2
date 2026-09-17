@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
-import { Text } from "@/components/atoms/Typography";
 import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -68,38 +68,10 @@ export default async function ActivitiesPage() {
         <LinkCards items={activities} />
       </StoryChapter>
 
-      <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-24">
-        <Image
-          src={atmospheres.nebula}
-          alt=""
-          fill
-          className="object-cover opacity-40"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-ink/55" />
-        <OutlineWord
-          tone="light"
-          className="right-0 top-4 text-[14vw] lg:text-[7rem]"
-        >
-          WORD
-        </OutlineWord>
-        <div className="container-wide relative z-10 max-w-3xl">
-          <ParagraphReveal>
-            <p className="eyebrow text-brand-200">Scripture</p>
-          </ParagraphReveal>
-          <ParagraphReveal delay={0.1}>
-            <blockquote>
-              <p className="font-display mt-4 text-2xl leading-snug tracking-tight text-white sm:text-4xl">
-                “And let us consider one another to provoke unto love and to
-                good works.”
-              </p>
-              <Text className="mt-6 text-white/65" size="sm">
-                Hebrews 10:24
-              </Text>
-            </blockquote>
-          </ParagraphReveal>
-        </div>
-      </section>
+      <ScriptureBand
+        verse="And let us consider one another to provoke unto love and to good works."
+        reference="Hebrews 10:24"
+      />
 
       <section className="relative overflow-x-hidden py-20 sm:py-24">
         <Image

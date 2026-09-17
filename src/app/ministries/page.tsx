@@ -3,6 +3,8 @@ import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { ImageGrid, LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { MinistryGrid } from "@/components/organisms/MinistryGrid";
@@ -17,6 +19,21 @@ export const metadata: Metadata = {
   description:
     "Campus GEM ministries: camps, love feasts, mentoring, and ICT training.",
 };
+
+const ministryBeats = [
+  {
+    title: "Choose a doorway",
+    body: "Camps, feasts, mentoring, ICT — each pathway forms faith and friendship differently.",
+  },
+  {
+    title: "Serve as you grow",
+    body: "Ministry is not only receiving; it is offering your gifts back to the family.",
+  },
+  {
+    title: "Stay in the story",
+    body: "One pathway often leads to another — keep walking with Campus GEM through the year.",
+  },
+] as const;
 
 export default async function MinistriesPage() {
   const [page, ministries] = await Promise.all([
@@ -56,14 +73,37 @@ export default async function MinistriesPage() {
           "Each ministry expression is a door into the Campus GEM family. Explore the pathways below and take a step toward deeper formation."
         }
         mist
+      >
+        <div className="mb-2">
+          <StoryArrow />
+        </div>
+        <p className="mt-6 max-w-md text-sm leading-6 text-ink-soft">
+          We train Youth in ICT. We pair them with mentors. We gather at camps
+          and tables — every door leads home.
+        </p>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God."
+        reference="1 Peter 4:10"
+        outline="GIFT"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="How ministry feels here"
+        outline="HEART"
+      >
+        <StoryBeats beats={ministryBeats} />
+      </StoryChapter>
+
+      <StoryChapter
+        mist
+        eyebrow="Explore"
+        title="Choose your pathway"
+        outline="DOOR"
         fullWidthChildren
       >
-        <div className="mb-8">
-          <StoryArrow className="mb-3" />
-          <p className="max-w-md text-sm leading-6 text-ink-soft">
-            Choose a pathway — camps, feasts, mentoring, and more.
-          </p>
-        </div>
         <MinistryGrid ministries={ministries} />
       </StoryChapter>
 
@@ -103,11 +143,7 @@ export default async function MinistriesPage() {
         </div>
       </section>
 
-      <StoryChapter
-        eyebrow="Also explore"
-        title="Keep walking"
-        outline="MORE"
-      >
+      <StoryChapter eyebrow="Also explore" title="Keep walking" outline="MORE">
         <LinkCards
           items={[
             {
@@ -123,7 +159,7 @@ export default async function MinistriesPage() {
             {
               href: "/cgem-marriages",
               title: "CGM Marriages",
-              description: "Celebrating covenant love in our family.",
+              description: "Capturing those in our family who are married.",
             },
             {
               href: "/hall-of-fame",

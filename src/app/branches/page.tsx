@@ -4,6 +4,8 @@ import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { Heading, Text } from "@/components/atoms/Typography";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -17,6 +19,21 @@ export const metadata: Metadata = {
   description:
     "Campus GEM fellowships and gathering points across campuses and online.",
 };
+
+const branchBeats = [
+  {
+    title: "Find a fellowship",
+    body: "Start with Legon, campus outreaches, or our online community channels.",
+  },
+  {
+    title: "Belong where you are",
+    body: "Whether on campus or afar, there is a way to stay connected to the family.",
+  },
+  {
+    title: "Plant something new",
+    body: "Sense a call to start a branch? Tell us — we will help you take the next step.",
+  },
+] as const;
 
 export default async function BranchesPage() {
   const [page, settings] = await Promise.all([
@@ -59,7 +76,10 @@ export default async function BranchesPage() {
         eyebrow="Where we gather"
         title="Fellowships near you"
         outline="NEAR"
-        intro={page.intro || branchesContent.intro}
+        intro={
+          page.intro ||
+          "Campus GEM is growing across campuses and communities. Reach out to connect — or to start a new branch."
+        }
         mist
       >
         <StoryArrow className="mb-8" />
@@ -78,6 +98,20 @@ export default async function BranchesPage() {
             </ParagraphReveal>
           ))}
         </div>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="Go ye therefore, and teach all nations… and, lo, I am with you alway, even unto the end of the world."
+        reference="Matthew 28:19–20"
+        outline="GO"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="Presence with purpose"
+        outline="HEART"
+      >
+        <StoryBeats beats={branchBeats} />
       </StoryChapter>
 
       <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-24">
@@ -125,7 +159,7 @@ export default async function BranchesPage() {
         eyebrow="Plant"
         title="Want to start a branch?"
         outline="START"
-        intro="Tell us about your campus or community and we will help you take the next step."
+        intro="Tell us about your campus or community and we will help you take the next step — with prayer, coaching, and the Campus GEM family behind you."
       >
         <div className="flex flex-wrap gap-3">
           <Button href="/contact">Get in touch</Button>

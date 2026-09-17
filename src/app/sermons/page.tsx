@@ -3,6 +3,8 @@ import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
 import { LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { SermonGrid } from "@/components/organisms/SermonGrid";
@@ -16,6 +18,21 @@ export const metadata: Metadata = {
   description:
     "Messages that form faith, discipleship, and Christ-centered living.",
 };
+
+const sermonBeats = [
+  {
+    title: "Hear the Word",
+    body: "Teaching from camps, fellowships, and the Campus GEM pulpit that stirs faith.",
+  },
+  {
+    title: "Practice what you hear",
+    body: "Pair every message with Daily Confession and weekly Bible Study.",
+  },
+  {
+    title: "Carry it onto campus",
+    body: "Let the Word shape excellence, friendship, and calling where you live.",
+  },
+] as const;
 
 export default async function SermonsPage() {
   const [page, sermons] = await Promise.all([
@@ -52,17 +69,37 @@ export default async function SermonsPage() {
         outline="HEAR"
         intro={
           page.intro ||
-          "Explore featured themes from Campus GEM gatherings. Full media archives continue to grow — reach out if you need a specific message."
+          "Explore featured themes from Campus GEM gatherings. Full media archives continue to grow."
         }
         mist
+      >
+        <StoryArrow className="mb-2" />
+        <p className="mt-6 max-w-md text-sm leading-6 text-ink-soft">
+          Faith comes by hearing — then walking what you have heard.
+        </p>
+      </StoryChapter>
+
+      <ScriptureBand
+        verse="So then faith cometh by hearing, and hearing by the word of God."
+        reference="Romans 10:17"
+        outline="FAITH"
+      />
+
+      <StoryChapter
+        eyebrow="In this story"
+        title="How the Word walks with you"
+        outline="WALK"
+      >
+        <StoryBeats beats={sermonBeats} />
+      </StoryChapter>
+
+      <StoryChapter
+        mist
+        eyebrow="Featured"
+        title="Themes from the family"
+        outline="THEME"
         fullWidthChildren
       >
-        <div className="mb-8">
-          <StoryArrow className="mb-3" />
-          <p className="max-w-md text-sm leading-6 text-ink-soft">
-            Teaching from camps, fellowships, and the Campus GEM pulpit.
-          </p>
-        </div>
         <SermonGrid sermons={sermons} />
       </StoryChapter>
 
