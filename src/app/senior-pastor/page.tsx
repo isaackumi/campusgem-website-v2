@@ -4,6 +4,8 @@ import { Button } from "@/components/atoms/Button";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
+import { StoryBeats } from "@/components/molecules/StoryBeats";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -62,6 +64,12 @@ export default async function SeniorPastorPage() {
         </div>
       </StoryChapter>
 
+      <ScriptureBand
+        verse="And the Lord answered me, and said, Write the vision, and make it plain upon tables, that he may run that readeth it."
+        reference="Habakkuk 2:2"
+        outline="VISION"
+      />
+
       <section className="relative overflow-x-hidden bg-ink py-20 text-white sm:py-24">
         <Image
           src={atmospheres.nebula}
@@ -79,8 +87,11 @@ export default async function SeniorPastorPage() {
         </OutlineWord>
         <div className="container-wide relative z-10 max-w-3xl">
           <ParagraphReveal>
+            <p className="eyebrow text-brand-200">Founding word</p>
+          </ParagraphReveal>
+          <ParagraphReveal delay={0.1}>
             <blockquote>
-              <p className="font-display text-2xl leading-snug tracking-tight text-white sm:text-4xl">
+              <p className="font-display mt-4 text-2xl leading-snug tracking-tight text-white sm:text-4xl">
                 “{pastor.quote}”
               </p>
               <Text className="mt-6 text-white/65" size="sm">
@@ -134,31 +145,7 @@ export default async function SeniorPastorPage() {
         title="What he champions"
         outline="HEART"
       >
-        <div className="max-w-3xl border-t border-ink/10">
-          {pastor.focuses.map(
-            (item: { title: string; body: string }, i: number) => (
-              <ParagraphReveal key={item.title} delay={0.08 * i}>
-                <div className="grid gap-3 border-b border-ink/10 py-8 sm:grid-cols-[4.5rem_1fr] sm:gap-8">
-                  <span className="font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-brand-600">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <Heading
-                      level={3}
-                      as="h3"
-                      className="font-display text-xl font-bold tracking-tight text-ink sm:text-2xl"
-                    >
-                      {item.title}
-                    </Heading>
-                    <Text className="mt-2 max-w-xl" muted>
-                      {item.body}
-                    </Text>
-                  </div>
-                </div>
-              </ParagraphReveal>
-            ),
-          )}
-        </div>
+        <StoryBeats beats={pastor.focuses} />
       </StoryChapter>
 
       <section className="relative overflow-x-hidden py-16 sm:py-20">

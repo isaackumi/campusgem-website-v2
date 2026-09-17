@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { OutlineWord } from "@/components/atoms/OutlineWord";
+import { Button } from "@/components/atoms/Button";
 import { StoryArrow } from "@/components/atoms/StoryArrow";
+import { LinkCards } from "@/components/molecules/PageBlocks";
+import { ScriptureBand } from "@/components/molecules/ScriptureBand";
 import { StoryChapter } from "@/components/molecules/StoryChapter";
 import { ParagraphReveal, TextReveal } from "@/components/molecules/TextReveal";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -52,6 +55,12 @@ export default async function DailyConfessionPage() {
           </p>
         </div>
       </StoryChapter>
+
+      <ScriptureBand
+        verse="Death and life are in the power of the tongue: and they that love it shall eat the fruit thereof."
+        reference="Proverbs 18:21"
+        outline="SPEAK"
+      />
 
       {numberedSections.map((section, sectionIndex) => (
         <section
@@ -135,6 +144,55 @@ export default async function DailyConfessionPage() {
                 {content.benediction}
               </p>
             </blockquote>
+          </ParagraphReveal>
+        </div>
+      </section>
+
+      <section className="relative overflow-x-hidden py-16 sm:py-20">
+        <Image
+          src={atmospheres.washA}
+          alt=""
+          fill
+          className="object-cover opacity-35"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-brand-50/85" />
+        <OutlineWord className="right-0 top-4 text-[12vw] lg:text-[6rem]">
+          LIVE
+        </OutlineWord>
+        <div className="container-wide relative z-10">
+          <ParagraphReveal>
+            <p className="eyebrow text-brand-700">Keep speaking</p>
+          </ParagraphReveal>
+          <TextReveal
+            as="h2"
+            text="Let the Word walk with you"
+            className="font-display mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+            delay={0.08}
+          />
+          <ParagraphReveal delay={0.15} className="mt-8">
+            <LinkCards
+              items={[
+                {
+                  href: "/bible-study",
+                  title: "Bible Study",
+                  description: "Sundays at 7:00 PM GMT on Telegram.",
+                },
+                {
+                  href: "/sermons",
+                  title: "Sermons",
+                  description: "Messages that form faith and calling.",
+                },
+                {
+                  href: "/camp",
+                  title: "Eagles Camp",
+                  description: "Our annual camp meeting — season 2026.",
+                },
+              ]}
+            />
+          </ParagraphReveal>
+          <ParagraphReveal delay={0.25} className="mt-8">
+            <Button href="/contact">Connect with us</Button>
           </ParagraphReveal>
         </div>
       </section>
