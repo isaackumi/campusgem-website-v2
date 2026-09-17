@@ -18,7 +18,7 @@ import { getHallOfFameContent } from "@/sanity/lib/content";
 export const metadata: Metadata = {
   title: "Hall of Fame",
   description:
-    "Celebrating graduates whose faith, excellence, and perseverance inspire the next generation.",
+    "Honoring graduates whose faith and academic excellence — as worship — inspire the next generation.",
 };
 
 export default async function HallOfFamePage() {
@@ -45,6 +45,11 @@ export default async function HallOfFamePage() {
         <div className="mb-2">
           <StoryArrow />
         </div>
+        <ParagraphReveal delay={0.12} className="mt-8 max-w-xl">
+          <p className="font-display text-xl leading-snug tracking-tight text-brand-700 sm:text-2xl">
+            {local.conviction}
+          </p>
+        </ParagraphReveal>
         <p className="mt-6 max-w-md text-sm leading-6 text-ink-soft">
           {page.entries.length} honored — portraits of faith, excellence, and
           perseverance.
@@ -54,7 +59,7 @@ export default async function HallOfFamePage() {
       <ScriptureBand
         verse={local.scripture.verse}
         reference={local.scripture.reference}
-        outline="LIGHT"
+        outline="STAND"
       />
 
       <StoryChapter

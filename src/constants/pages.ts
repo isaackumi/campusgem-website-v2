@@ -332,29 +332,32 @@ export const activityPages = {
     title: "Hall of Fame",
     eyebrow: "Activities",
     description:
-      "Honoring graduates whose faith, excellence, and perseverance light the way.",
+      "Honoring graduates whose faith, academic excellence, and perseverance light the way.",
     storyTitle: "Lives that light the path",
-    body: "The Campus GEM Hall of Fame honors members whose faith, excellence, and perseverance inspire the next generation. These portraits mark seasons of study completed, calling clarified, and lives offered for God's glory.",
+    body: "The Campus GEM Hall of Fame honors members whose faith, excellence, and perseverance inspire the next generation. These portraits mark seasons of study completed, calling clarified, and lives offered for God's glory. We firmly believe academic excellence is part of worship — and we celebrate those who finished well.",
+    conviction:
+      "We believe academic excellence is part of worship. Every grade, every paper, every finished season can glorify God.",
     scripture: {
       verse:
-        "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.",
-      reference: "Matthew 5:16",
+        "Therefore, my beloved brethren, be ye stedfast, unmoveable, always abounding in the work of the Lord, forasmuch as ye know that your labour is not in vain in the Lord.",
+      reference: "1 Corinthians 15:58",
     },
     beats: [
       {
-        title: "Celebrate the journey",
-        body: "We remember graduates who finished well — in faith and in excellence.",
+        title: "Excellence as worship",
+        body: "We honor study done unto God — academic excellence is not separate from faith; it is part of how we worship.",
       },
       {
-        title: "Inspire the next generation",
-        body: "Their stories tell Youth that academic excellence can be worship.",
+        title: "Steadfast to the finish",
+        body: "These portraits remember Youth who stayed the course through pressure, prayer, and perseverance.",
       },
       {
-        title: "Glory to God",
-        body: "Every portrait points beyond achievement to the One who called them.",
+        title: "Labour not in vain",
+        body: "Their stories tell the next generation that work done in the Lord — in class and in calling — is never wasted.",
       },
     ],
-    closing: "Walk among the portraits — and let courage rise for your own race.",
+    closing:
+      "Be steadfast. Walk among the portraits — and let courage rise for your own race.",
     image: "/images/camp/camp-moment-04.jpg",
     contentImage: "/images/hall-of-fame/stella.jpg",
   },
