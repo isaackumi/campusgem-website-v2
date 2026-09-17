@@ -29,8 +29,12 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/icon.png",
   },
   openGraph: {
     title: siteConfig.name,
